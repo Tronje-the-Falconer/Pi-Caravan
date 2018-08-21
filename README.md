@@ -17,6 +17,7 @@ To-Do's
 - Wifi
   - AccessPoint
   - Campingplatz WLAN
+- Batterieüberwachung
 
 
 Done's
