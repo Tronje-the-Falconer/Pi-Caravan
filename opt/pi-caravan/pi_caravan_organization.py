@@ -1,3 +1,7 @@
+#!/usr/bin/python
+# coding=utf-8
+# pi_caravan_organization.py
+#------------------------------------------------------------
 """
     basic functions
     
