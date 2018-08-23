@@ -7,3 +7,6 @@
     
     setting up inital settings
 """
+
+
+loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
