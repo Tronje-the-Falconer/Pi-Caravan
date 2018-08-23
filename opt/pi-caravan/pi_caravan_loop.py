@@ -2,7 +2,13 @@
 # coding=utf-8
 # pi_caravan_loop.py
 #------------------------------------------------------------
+import pi_caravan_logging
 import pi_caravan_read_onewire_sensors
+
+
+global logger
+logger = pi_caravan_logging.create_logger(__name__)
+logger.debug('logging initialised')
 
 def do_mainloop():
     global temperature_sensor_designation, temperature_senor_count, temperature_sensor_value 
