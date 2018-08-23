@@ -24,5 +24,5 @@ def import_temperature_sensors():
                 temperature_senor_count = temperature_senor_count + 1
     except:
         # reading error
-        logger.warning('the directory "' . pi_caravan_path.onewirepath . '" content could not be read.')
+        logger.warning('the directory "' + pi_caravan_path.onewirepath + '" content could not be read.')
     return temperature_sensor_designation, temperature_senor_count, temperature_sensor_value
