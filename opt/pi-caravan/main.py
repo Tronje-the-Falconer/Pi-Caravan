@@ -27,7 +27,7 @@ logger = pi_caravan_logging.create_logger('main')
 logger.debug('logging initialised')
 
 try:
-    pi_caravan_loop.mainloop()
+    pi_caravan_loop.do_mainloop()
     
 except KeyboardInterrupt:
     logger.warning(_('KeyboardInterrupt'))
