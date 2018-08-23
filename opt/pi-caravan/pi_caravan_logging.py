@@ -53,8 +53,8 @@ def create_logger(pythonfile):
     creating loggers
     """
     check_website_logfile()
-    loglevel_file_value = pi_caravan_database_get_logging_value.get_logging_value(pi_caravan_names.loglevel_file_key)
-    loglevel_console_value = pi_caravan_database_get_logging_value.get_logging_value(pi_caravan_names.loglevel_console_key)
+    loglevel_file_value = pi_caravan_database_get_logging_value.get_logging_value(pi_caravan_names.loglevel_file_field)
+    loglevel_console_value = pi_caravan_database_get_logging_value.get_logging_value(pi_caravan_names.loglevel_console_field)
     
     # Logger fuer website
     website_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_caravan_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
