@@ -46,7 +46,7 @@ def get_path_sqlite3_file():
     set_paths()
     return sqlite3_file
 
-ef get_path_onewire():
+def get_path_onewire():
     """
     getting path for website logfile
     """
