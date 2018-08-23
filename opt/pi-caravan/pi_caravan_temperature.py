@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # coding=utf-8
-#
+# pi_caravan_temperature.py
 #------------------------------------------------------------
+"""
+    getting temperatures
+"""
 
 import os, sys, time
 
