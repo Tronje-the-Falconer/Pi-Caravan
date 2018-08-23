@@ -12,7 +12,7 @@ logger.debug('logging initialised')
 
 
 # temperature sensors
-def read_temperature_sensors():
+def import_temperature_sensors():
     temperature_sensor_designation = []   # list of all single sensors identifiers
     temperature_senor_count = 0           # INT for the number of read sensors
     temperature_sensor_value = []         # list with the individual sensor values
