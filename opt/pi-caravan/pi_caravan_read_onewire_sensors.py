@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # coding=utf-8
-# pi_caravan_temperature.py
+# pi_caravan_read_onewire_sensors.py
 #------------------------------------------------------------
 """
     getting temperatures
@@ -10,6 +10,9 @@ import os, sys, time
 import pi_caravan_names
 import pi_caravan_logging
 
+global logger
+logger = pi_caravan_logging.create_logger(__name__)
+logger.debug('logging initialised')
 
 def read_temperature_sensors():
     global temperature_sensor_designation, temperature_senor_count, temperature_sensor_value
