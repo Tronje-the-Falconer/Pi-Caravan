@@ -15,9 +15,11 @@ def set_paths():
     
     global logfile_txt_file
     global pi_caravan_log_file
+    global sqlite3_file
 
     logfile_txt_file = '/var/www/logs/logfile.txt'
     pi_caravan_log_file = '/var/www/logs/pi-caravan.log'
+    sqlite3_file = '/var/www/config/pi-ager.sqlite3'
 
 def get_path_logfile_txt_file():
     """
@@ -34,3 +36,11 @@ def get_pi_caravan_log_file_path():
     global pi_caravan_log_file
     set_paths()
     return pi_caravan_log_file
+
+def get_path_sqlite3_file():
+    """
+    getting path for sqlite file
+    """
+    global sqlite3_file
+    set_paths()
+    return sqlite3_file
