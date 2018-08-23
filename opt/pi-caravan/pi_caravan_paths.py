@@ -14,10 +14,10 @@ def set_paths():
     """
     
     global logfile_txt_file
-    global pi_ager_log_file
+    global pi_caravan_log_file
 
     logfile_txt_file = '/var/www/logs/logfile.txt'
-    pi_ager_log_file = '/var/www/logs/pi-ager.log'
+    pi_caravan_log_file = '/var/www/logs/pi-caravan.log'
 
 def get_path_logfile_txt_file():
     """
@@ -31,6 +31,6 @@ def get_pi_caravan_log_file_path():
     """
     getting path for logfile
     """
-    global pi_ager_log_file
+    global pi_caravan_log_file
     set_paths()
-    return pi_ager_log_file
+    return pi_caravan_log_file
