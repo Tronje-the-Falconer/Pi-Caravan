@@ -7,7 +7,6 @@
     
     
 """
-import RPi.GPIO as gpio
 import pi_caravan_logging
 import pi_caravan_names
 
