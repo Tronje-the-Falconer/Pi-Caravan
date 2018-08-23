@@ -2,7 +2,7 @@
 # coding=utf-8
 # 1wire_sensors.py
 #------------------------------------------------------------
-
+import os, sys
 import pi_caravan_logging
 import pi_caravan_path
 
