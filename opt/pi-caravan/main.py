@@ -26,6 +26,9 @@ import pi_caravan_loop
 logger = pi_caravan_logging.create_logger('main')
 logger.debug('logging initialised')
 
+# initialise system
+pi_caravan_init.get_sensors()
+
 try:
     pi_caravan_loop.do_mainloop()
     
