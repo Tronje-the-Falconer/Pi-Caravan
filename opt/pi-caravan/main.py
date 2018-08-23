@@ -20,12 +20,14 @@ import os
 import pi_caravan_init
 import pi_caravan_organization
 import pi_caravan_logging
+import pi_caravan_loop
 
 
 logger = pi_caravan_logging.create_logger('main')
 logger.debug('logging initialised')
 
 try:
+    pi_caravan_loop.mainloop()
     
 except KeyboardInterrupt:
     logger.warning(_('KeyboardInterrupt'))
