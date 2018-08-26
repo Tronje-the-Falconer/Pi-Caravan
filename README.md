@@ -15,6 +15,7 @@ To-Do's
   - Abwassser
   - WC
 - Batterieüberwachung
+- wasserwaage
 - GSM 3G/LTE
 
 
