@@ -14,10 +14,10 @@ To-Do's
   -Frischwasser
   - Abwassser
   - WC
-- Wifi
-  - AccessPoint
-  - Campingplatz WLAN
 - Batterieüberwachung
 
 
 Done's
+- Wifi
+  - AccessPoint
+  - Campingplatz WLAN
