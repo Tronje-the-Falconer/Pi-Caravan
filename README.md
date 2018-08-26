@@ -15,6 +15,7 @@ To-Do's
   - Abwassser
   - WC
 - Batterieüberwachung
+- GSM 3G/LTE
 
 
 Done's
