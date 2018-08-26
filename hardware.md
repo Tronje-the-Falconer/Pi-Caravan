@@ -1,0 +1,3 @@
+- Raspberry Pi 3 B+
+- Logilink WL0150 (Wifi USB)
+- Logitech K400+ (Keyboard & Mousepad)
