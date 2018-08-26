@@ -70,5 +70,29 @@ run installation
 
     cd /home/rpi3-hotspot
     sudo ./install.sh
-
+    
 then reboot
+
+if hotspot doesn't connect on reboot check chipset of usb-wifi (mine is RT5372)
+
+make Blacklist
+
+    sudo nano /etc/modprobe.d/wlan-blacklist.conf
+    
+insert
+
+    blacklist RT5372
+    
+then
+
+    sudo depmod -ae
+    sudo update-initramfs -u
+    sudo nano /etc/modules
+    
+    
+ insert at end of file
+ 
+    snd-bcm2835
+    RT5372
+    
+reboot and wifi should be there
