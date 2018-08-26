@@ -33,9 +33,11 @@ copy file into boot-folder
     sudo cp -u /home/pi/rpi3-hotspot/boot/hotspot.txt /boot/hotspot.txt
 
 edit file interfaces
+
     sudo nano /home/rpi3-hotspot/etc/network/interfaces
     
 insert (like for eth0)
+
     iface wlan1 inet manual
 
 edit file rpi-access-point
