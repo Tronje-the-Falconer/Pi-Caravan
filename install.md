@@ -85,7 +85,7 @@ insert
     
 then
 
-    sudo depmod -ae
+    sudo depmod -a
     sudo update-initramfs -u
     sudo nano /etc/modules
     
