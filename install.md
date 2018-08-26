@@ -20,11 +20,14 @@ use templatefile to create configurationfile
     sudo nano /home/rpi3-hotspot/boot/hotspot.txt.example
     
 set ssid and passphrase
+
 Example:
+
     ssid=jukebox
     passphrase=12345678
 
 save file as hotspot.txt 
+
 copy file into boot-folder
 
     sudo cp -u /home/pi/rpi3-hotspot/boot/hotspot.txt /boot/hotspot.txt
