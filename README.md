@@ -2,7 +2,7 @@
 Using Raspberry in Caravan
 
 To-Do's
-- DAB/FM Radio
+- DAB Radio
 - Temperatursenoren (1-Wire)
   - Außen
   - Innen
@@ -23,3 +23,4 @@ Done's
 - Wifi
   - AccessPoint
   - Campingplatz WLAN
+FM Radio
