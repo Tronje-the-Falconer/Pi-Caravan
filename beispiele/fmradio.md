@@ -1,5 +1,7 @@
 https://tutorials-raspberrypi.de/raspberry-pi-als-radioempfaenger-benutzen-autoradio-car-pc/
 
+https://github.com/achilikin/RdSpi
+
 
 https://github.com/achilikin/RdSpi/issues/4
 
