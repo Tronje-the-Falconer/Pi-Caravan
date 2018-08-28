@@ -1,5 +1,7 @@
 https://tutorials-raspberrypi.de/raspberry-pi-als-radioempfaenger-benutzen-autoradio-car-pc/
 
+https://tutorials-raspberrypi.de/wiringpi-installieren-pinbelegung/
+
 https://github.com/achilikin/RdSpi
 
 
