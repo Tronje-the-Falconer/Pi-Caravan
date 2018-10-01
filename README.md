@@ -17,6 +17,7 @@ To-Do's
 - Batterieüberwachung
 - wasserwaage (MPU6050)
 - GSM 3G/LTE (SIM808 GPRS/GPSModul)
+- Display
 
 
 Done's
