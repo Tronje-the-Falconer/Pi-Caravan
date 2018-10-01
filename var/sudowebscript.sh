@@ -23,7 +23,7 @@ case "$1" in
     radiospacingkhz) # $2 = kHz | sets 200, 100, or 50 kHz spacing
         ./spacing $2
     ;;
-    radioscan) # $2 = (mode) | scans for radio stations, mode can be specified 1-5, see AN230, Table 23. Summary of Seek Settings
+    radioscan) # $2 = (mode) | scans for radio stations, mode can be specified 1-5, see AN230, Table 23. Summary of Seek Settings (default, recommended, more stations, good quality stations only, most stations)
         ./scan $2
     ;;
     radiospectrum) # scans full FM band and prints RSSI
