@@ -8,10 +8,12 @@ To-Do's
   - Innen
   - Kühlschrank
   - Eisfach
+  - Kühlschrank abluft
+- Steuerung von Abluftlüfter
 - Wetteranzeige
 - GPS Ortung (SIM808 GPRS/GPSModul)
 - Füllstandsanzeige
-  -Frischwasser
+  - Frischwasser
   - Abwassser
   - WC
 - Batterieüberwachung
