@@ -18,7 +18,7 @@
             <td><button class="art-button" name="Radio Tune">Tune</button></td>
         </tr>
         <tr>
-            <td>Tune Frequenzy</td>
+            <td>Tune Frequency</td>
             <td></td>
         </tr>
         
