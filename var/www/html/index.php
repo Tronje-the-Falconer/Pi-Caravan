@@ -14,11 +14,12 @@
             <td><button class="art-button" name="Radio Volume down">Volume down</button></td>
         </tr>
         <tr>
-            <td><button class="art-button" name="Radio Seek">seek</button></td>
-            <td><button class="art-button" name="Radio Tune">Tune</button></td>
+            <td><button class="art-button" name="Radio Seek Up">seek up</button></td>
+            <td><button class="art-button" name="Radio Seek Down">seek down</button></td>
+            
         </tr>
         <tr>
-            <td>Tune Frequency</td>
+            <td><button class="art-button" name="Radio Tune">Tune</button> Tune Frequency:</td>
             <td></td>
         </tr>
         
