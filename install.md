@@ -96,3 +96,116 @@ then
     RT5372
     
 reboot and wifi should be there
+
+----
+
+Wiring Pi
+
+sudo apt-get update && sudo apt-get upgrade
+
+GIT
+    sudo apt-get install git git-core
+
+
+    git clone git://git.drogon.net/wiringPi
+    cd wiringPi
+
+install:
+
+    ./build
+
+Webserver
+[FEHLT]
+
+Radio (https://tutorials-raspberrypi.de/raspberry-pi-als-radioempfaenger-benutzen-autoradio-car-pc/)
+
+    sudo raspi-config
+
+activate “I2C"
+
+    sudo nano /etc/modules
+
+insert
+
+    i2c-bcm2708
+    i2c-dev
+
+
+    sudo apt-get update
+    sudo apt-get install i2c-tools
+    
+Software
+
+    git clone https://github.com/achilikin/RdSpi && cd RdSpi
+
+Zeile 93 auskommentieren mit /*  */
+
+    sudo nano main.c
+    
+    /* rpi_pin_export(SI_RESET, RPI_INPUT); */
+
+    make
+
+    sudo nano i2c-init.c
+
+    /* i2c-init.c */
+    #include <wiringPi.h>
+    
+    int main() {
+    int resetPin = 23; // GPIO23
+    int sdaPin = 0; // GPIO0
+    
+    /* Setup GPIO access in BCM mode */
+    wiringPiSetupGpio();
+    
+    /* Set pins as output */
+    pinMode(resetPin, OUTPUT);
+    pinMode(sdaPin, OUTPUT);
+    
+    /* A low SDA indicates a 2-wire interface */
+    digitalWrite(sdaPin, LOW);
+    /* Put chip into reset */
+    digitalWrite(resetPin, LOW); 
+    /* 1ms delay to allow pins to settle */ 
+    delay(1);
+    /* Bring chip out of reset with SDIO set low
+    and SEN pulled high (with pull-up resistor) */
+    digitalWrite(resetPin, HIGH); 
+    
+    return 0;
+    }
+
+    gcc -o i2c-init i2c-init.c -lwiringPi
+
+In Autostart [FEHLT]
+
+    sudo ./i2c-init
+
+prüfen
+
+    i2cdetect -y 1
+    
+         0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+    00:          -- -- -- -- -- -- -- -- -- -- -- -- --
+    10: 10 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    20: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    40: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+    70: -- -- -- -- -- -- -- --
+
+testen:
+
+    sudo ./rdspi reset
+    sudo ./rdspi tune 95.00
+    sudo ./rdspi volume 10
+
+    chmod +x i2c-init
+    chmod +x rdspi
+
+
+    export PATH=$PATH:/home/pi/RdiSpi
+    cd /usr/bin
+    sudo ln -s /home/pi/RdSpi/i2c-init i2c-init
+    sudo ln -s /home/pi/RdSpi/rdspi rdspi
