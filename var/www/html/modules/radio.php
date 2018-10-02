@@ -20,7 +20,7 @@
         shell_exec('sudo /var/sudowebscript.sh radioseek prev')
     }
     if (isset($_POST['radio_tune'])){
-        shell_exec('sudo /var/sudowebscript.sh radiotunefreq 93.3') # Hardcoded! auslesen!
+        shell_exec('sudo /var/sudowebscript.sh radiotunefreq 93.2') # Hardcoded! auslesen!
     }
     
     
