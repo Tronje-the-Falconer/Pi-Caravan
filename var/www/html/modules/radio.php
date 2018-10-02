@@ -6,6 +6,9 @@
     if (isset($_POST['radio_off'])){
         shell_exec('sudo /var/sudowebscript.sh radiostartstop down')
     }
+    if (isset($_POST['radio_reset'])){
+        shell_exec('sudo /var/sudowebscript.sh radioreset')
+    }
     if (isset($_POST['radio_volume_up'])){
         shell_exec('sudo /var/sudowebscript.sh radiovolume 5') # Hardcoded! berechnen!
     }
