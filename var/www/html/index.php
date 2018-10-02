@@ -12,13 +12,13 @@
             <td><button class="art-button" name="radio_off">Radio off</button></td>
         </tr>
         <tr>
-            <td><button class="art-button" name="radio_volume_up">Volume up</button></td>
             <td><button class="art-button" name="radio_volume_down">Volume down</button></td>
+            <td><button class="art-button" name="radio_volume_up">Volume up</button></td>
             <td></td>
         </tr>
         <tr>
-            <td><button class="art-button" name="radio_seek_up">seek up</button></td>
             <td><button class="art-button" name="radio_seek_down">seek down</button></td>
+            <td><button class="art-button" name="radio_seek_up">seek up</button></td>
             <td></td>
         </tr>
         <tr>
