@@ -1,5 +1,6 @@
 <?php
-    include 'header.php';                                       // Template-Kopf und Navigation
+    include 'header.php';                                       // template-head
+    include 'modules/radio.php';                                // radio-functions
 ?>
 <h1 class="art-postheader">Pi Caravan</h1>
 <h2 class="art-postheader">Radio</h2>
