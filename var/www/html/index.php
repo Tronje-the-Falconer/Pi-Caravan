@@ -8,8 +8,8 @@
     <table style="width: 100%;">
                <tr>
             <td><button class="art-button" name="radio_on">Radio on</button></td>
+            <td><button class="art-button" name="radio_reset">Radio reset</button></td>
             <td><button class="art-button" name="radio_off">Radio off</button></td>
-            <td></td>
         </tr>
         <tr>
             <td><button class="art-button" name="radio_volume_up">Volume up</button></td>
