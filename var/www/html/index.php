@@ -22,9 +22,9 @@
             <td></td>
         </tr>
         <tr>
-            <td><button class="art-button" name="radio_tune">Tune</button></td>
             <td>Tune Frequency:</td>
             <td><input name="radio_frequency" type="number" maxlength="5" min="87.5" max="108" step="0.01" onchange="(function(el){el.value=parseFloat(el.value).toFixed(2);})(this)" placeholder="105,50"></td>
+            <td><button class="art-button" name="radio_tune">Tune</button></td>
         </tr>
     </table>
 </form>
