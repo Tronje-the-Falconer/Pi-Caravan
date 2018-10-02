@@ -20,7 +20,7 @@
         </tr>
         <tr>
             <td><button class="art-button" name="radio_tune">Tune</button> Tune Frequency:</td>
-            <td><input type="text" name="radio_frequency"></td>
+            <td><input type="text" name="radio_frequency" type = "number"></td>
         </tr>
         
     </table>
