@@ -5,10 +5,10 @@
 <h1 class="art-postheader">Pi Caravan</h1>
 <h2 class="art-postheader">Radio</h2>
 <form  method="post">
-    <table style="width: 100%;">
+    <table style="width: 20%;">
                <tr>
             <td><button class="art-button" name="radio_on">Radio on</button></td>
-            <td><button class="art-button" name="radio_reset">Radio reset</button></td>
+            <td><button class="art-button" name="radio_reset">Radio on and reset</button></td>
             <td><button class="art-button" name="radio_off">Radio off</button></td>
         </tr>
         <tr>
