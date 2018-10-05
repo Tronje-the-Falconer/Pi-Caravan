@@ -262,7 +262,7 @@ In Autostart
             # Starting Programm
             cd /home/pi/RdSpi/
             gcc -o i2c-init i2c-init.c -lwiringPi
-            ./i2c-init
+            i2c-init
             echo "start done"
             ;;
         stop)
