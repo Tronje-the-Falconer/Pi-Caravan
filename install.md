@@ -286,3 +286,8 @@ test
     sudo /etc/init.d/pi-caravan-radio.sh stop
 
     sudo update-rc.d pi-caravan-radio.sh defaults
+    
+     sudo chmod 666 /var/www/html/logs/logfile.txt
+     sudo chmod 775 /var/www/html/logs/
+     sudo chmod 664 /var/www/html/config/pi-caravan.sqlite3
+     sudo chown -R www-data:www-data /var/www/html/config/
