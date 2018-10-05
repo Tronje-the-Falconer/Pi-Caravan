@@ -287,6 +287,10 @@ test
 
     sudo update-rc.d pi-caravan-radio.sh defaults
     
+## SQLITE3
+
+     sudo apt install sqlite3
+     
      sudo chmod 666 /var/www/html/logs/logfile.txt
      sudo chmod 775 /var/www/html/logs/
      sudo chmod 664 /var/www/html/config/pi-caravan.sqlite3
