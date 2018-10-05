@@ -1,14 +1,24 @@
-First install raspbian on Pi
+## Raspian
+
+install Raspbian on Pi
 
 than configure it
 
 set Wifi
 
-then
+set i2c
 
-installing git
+set 1wire
 
-    sudo apt-get install git
+set serial no and yes
+
+     sudo apt-get update && sudo apt-get upgrade
+
+## Git
+
+     sudo apt-get install git git-core
+
+## Hotspotscript
 
 install HotSpot-Skipt from Github (https://github.com/damiencaselli/rpi3-hotspot)
 
@@ -99,14 +109,9 @@ reboot and wifi should be there
 
 ----
 
-Wiring Pi
+## Wiring Pi
 
-sudo apt-get update && sudo apt-get upgrade
-
-GIT
-    sudo apt-get install git git-core
-
-
+    cd /home/pi/
     git clone git://git.drogon.net/wiringPi
     cd wiringPi
 
@@ -114,14 +119,44 @@ install:
 
     ./build
 
-Webserver
-[FEHLT]
+## Webserver
 
-Radio (https://tutorials-raspberrypi.de/raspberry-pi-als-radioempfaenger-benutzen-autoradio-car-pc/)
+    sudo apt-get install lighttpd
+    sudo groupadd www-data
+    sudo usermod -G www-data -a pi
+    sudo chown -R www-data:www-data /var/www
+    sudo chmod -R 775 /var/www
+    sudo lighty-enable-mod auth
 
-    sudo raspi-config
+    
+## PHP
 
-activate “I2C"
+    sudo apt-get install php7.0-common php7.0-cgi php7.0 php7.0-sqlite3
+    sudo lighty-enable-mod fastcgi
+    sudo lighty-enable-mod fastcgi-php
+    sudo service lighttpd force-reload
+    sudo apt-get install php7.0-apcu
+    sudo nano /etc/php/7.0/mods-available/apcu_bc.ini
+    
+    extension=apc.so
+    apc.enabled=1
+    apc.file_update_protection=2
+    apc.optimization=0
+    apc.shm_size=32M
+    apc.include_once_override=0
+    apc.shm_segments=1
+    apc.gc_ttl=7200
+    apc.ttl=7200
+    apc.num_files_hint=1024
+    apc.enable_cli=0
+    
+    sudo nano /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
+    
+    "allow-x-send-file" => "enable"
+    
+    sudo reboot
+
+## Radio (https://tutorials-raspberrypi.de/raspberry-pi-als-radioempfaenger-benutzen-autoradio-car-pc/)
 
     sudo nano /etc/modules
 
@@ -130,12 +165,8 @@ insert
     i2c-bcm2708
     i2c-dev
 
-
-    sudo apt-get update
     sudo apt-get install i2c-tools
     
-Software
-
     git clone https://github.com/achilikin/RdSpi && cd RdSpi
 
 Zeile 93 auskommentieren mit /*  */
@@ -177,8 +208,6 @@ Zeile 93 auskommentieren mit /*  */
 
     gcc -o i2c-init i2c-init.c -lwiringPi
 
-In Autostart [FEHLT]
-
     sudo ./i2c-init
 
 prüfen
@@ -209,3 +238,51 @@ testen:
     cd /usr/bin
     sudo ln -s /home/pi/RdSpi/i2c-init i2c-init
     sudo ln -s /home/pi/RdSpi/rdspi rdspi
+
+aufruf dann ohne ./ und von überall aus möglich
+
+In Autostart 
+
+    sudo nano /etc/init.d/pi-caravan-radio.sh
+    
+    #! /bin/sh
+    ### BEGIN INIT INFO
+    # Provides: pi-caravan-radio.sh
+    # Required-Start: $syslog
+    # Required-Stop: $syslog
+    # Default-Start: 2 3 4 5
+    # Default-Stop: 0 1 6
+    # Short-Description: pi-caravan-radio init
+    # Description:
+    ### END INIT INFO
+
+    case "$1" in
+        start)
+            echo "pi-caravan Radio startet"
+            # Starting Programm
+            cd /home/pi/RdSpi/
+            gcc -o i2c-init i2c-init.c -lwiringPi
+            ./i2c-init
+            echo "start done"
+            ;;
+        stop)
+            echo "pi-caravan Radio will now shutdown"
+            # Ending Programm
+            ;;
+        *)
+            echo "Using: /etc/init.d/pi-ager-radio.sh {start|stop}"
+            exit 1
+            ;;
+    esac
+
+    exit 0  
+
+
+    sudo chmod 755 /etc/init.d/pi-caravan-radio.sh
+
+test
+
+    sudo /etc/init.d/pi-caravan-radio.sh start
+    sudo /etc/init.d/pi-caravan-radio.sh stop
+
+    sudo update-rc.d pi-caravan-radio.sh defaults
