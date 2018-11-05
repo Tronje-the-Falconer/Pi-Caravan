@@ -20,5 +20,5 @@ def goodbye():
     last function for clean up system
     """
     global logger
-    logstring = _('goodbye') + '!'
+    logstring = 'goodbye!'
     logger.info(logstring)

@@ -16,10 +16,11 @@ def set_paths():
     global logfile_txt_file
     global pi_caravan_log_file
     global sqlite3_file
+    global onewire_path
 
-    logfile_txt_file = '/var/www/logs/logfile.txt'
-    pi_caravan_log_file = '/var/www/logs/pi-caravan.log'
-    sqlite3_file = '/var/www/config/pi-ager.sqlite3'
+    logfile_txt_file = '/var/www/html/logs/logfile.txt'
+    pi_caravan_log_file = '/var/www/html/logs/pi-caravan.log'
+    sqlite3_file = '/var/www/html/database/pi-ager.sqlite3'
     onewire_path = '/sys/bus/w1/devices'
 
 def get_path_logfile_txt_file():
