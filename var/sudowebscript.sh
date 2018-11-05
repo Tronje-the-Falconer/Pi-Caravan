@@ -5,6 +5,11 @@
 # shell_exec('sudo /var/sudowebscript.sh PARAMETER')
 
 case "$1" in
+    radiostart)
+        rdspi reset
+        rdspi volume 5
+        rdspi tune 93.20
+    ;;
     radiostartstop) # $2 = up OR down | power up/down - powers Si4703 up/down
         rdspi power $2
     ;;
