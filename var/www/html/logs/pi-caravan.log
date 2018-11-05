@@ -1,0 +1,315 @@
+10-05 21:10:02 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:11:29 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:11:29 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-05 21:11:29 pi_caravan_organization     DEBUG    logging initialised
+10-05 21:12:23 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:12:23 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-05 21:12:23 pi_caravan_organization     DEBUG    logging initialised
+10-05 21:14:59 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:14:59 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-05 21:14:59 pi_caravan_organization     DEBUG    logging initialised
+10-05 21:14:59 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-05 21:14:59 pi_caravan_loop             DEBUG    logging initialised
+10-05 21:14:59 main                        DEBUG    logging initialised
+10-05 21:16:06 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:16:06 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-05 21:16:06 pi_caravan_organization     DEBUG    logging initialised
+10-05 21:16:06 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-05 21:16:06 pi_caravan_loop             DEBUG    logging initialised
+10-05 21:16:06 main                        DEBUG    logging initialised
+10-05 21:16:59 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:16:59 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-05 21:16:59 pi_caravan_organization     DEBUG    logging initialised
+10-05 21:16:59 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-05 21:16:59 pi_caravan_loop             DEBUG    logging initialised
+10-05 21:16:59 main                        DEBUG    logging initialised
+10-05 21:16:59 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-05 21:16:59 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-05 21:18:12 pi_caravan_logging          DEBUG    logging initialised
+10-05 21:18:12 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-05 21:18:12 pi_caravan_organization     DEBUG    logging initialised
+10-05 21:18:12 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-05 21:18:12 pi_caravan_loop             DEBUG    logging initialised
+10-05 21:18:12 main                        DEBUG    logging initialised
+10-05 21:18:12 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-05 21:18:12 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-05 21:18:12 pi_caravan_organization     INFO     goodbye!
+10-07 20:13:24 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:13:24 pi_caravan_init_onewire_sensors DEBUG    logging initialised
+10-07 20:13:24 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:13:24 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:13:24 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:13:24 main                        DEBUG    logging initialised
+10-07 20:13:24 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:13:24 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-07 20:13:24 pi_caravan_organization     INFO     goodbye!
+10-07 20:44:17 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:45:22 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:45:22 pi_caravan_init             DEBUG    logging initialised
+10-07 20:45:22 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:45:22 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:45:22 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:45:22 main                        DEBUG    logging initialised
+10-07 20:47:44 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:47:44 pi_caravan_init             DEBUG    logging initialised
+10-07 20:47:44 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:47:44 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:47:44 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:47:44 main                        DEBUG    logging initialised
+10-07 20:47:44 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:47:44 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-07 20:47:44 pi_caravan_organization     INFO     goodbye!
+10-07 20:50:29 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:50:29 pi_caravan_init             DEBUG    logging initialised
+10-07 20:50:29 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:50:29 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:50:29 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:50:29 main                        DEBUG    logging initialised
+10-07 20:50:29 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:50:29 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-07 20:50:29 pi_caravan_organization     INFO     goodbye!
+10-07 20:53:40 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:53:40 pi_caravan_init             DEBUG    logging initialised
+10-07 20:53:40 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:53:40 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:53:40 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:53:40 main                        DEBUG    logging initialised
+10-07 20:53:40 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:53:40 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-07 20:53:40 pi_caravan_organization     INFO     goodbye!
+10-07 20:54:44 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:54:44 pi_caravan_init             DEBUG    logging initialised
+10-07 20:54:44 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:55:01 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:55:01 pi_caravan_init             DEBUG    logging initialised
+10-07 20:55:01 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:55:01 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:55:01 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:55:01 main                        DEBUG    logging initialised
+10-07 20:55:01 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:55:01 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-07 20:55:01 pi_caravan_organization     INFO     goodbye!
+10-07 20:58:03 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:58:03 pi_caravan_init             DEBUG    logging initialised
+10-07 20:58:03 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:58:03 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:58:03 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:58:03 main                        DEBUG    logging initialised
+10-07 20:58:03 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:58:03 pi_caravan_loop             WARNING  reading temperature sensors was not possible.
+10-07 20:58:03 pi_caravan_organization     INFO     goodbye!
+10-07 20:58:27 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:58:27 pi_caravan_init             DEBUG    logging initialised
+10-07 20:58:27 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:58:27 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:58:27 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:58:27 main                        DEBUG    logging initialised
+10-07 20:58:27 pi_caravan_read_onewire_sensors WARNING  reading temperature sensors was not possible.
+10-07 20:58:27 pi_caravan_loop             WARNING  main loop failed
+10-07 20:58:27 pi_caravan_organization     INFO     goodbye!
+10-07 20:59:16 pi_caravan_logging          DEBUG    logging initialised
+10-07 20:59:16 pi_caravan_init             DEBUG    logging initialised
+10-07 20:59:16 pi_caravan_organization     DEBUG    logging initialised
+10-07 20:59:16 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 20:59:16 pi_caravan_loop             DEBUG    logging initialised
+10-07 20:59:16 main                        DEBUG    logging initialised
+10-07 20:59:16 pi_caravan_loop             WARNING  main loop failed
+10-07 20:59:16 pi_caravan_organization     INFO     goodbye!
+10-07 21:01:57 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:01:57 pi_caravan_init             DEBUG    logging initialised
+10-07 21:01:57 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:01:57 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:01:57 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:01:57 main                        DEBUG    logging initialised
+10-07 21:01:57 pi_caravan_organization     INFO     goodbye!
+10-07 21:04:11 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:04:11 pi_caravan_init             DEBUG    logging initialised
+10-07 21:04:11 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:04:11 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:04:11 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:04:11 main                        DEBUG    logging initialised
+10-07 21:04:11 pi_caravan_organization     INFO     goodbye!
+10-07 21:04:55 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:04:55 pi_caravan_init             DEBUG    logging initialised
+10-07 21:04:55 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:04:55 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:04:55 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:04:55 main                        DEBUG    logging initialised
+10-07 21:04:55 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 20, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_senor_count)
+NameError: name 'temperature_senor_count' is not defined
+10-07 21:04:55 pi_caravan_organization     INFO     goodbye!
+10-07 21:08:05 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:08:05 pi_caravan_init             DEBUG    logging initialised
+10-07 21:08:05 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:08:05 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:08:05 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:08:05 main                        DEBUG    logging initialised
+10-07 21:08:05 pi_caravan_loop             WARNING  main loop failed
+10-07 21:08:05 pi_caravan_organization     INFO     goodbye!
+10-07 21:08:47 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:08:47 pi_caravan_init             DEBUG    logging initialised
+10-07 21:08:47 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:08:47 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:08:47 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:08:47 main                        DEBUG    logging initialised
+10-07 21:08:47 pi_caravan_loop             WARNING  main loop failed
+10-07 21:08:47 pi_caravan_organization     INFO     goodbye!
+10-07 21:09:44 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:09:44 pi_caravan_init             DEBUG    logging initialised
+10-07 21:09:44 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:09:44 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:09:44 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:09:44 main                        DEBUG    logging initialised
+10-07 21:09:44 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 15, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 20, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_senor_count)
+NameError: name 'temperature_senor_count' is not defined
+10-07 21:09:44 pi_caravan_organization     INFO     goodbye!
+10-07 21:12:44 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:12:44 pi_caravan_init             DEBUG    logging initialised
+10-07 21:12:44 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:12:44 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:12:44 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:12:44 main                        DEBUG    logging initialised
+10-07 21:12:44 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 15, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 21, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_senor_count)
+NameError: name 'temperature_senor_count' is not defined
+10-07 21:12:44 pi_caravan_organization     INFO     goodbye!
+10-07 21:30:26 pi_caravan_logging          DEBUG    logging initialised
+10-07 21:30:26 pi_caravan_init             DEBUG    logging initialised
+10-07 21:30:26 pi_caravan_organization     DEBUG    logging initialised
+10-07 21:30:26 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-07 21:30:26 pi_caravan_loop             DEBUG    logging initialised
+10-07 21:30:26 main                        DEBUG    logging initialised
+10-07 21:30:26 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 15, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 21, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_sensor_count)
+NameError: name 'temperature_sensor_count' is not defined
+10-07 21:30:26 pi_caravan_organization     INFO     goodbye!
+10-09 20:08:34 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:08:34 pi_caravan_init             DEBUG    logging initialised
+10-09 20:08:34 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:08:34 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:08:34 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:08:34 main                        DEBUG    logging initialised
+10-09 20:08:34 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 22, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_sensor_count)
+NameError: name 'temperature_sensor_count' is not defined
+10-09 20:08:34 pi_caravan_organization     INFO     goodbye!
+10-09 20:10:15 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:10:15 pi_caravan_init             DEBUG    logging initialised
+10-09 20:10:15 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:10:15 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:10:15 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:10:15 main                        DEBUG    logging initialised
+10-09 20:10:15 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 25, in read_temperature_sensors
+    while x < temperature_sensor_count:
+NameError: name 'temperature_sensor_count' is not defined
+10-09 20:10:15 pi_caravan_organization     INFO     goodbye!
+10-09 20:11:35 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:11:35 pi_caravan_init             DEBUG    logging initialised
+10-09 20:11:35 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:11:35 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:11:35 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:11:35 main                        DEBUG    logging initialised
+10-09 20:11:35 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+10-09 20:11:35 pi_caravan_organization     INFO     goodbye!
+10-09 20:17:59 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:17:59 pi_caravan_init             DEBUG    logging initialised
+10-09 20:17:59 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:17:59 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:17:59 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:17:59 main                        DEBUG    logging initialised
+10-09 20:17:59 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+10-09 20:17:59 pi_caravan_organization     INFO     goodbye!
+10-09 20:19:42 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:19:42 pi_caravan_init             DEBUG    logging initialised
+10-09 20:19:42 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:19:42 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:19:42 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:19:42 main                        DEBUG    logging initialised
+10-09 20:19:42 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+10-09 20:19:42 pi_caravan_organization     INFO     goodbye!
+10-09 20:21:57 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:21:57 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:21:57 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:21:57 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:21:57 main                        DEBUG    logging initialised
+10-09 20:21:57 pi_caravan_init             DEBUG    logging initialised
+10-09 20:21:57 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 34, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+10-09 20:21:57 pi_caravan_organization     INFO     goodbye!
+10-09 20:23:06 pi_caravan_logging          DEBUG    logging initialised
+10-09 20:23:06 pi_caravan_organization     DEBUG    logging initialised
+10-09 20:23:06 pi_caravan_read_onewire_sensors DEBUG    logging initialised
+10-09 20:23:06 pi_caravan_loop             DEBUG    logging initialised
+10-09 20:23:06 main                        DEBUG    logging initialised
+10-09 20:23:06 pi_caravan_init             DEBUG    logging initialised
+10-09 20:23:06 main                        ERROR    exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 34, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 25, in read_temperature_sensors
+    while x < temperature_sensor_count:
+NameError: name 'temperature_sensor_count' is not defined
+10-09 20:23:06 pi_caravan_organization     INFO     goodbye!

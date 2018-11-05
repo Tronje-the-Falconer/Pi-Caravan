@@ -1,1 +1,136 @@
-
+18-10-05 21:16:59 reading temperature sensors was not possible.
+18-10-05 21:16:59 reading temperature sensors was not possible.
+18-10-05 21:18:12 reading temperature sensors was not possible.
+18-10-05 21:18:12 reading temperature sensors was not possible.
+18-10-05 21:18:12 goodbye!
+18-10-07 20:13:24 reading temperature sensors was not possible.
+18-10-07 20:13:24 reading temperature sensors was not possible.
+18-10-07 20:13:24 goodbye!
+18-10-07 20:47:44 reading temperature sensors was not possible.
+18-10-07 20:47:44 reading temperature sensors was not possible.
+18-10-07 20:47:44 goodbye!
+18-10-07 20:50:29 reading temperature sensors was not possible.
+18-10-07 20:50:29 reading temperature sensors was not possible.
+18-10-07 20:50:29 goodbye!
+18-10-07 20:53:40 reading temperature sensors was not possible.
+18-10-07 20:53:40 reading temperature sensors was not possible.
+18-10-07 20:53:40 goodbye!
+18-10-07 20:55:01 reading temperature sensors was not possible.
+18-10-07 20:55:01 reading temperature sensors was not possible.
+18-10-07 20:55:01 goodbye!
+18-10-07 20:58:03 reading temperature sensors was not possible.
+18-10-07 20:58:03 reading temperature sensors was not possible.
+18-10-07 20:58:03 goodbye!
+18-10-07 20:58:27 reading temperature sensors was not possible.
+18-10-07 20:58:27 main loop failed
+18-10-07 20:58:27 goodbye!
+18-10-07 20:59:16 main loop failed
+18-10-07 20:59:16 goodbye!
+18-10-07 21:01:57 goodbye!
+18-10-07 21:04:11 goodbye!
+18-10-07 21:04:55 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 20, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_senor_count)
+NameError: name 'temperature_senor_count' is not defined
+18-10-07 21:04:55 goodbye!
+18-10-07 21:08:05 main loop failed
+18-10-07 21:08:05 goodbye!
+18-10-07 21:08:47 main loop failed
+18-10-07 21:08:47 goodbye!
+18-10-07 21:09:44 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 15, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 20, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_senor_count)
+NameError: name 'temperature_senor_count' is not defined
+18-10-07 21:09:44 goodbye!
+18-10-07 21:12:44 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 15, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 21, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_senor_count)
+NameError: name 'temperature_senor_count' is not defined
+18-10-07 21:12:44 goodbye!
+18-10-07 21:30:26 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 15, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 21, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_sensor_count)
+NameError: name 'temperature_sensor_count' is not defined
+18-10-07 21:30:26 goodbye!
+18-10-09 20:08:34 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 22, in read_temperature_sensors
+    print ('sensorcount: ' + temperature_sensor_count)
+NameError: name 'temperature_sensor_count' is not defined
+18-10-09 20:08:34 goodbye!
+18-10-09 20:10:15 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 25, in read_temperature_sensors
+    while x < temperature_sensor_count:
+NameError: name 'temperature_sensor_count' is not defined
+18-10-09 20:10:15 goodbye!
+18-10-09 20:11:35 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+18-10-09 20:11:35 goodbye!
+18-10-09 20:17:59 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+18-10-09 20:17:59 goodbye!
+18-10-09 20:19:42 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 33, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+18-10-09 20:19:42 goodbye!
+18-10-09 20:21:57 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 34, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors(temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value)
+NameError: name 'temperature_sensor_designation' is not defined
+18-10-09 20:21:57 goodbye!
+18-10-09 20:23:06 exception occurred!!!
+Traceback (most recent call last):
+  File "/opt/pi-caravan/pi_caravan_main.py", line 34, in <module>
+    pi_caravan_loop.do_mainloop()
+  File "/opt/pi-caravan/pi_caravan_loop.py", line 16, in do_mainloop
+    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+  File "/opt/pi-caravan/pi_caravan_read_onewire_sensors.py", line 25, in read_temperature_sensors
+    while x < temperature_sensor_count:
+NameError: name 'temperature_sensor_count' is not defined
+18-10-09 20:23:06 goodbye!
