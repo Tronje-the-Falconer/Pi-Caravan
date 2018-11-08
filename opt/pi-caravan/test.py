@@ -91,9 +91,29 @@ def read_temp():
     x = 0
     ds1820auslesen()
     print("Sensorbezeichnung und Temperaturwert:")
+    
+    
+    
+    
+
+    
     while x < tempSensorAnzahl:
-        print (tempSensorBezeichnung[x] , " " , tempSensorWert[x] , " °C")
+        if tempSensorBezeichnung[x] == '28-021313977aaa':
+            sensorposition = 'Außentemperatur'
+            ##Man kann die gefühlte Temperatur nach der folgenden, relativ einfachen Formel ausrechnen, in die nur die tatsächliche Temperatur (t) in Grad Celsius und die Windgeschwindigkeit (v) in km/h eingehen. Der Windchill (W) in Grad Celsius ergibt sich aus:
+            ##W = 13,12 + 0,6215 * t – 11,37 * v0,16 + 0,3965 * t * v0,16
+            ## windchill =  round(13.12 + 0.6215 * float(tempSensorWert[x]) – 11.37 * windgeschwindigkeit**0.16 + 0.3965 * float(tempSensorWert[x]) * windgeschwindigkeit**0.16, 2)
+            windchill =  round(13.12 + 0.6215 * float(tempSensorWert[x]) - 11.37 * 15**0.16 + 0.3965 * float(tempSensorWert[x]) * 15**0.16, 2)
+        elif tempSensorBezeichnung[x] == '28-0213139dc0aa':
+            sensorposition = 'Kühlschrank'
+        elif tempSensorBezeichnung[x] == '28-000c98430a7b':
+            sensorposition = 'Eisfach'
+        elif tempSensorBezeichnung[x] == '28-00ff98430494':
+            sensorposition = 'Innentemperatur'
+            
+        print (sensorposition , " " , tempSensorWert[x] , " °C")
         x = x + 1
+    print('Windchill ' , windchill)
     time.sleep(.5)
     print("\n")
     
