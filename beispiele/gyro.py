@@ -69,3 +69,61 @@ print "beschleunigung_zout: ", ("%6d" % beschleunigung_zout), " skaliert: ", bes
  
 print "X Rotation: " , get_x_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert)
 print "Y Rotation: " , get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert)
+
+#####################
+Tiefpassfilter einschalten
+bus.write_byte_data(address, 0x1A, 6)
+
+
+#####################
+Klasse
+
+
+# Register 
+power_mgmt_1 = 0x6b
+power_mgmt_2 = 0x6c
+bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
+address = 0x68       # via i2cdetect
+
+class Gyro_read(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        try:
+            bus.write_byte_data(address, power_mgmt_1, 0)
+            self.running = True # setting the thread running to true
+        except:
+            print "Keine Verbindung zum Gyroskop"
+            self.running = False # setting the thread running to false    
+    def read_byte(self,reg):
+        return bus.read_byte_data(address, reg)
+     
+    def read_word(self,reg):
+        h = bus.read_byte_data(address, reg)
+        l = bus.read_byte_data(address, reg+1)
+        value = (h <= 0x8000):
+            return -((65535 - val) + 1)
+        else:
+            return val
+     
+    def dist(self,a,b):
+        return math.sqrt((a*a)+(b*b))
+     
+    def get_y_rotation(self,x,y,z):
+        radians = math.atan2(x,self.dist(y,z))
+        return -math.degrees(radians)
+     
+    def get_x_rotation(self,x,y,z):
+        radians = math.atan2(y, self.dist(x,z))
+        return math.degrees(radians)
+
+Das Objekt kann jetzt z.B. so  konstruiert werden :
+
+ Objekt bauen:
+gyro_read = Gyro_read()
+
+Auslesen:
+ gyroskop_xout = gyro_read.read_word_2c(0x43)
+ gyroskop_yout = gyro_read.read_word_2c(0x45)
+ gyroskop_zout = gyro_read.read_word_2c(0x47)
+
+ ##################
