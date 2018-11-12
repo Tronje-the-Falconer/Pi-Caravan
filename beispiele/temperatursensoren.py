@@ -63,3 +63,11 @@ while programmStatus == 1:
    
 # Programmende durch Veränderung des programmStatus
 print "Programm wurde beendet."
+
+
+
+###WINDCHILL
+##Man kann die gefühlte Temperatur nach der folgenden, relativ einfachen Formel ausrechnen, in die nur die tatsächliche Temperatur (t) in Grad Celsius und die Windgeschwindigkeit (v) in km/h eingehen. Der Windchill (W) in Grad Celsius ergibt sich aus:
+##W = 13,12 + 0,6215 * t – 11,37 * v0,16 + 0,3965 * t * v0,16
+## windchill =  round(13.12 + 0.6215 * float(tempSensorWert[x]) – 11.37 * windgeschwindigkeit**0.16 + 0.3965 * float(tempSensorWert[x]) * windgeschwindigkeit**0.16, 2)
+#windchill =  round(13.12 + 0.6215 * float(tempSensorWert[x]) - 11.37 * 15**0.16 + 0.3965 * float(tempSensorWert[x]) * 15**0.16, 2)
