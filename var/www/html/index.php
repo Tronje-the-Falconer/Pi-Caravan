@@ -3,6 +3,7 @@
     include 'modules/radio.php';                                // radio-functions
 ?>
 <h1 class="art-postheader">Pi Caravan</h1>
+<hr>
 <h2 class="art-postheader">Radio</h2>
 <form method="post">
     <table style="width: 20%;">
@@ -28,6 +29,30 @@
         </tr>
     </table>
 </form>
+<hr>
+<h2 class="art-postheader">Temperatur</h2>
+<table style="width: 20%;">
+    <tr>
+        <td>Außentemperatur: </td>
+        <td> °C</td>
+    </tr>
+    <tr>
+        <td>Innentemperatur: </td>
+        <td> °C</td>
+    </tr>
+    <tr>
+        <td>Kühlschrank innen: </td>
+        <td> °C</td>
+    </tr>
+    <tr>
+        <td>Kühlschrank Abluft: </td>
+        <td> °C</td>
+    </tr>
+    <tr>
+        <td>Kühlschrank Abluft Lüfter </td>
+        <td>AN/AUS</td>
+    </tr>
+</table>
 <?php
     include 'footer.php';
 ?>
