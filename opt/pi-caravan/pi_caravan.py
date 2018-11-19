@@ -25,25 +25,23 @@ import loop
 class Loopcounter():
     def __init__(self):
         self.reset()
-    def reset():
-        self.__loopcounter__ = 0
-    def increase():
-        self.__loopcounter__ +=1
-    def get_value():
-        return self.__loopcounter__
+    def reset(self):
+        self.loopcount = 0
+    def increase(self):
+        self.loopcount +=1
+    def get_value(self):
+        return self.loopcount
     
 
 def __init__():
-    Loopcounter.__init__()
-    
-logger = logging_.create_logger('main')
-logger.debug('logging initialised')
+    loopcounter = Loopcounter()
+    logger = logging_.create_logger('main')
+    logger.debug('logging initialised')
 
-temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air = pi_caravan_init.get_sensors()
 # initialise system
-
+__init__()
 try:
-    loop.do_mainloop(temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air)
+    loop.do_mainloop()
     
 except KeyboardInterrupt:
     logger.warning('KeyboardInterrupt')
@@ -55,5 +53,5 @@ except Exception as e:
     pass
 
 finally:
-    Loopcounter.reset()
+    loopcounter.reset()
     organization.goodbye()

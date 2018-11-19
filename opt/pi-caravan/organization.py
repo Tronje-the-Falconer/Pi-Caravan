@@ -7,11 +7,10 @@
     
     
 """
-import pi_caravan_logging
-import pi_caravan_names
+import logging_
 
 global logger
-logger = pi_caravan_logging.create_logger(__name__)
+logger = logging_.create_logger(__name__)
 logger.debug('logging initialised')
 
 # Function goodbye

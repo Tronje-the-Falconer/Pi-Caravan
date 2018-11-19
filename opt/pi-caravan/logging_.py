@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # coding=utf-8
-# pi_caravan_logging.py
+# logging.py
 #------------------------------------------------------------
 """
     logging for pi-caravan
@@ -9,9 +9,9 @@
 """
 import logging
 from logging import handlers
-import pi_caravan_paths
-import pi_caravan_names
-import pi_caravan_database_get_logging_value
+import paths
+import names
+import database_get_logging_value
 import pathlib
 import os, stat
 
@@ -39,32 +39,32 @@ def check_website_logfile():
     checking and setting permission for the website logfile 
     """
     global logger
-    filepath = pi_caravan_paths.get_path_logfile_txt_file()
+    filepath = paths.get_path_logfile_txt_file()
     website_logfile = pathlib.Path(filepath)
-    filepermission = oct(os.stat(pi_caravan_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
+    filepermission = oct(os.stat(paths.logfile_txt_file)[stat.ST_MODE])[-3:]
     if not website_logfile.is_file():
-        new_website_logfile = open(pi_caravan_paths.get_path_logfile_txt_file(), "wb")
+        new_website_logfile = open(paths.get_path_logfile_txt_file(), "wb")
         new_website_logfile.close()
-        #os.chmod(pi_caravan_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        #os.chmod(paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
     if (filepermission != '666'):
-        os.chmod(pi_caravan_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        os.chmod(paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
 
 def create_logger(pythonfile):
     """
     creating loggers
     """
     check_website_logfile()
-    loglevel_file_value = pi_caravan_database_get_logging_value.get_logging_value(pi_caravan_names.loglevel_file_field)
-    loglevel_console_value = pi_caravan_database_get_logging_value.get_logging_value(pi_caravan_names.loglevel_console_field)
+    loglevel_file_value = database_get_logging_value.get_logging_value(names.loglevel_file_field)
+    loglevel_console_value = database_get_logging_value.get_logging_value(names.loglevel_console_field)
     
     # Logger fuer website
-    website_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_caravan_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
+    website_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
     website_log_rotatingfilehandler.setLevel(logging.INFO)
     website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
     website_log_rotatingfilehandler.setFormatter(website_log_rotatingfilehandler_formatter)
 
     # Logger fuer pi-caravan debugging
-    pi_caravan_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_caravan_paths.get_pi_caravan_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
+    pi_caravan_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(paths.get_pi_caravan_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
     pi_caravan_log_rotatingfilehandler.setLevel(get_logginglevel(loglevel_file_value))
     pi_caravan_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
     pi_caravan_log_rotatingfilehandler.setFormatter(pi_caravan_log_rotatingfilehandler_formatter)
