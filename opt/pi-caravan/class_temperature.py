@@ -7,8 +7,8 @@ class TemperatureSensor(threading.Thread):
     def __init__(self, base_path= '/sys/bus/w1/devices/', 
                      file_name='/w1_slave', sensorname='28*', default=25.0):
         threading.Thread.__init__(self)
-        self.default = default
-        self.sensorname = sensorname
+        self.default = default #private
+        self.sensorname = sensorname #private
  
         try:
             self.sensor_path = glob.glob(base_path + self.sensorname)[0] + file_name 

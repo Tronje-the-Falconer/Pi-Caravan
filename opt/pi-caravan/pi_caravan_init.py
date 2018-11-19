@@ -9,20 +9,37 @@
 """
 
 import os
-import pi_caravan_logging
-import pi_caravan_names
+import logging_
+import names
 import class_temperature
 
 global logger
 
-def init():
-    logger = pi_caravan_logging.create_logger(__name__)
+def __init__():
+    logger = logging_.create_logger(__name__)
     logger.debug('logging initialised')
-    
-    temperature_sensor_outside = class_temperature.TemperatureSensor(sensorname=pi_caravan_names.temperature_sensor_outside)
-    temperature_sensor_inside = class_temperature.TemperatureSensor(sensorname=pi_caravan_names.temperature_sensor_inside)
-    temperature_sensor_fridge = class_temperature.TemperatureSensor(sensorname=pi_caravan_names.temperature_sensor_fridge)
-    temperature_sensor_fridge_exhaust_air = class_temperature.TemperatureSensor(sensorname=pi_caravan_names.temperature_sensor_fridge_exhaust_air)
-    return temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air
-    
-loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
+
+
+def get_temperature_from_sensor_outside():
+    if _temperature_sensor_outside == NULL:
+        _temperature_sensor_outside = class_temperature.TemperatureSensor(sensorname=names.temperature_sensor_outside)
+        
+    return temperature_sensor_outside.get_temperature()
+
+def get_temperature_from_sensor_inside():
+    if _temperature_sensor_inside == NULL:
+        _temperature_sensor_inside = class_temperature.TemperatureSensor(sensorname=names.temperature_sensor_inside)
+        
+    return _temperature_sensor_inside.get_temperature()
+
+def get_temperature_from_sensor_fridge():
+    if _temperature_sensor_fridge == NULL:
+        _temperature_sensor_fridge = class_temperature.TemperatureSensor(sensorname=names.temperature_sensor_fridge)
+        
+    return _temperature_sensor_fridge.get_temperature()
+
+def get_temperature_from_sensor_fridge_exhaust_air():
+    if _temperature_sensor_fridge_exhaust_air == NULL:
+        _temperature_sensor_fridge_exhaust_air = class_temperature.TemperatureSensor(sensorname=names.temperature_sensor_fridge)
+        
+    return _temperature_sensor_fridge_exhaust_air.get_temperature()

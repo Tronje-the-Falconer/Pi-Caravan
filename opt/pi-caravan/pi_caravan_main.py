@@ -17,20 +17,33 @@ Forward WiFi from the campsite
 
 # import modules
 import os
-import pi_caravan_init
-import pi_caravan_organization
-import pi_caravan_logging
-import pi_caravan_loop
+import init
+import organization
+import logging_
+import loop
 
+class Loopcounter():
+    def __init__(self):
+        self.reset()
+    def reset():
+        self.__loopcounter__ = 0
+    def increase():
+        self.__loopcounter__ +=1
+    def get_value():
+        return self.__loopcounter__
+    
 
-logger = pi_caravan_logging.create_logger('main')
+def __init__():
+    Loopcounter.__init__()
+    
+logger = logging_.create_logger('main')
 logger.debug('logging initialised')
 
-temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air = pi_caravan_init.init()
+temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air = pi_caravan_init.get_sensors()
 # initialise system
 
 try:
-    pi_caravan_loop.do_mainloop(temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air)
+    loop.do_mainloop(temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air)
     
 except KeyboardInterrupt:
     logger.warning('KeyboardInterrupt')
@@ -42,5 +55,5 @@ except Exception as e:
     pass
 
 finally:
-    pi_caravan_init.loopcounter = 0
-    pi_caravan_organization.goodbye()
+    Loopcounter.reset()
+    organization.goodbye()

@@ -2,14 +2,13 @@
 # coding=utf-8
 # pi_caravan_loop.py
 #------------------------------------------------------------
-import pi_caravan_logging
-import pi_caravan_names
+import logging_
 
 
 global logger, temperature_sensor_outside, temperature_sensor_inside, temperature_sensor_fridge, temperature_sensor_fridge_exhaust_air
 
 
-logger = pi_caravan_logging.create_logger(__name__)
+logger = logging_.create_logger(__name__)
 logger.debug('logging initialised')
 
 def do_mainloop(temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air):
