@@ -26,12 +26,11 @@ import pi_caravan_loop
 logger = pi_caravan_logging.create_logger('main')
 logger.debug('logging initialised')
 
-pi_caravan_init.init()
+temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air = pi_caravan_init.init()
 # initialise system
-#pi_caravan_init.get_sensors()
 
 try:
-    pi_caravan_loop.do_mainloop()
+    pi_caravan_loop.do_mainloop(temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air)
     
 except KeyboardInterrupt:
     logger.warning('KeyboardInterrupt')

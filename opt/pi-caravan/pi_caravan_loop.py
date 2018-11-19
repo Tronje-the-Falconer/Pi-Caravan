@@ -3,28 +3,33 @@
 # pi_caravan_loop.py
 #------------------------------------------------------------
 import pi_caravan_logging
-import pi_caravan_read_onewire_sensors
+import pi_caravan_names
 
 
-global logger
-global temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value 
+global logger, temperature_sensor_outside, temperature_sensor_inside, temperature_sensor_fridge, temperature_sensor_fridge_exhaust_air
+
+
 logger = pi_caravan_logging.create_logger(__name__)
 logger.debug('logging initialised')
 
-def do_mainloop():
-    global temperature_sensor_designation, temperature_sensor_count, temperature_sensor_value 
-    pi_caravan_read_onewire_sensors.read_temperature_sensors()
+def do_mainloop(temperature_sensor_outside,temperature_sensor_inside,temperature_sensor_fridge,temperature_sensor_fridge_exhaust_air):
+    print('mainloop')
+    temperature_sensor_outside = temperature_sensor_fridge_exhaust_air
+    temperature_sensor_inside = temperature_sensor_inside
+    temperature_sensor_fridge = temperature_sensor_fridge
+    temperature_sensor_fridge_exhaust_air = temperature_sensor_fridge_exhaust_air
     # temperature output in loop
     try:
         while True:
-            x = 0
-            pi_caravan_read_onewire_sensors.read_temperature_sensors()
-            print ("Sensorbezeichnung und Temperaturwert:")
-            while x < temperature_sensor_count:
-                print (temperature_sensor_designation[x] , " " , temperature_sensor_value[x] , " °C")
-                x = x + 1
-            time.sleep(.5)
+            print(temperature_sensor_outside.get_temperature())
+            print(temperature_sensor_inside.get_temperature())
+            print(temperature_sensor_fridge.get_temperature())
+            print(temperature_sensor_fridge_exhaust_air.get_temperature())
+            print ('Done')
             print ("\n")
+    except KeyboardInterrupt:
+        logger.warning('KeyboardInterrupt')
+        pass
     except:
         # error 
         logger.warning('main loop failed')
