@@ -2,29 +2,28 @@
 # coding=utf-8
 # pi_caravan_loop.py
 #------------------------------------------------------------
+import traceback
 import logging_
-from init import _get_temperature_from_sensor_outside
+import init
+import names
 
-global logger, temperature_sensor_outside, temperature_sensor_inside, temperature_sensor_fridge, temperature_sensor_fridge_exhaust_air
-
-def __init__():
-    __logger__ = logging_.create_logger(__name__)
-    __logger__.debug('logging initialised')
+_logger = logging_.create_logger(__name__)
+_logger.debug('logging initialised')
 
 def do_mainloop():
-    __init__()
     print('mainloop')
     # temperature output in loop
     try:
         while True:
-            print(_get_temperature_from_sensor_outside())
+            print(init.get_instance(names.id_temperature_sensor_outside).get_temperature())
+            print(init.get_instance(names.id_temperature_sensor_inside).get_temperature())
+            print(init.get_instance(names.id_temperature_sensor_fridge).get_temperature())
+            print(init.get_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature())
             print ('Done')
             print ("\n")
     except KeyboardInterrupt:
-        __logger__.warning('KeyboardInterrupt')
-        pass
-    except:
-        # error 
-        __logger__.warning('main loop failed')
-
-__init__()
+        raise
+    except Exception as e:
+        _logger.warning('main loop failed')
+        _logger.warning(e)
+        traceback.print_exc()

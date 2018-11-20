@@ -17,7 +17,6 @@ Forward WiFi from the campsite
 
 # import modules
 import os
-import init
 import organization
 import logging_
 import loop
@@ -39,7 +38,7 @@ logger = logging_.create_logger('main')
 logger.debug('logging initialised')
 
 # initialise system
-__init__()
+
 try:
     loop.do_mainloop()
     
