@@ -27,8 +27,9 @@ class TemperatureSensor(threading.Thread):
                 temperature = round(float(data.rsplit('t=',1)[1])/1000, 1)    
         except KeyboardInterrupt:
             raise
-        except:
+        except Exception as e:
             print("Can't read temperature sensor!")
+            print(e)
         return float(temperature) 
  
     def log_temperature(self, interval=5.0):

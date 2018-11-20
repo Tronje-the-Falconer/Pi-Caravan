@@ -15,10 +15,10 @@ def do_mainloop():
     # temperature output in loop
     try:
         while True:
-            print(init.get_instance(names.id_temperature_sensor_outside).get_temperature())
-            print(init.get_instance(names.id_temperature_sensor_inside).get_temperature())
-            print(init.get_instance(names.id_temperature_sensor_fridge).get_temperature())
-            print(init.get_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature())
+            print(init.get_onewire_sensor_instance(names.id_temperature_sensor_outside).get_temperature())
+            print(init.get_onewire_sensor_instance(names.id_temperature_sensor_inside).get_temperature())
+            print(init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge).get_temperature())
+            print(init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature())
             print ('Done')
             print ("\n")
     except KeyboardInterrupt:

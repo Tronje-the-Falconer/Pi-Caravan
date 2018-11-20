@@ -17,30 +17,15 @@ import class_temperature
 _logger = logging_.create_logger(__name__)
 _logger.debug('logging initialised')
 
-_temperature_sensor_outside = None
-_temperature_sensor_inside = None
-_temperature_sensor_fridge = None
-_temperature_sensor_fridge_exhaust = None
+dict_onewire_sensors = {}
+dict_loggers = {}
 
-def get_instance(sensorid):
-    global _temperature_sensor_outside
-    global _temperature_sensor_inside
-    global _temperature_sensor_fridge
-    global _temperature_sensor_fridge_exhaust
-    
-    if sensorid == names.id_temperature_sensor_outside:
-        if _temperature_sensor_outside == None:
-            _temperature_sensor_outside = class_temperature.TemperatureSensor(sensorid=names.id_temperature_sensor_outside)
-        return _temperature_sensor_outside
-    elif sensorid == names.id_temperature_sensor_inside:
-        if _temperature_sensor_inside == None:
-            _temperature_sensor_inside = class_temperature.TemperatureSensor(sensorid=names.id_temperature_sensor_inside)
-        return _temperature_sensor_inside
-    elif sensorid == names.id_temperature_sensor_fridge:
-        if _temperature_sensor_fridge == None:
-            _temperature_sensor_fridge = class_temperature.TemperatureSensor(sensorid=names.id_temperature_sensor_fridge)
-        return _temperature_sensor_fridge
-    elif sensorid == names.id_temperature_sensor_fridge_exhaust:
-        if _temperature_sensor_fridge_exhaust == None:
-            _temperature_sensor_fridge_exhaust = class_temperature.TemperatureSensor(sensorid=names.id_temperature_sensor_fridge_exhaust)
-        return _temperature_sensor_fridge_exhaust
+def get_onewire_sensor_instance(id_sensor):
+    if id_sensor not in dict_onewire_sensors:
+        dict_onewire_sensors[id_sensor] = class_temperature.TemperatureSensor(sensorid=id_sensor)
+    return dict_onewire_sensors[id_sensor]
+
+def get_logger_instance(pythonfile):
+    if pythonfile not in dict_loggers:
+        dict_loggers[pythonfile] = class_logger.Logger(pythonfile)
+    return dict_loggers[pythonfile]
