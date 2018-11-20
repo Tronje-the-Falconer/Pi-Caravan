@@ -15,19 +15,23 @@ import class_temperature
 
 global logger
 
+
 def __init__():
     logger = logging_.create_logger(__name__)
     logger.debug('logging initialised')
+    
+    global _temperature_sensor_outside
+    _temperature_sensor_outside = None
+    
     _get_temperature_from_sensor_outside()
     _get_temperature_from_sensor_inside()
     _get_temperature_from_sensor_fridge()
     _get_temperature_from_sensor_fridge_exhaust_air()
 
+__init__()
 
 def _get_temperature_from_sensor_outside():
-    try:
-        _temperature_sensor_outside
-    except UnboundLocalError as error:
+    if _temperature_sensor_outside == None:
         _temperature_sensor_outside = class_temperature.TemperatureSensor(sensorname=names.temperature_sensor_outside)
         return temperature_sensor_outside.get_temperature()
     else:

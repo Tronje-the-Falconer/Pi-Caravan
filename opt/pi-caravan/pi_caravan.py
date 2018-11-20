@@ -33,10 +33,10 @@ class Loopcounter():
         return self.loopcount
     
 
-def __init__():
-    loopcounter = Loopcounter()
-    logger = logging_.create_logger('main')
-    logger.debug('logging initialised')
+
+loopcounter = Loopcounter()
+logger = logging_.create_logger('main')
+logger.debug('logging initialised')
 
 # initialise system
 __init__()
