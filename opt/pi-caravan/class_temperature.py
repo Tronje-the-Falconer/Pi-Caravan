@@ -46,21 +46,3 @@ class TemperatureSensor(threading.Thread):
         # load stored temperatures with
         # np.load('temperatures.npy')
  
- 
- 
-# if __name__ == "__main__":
-    # temp_sensor_1 = TemperatureSensor(pi_caravan_names.tempsensor1)
-    # temp_sensor_2 = TemperatureSensor(pi_caravan_names.tempsensor2)
-    # temp_sensor_3 = TemperatureSensor(pi_caravan_names.tempsensor3)
-    # temp_sensor_4 = TemperatureSensor(pi_caravan_names.tempsensor4)
- 
-    # if sys.argv[-1] == "log":
-        # temp_sensor_1.log_temperature()
-        # temp_sensor_2.log_temperature()
-        # temp_sensor_3.log_temperature()
-        # temp_sensor_4.log_temperature()
-    # else:
-        # print(temp_sensor_1.get_temperature())
-        # print(temp_sensor_2.get_temperature())
-        # print(temp_sensor_3.get_temperature())
-        # print(temp_sensor_4.get_temperature())

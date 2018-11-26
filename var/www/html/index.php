@@ -34,18 +34,22 @@
 <table style="width: 20%;">
     <tr>
         <td>Außentemperatur: </td>
+        <td><div id="temp_outside"></div></td>
         <td> °C</td>
     </tr>
     <tr>
         <td>Innentemperatur: </td>
+        <td><div id="temp_inside"></div></td>
         <td> °C</td>
     </tr>
     <tr>
         <td>Kühlschrank innen: </td>
+        <td><div id="fridge"></div></td>
         <td> °C</td>
     </tr>
     <tr>
         <td>Kühlschrank Abluft: </td>
+        <td><div id="fridge_exhaust"></div></td>
         <td> °C</td>
     </tr>
     <tr>
@@ -53,6 +57,8 @@
         <td>AN/AUS</td>
     </tr>
 </table>
+<hr>
+<h2 class="art-postheader">Gyroskop</h2>
 <?php
     include 'footer.php';
 ?>
