@@ -17,6 +17,7 @@ def do_mainloop():
     # temperature output in loop
     try:
         while True:
+            print ('###### temperature')
             temperature_outside = init.get_onewire_sensor_instance(names.id_temperature_sensor_outside).get_temperature()
             temperature_inside = init.get_onewire_sensor_instance(names.id_temperature_sensor_inside).get_temperature()
             temperature_fridge = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge).get_temperature()
@@ -29,8 +30,32 @@ def do_mainloop():
             json_values = json.dumps({"temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust})
             with open(paths.get_path_web_json_file(), 'w') as file:
                 file.write(json_values)
-                
-            print ('Done')
+            print ('###### temperature done')
+            
+            
+            print ('###### gyro')
+            gyro_x = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x43)
+            gyro_y = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x45)
+            print ('X-Rotation: ' + str(gyro_x))
+            print ('Y-Rotation: ' + str(gyro_y))
+            print ('###### gyro done')
+            
+            
+            print ('###### gps')
+            
+            print ('###### gps done')
+            
+            
+            print ('###### fuellstandssensoren')
+            
+            print ('###### fuellstandssensoren done')
+            
+            
+            print ('###### windsensor')
+            
+            print ('###### windsensor done')
+            
+            print ('loop done')
             print ("\n")
     except KeyboardInterrupt:
         raise

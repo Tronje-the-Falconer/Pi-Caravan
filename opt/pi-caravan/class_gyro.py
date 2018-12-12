@@ -7,18 +7,23 @@ import threading
 class Gyro(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        self.bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
+        self.address = 0x68       # via i2cdetect
+        self.power_mgmt_1 = 0x6b
+        # Aktivieren, um das Modul ansprechen zu koennen
+        self.bus.write_byte_data(self.address, self.power_mgmt_1, 0)
         try:
-            bus.write_byte_data(address, power_mgmt_1, 0)
-            bus.write_byte_data(address, 0x1A, 6) #Tiefpasfilter ein
+            self.bus.write_byte_data(self.address, self.power_mgmt_1, 0)
+            self.bus.write_byte_data(self.address, 0x1A, 6) #Tiefpasfilter ein
             self.running = True # setting the thread running to true
         except:
             print("Keine Verbindung zum Gyroskop")
             self.running = False
     def read_byte(self,reg):
-        return bus.read_byte_data(address, reg)
+        return self.bus.read_byte_data(self.address, reg)
     def read_word(self,reg):
-        h = bus.read_byte_data(address, reg)
-        l = bus.read_byte_data(address, reg+1)
+        h = self.bus.read_byte_data(self.address, reg)
+        l = self.bus.read_byte_data(self.address, reg+1)
         value = (h << 8) + l
         return value 
     def read_word_2c(self,reg):
@@ -74,14 +79,14 @@ def read_gyro():
     print("Y Rotation: " , gyro.get_y_rotation(beschleunigung_xout_skaliert, beschleunigung_yout_skaliert, beschleunigung_zout_skaliert))
     
     
-global gyro, programmStatus
-programmStatus = 1
-gyro = Gyro()
+# global gyro, programmStatus
+# programmStatus = 1
+# gyro = Gyro()
 
-while programmStatus == 1:
-    #read_temp()
-    read_gyro()
-    time.sleep(5)
+# while programmStatus == 1:
+##    read_temp()
+    # read_gyro()
+    # time.sleep(5)
    
-# Programmende durch Veränderung des programmStatus
-print("Programm wurde beendet.")
+##Programmende durch Veränderung des programmStatus
+# print("Programm wurde beendet.")
