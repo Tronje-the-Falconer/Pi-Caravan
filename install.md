@@ -22,12 +22,17 @@ set serial no and yes
 
 install HotSpot-Skipt from Github (https://github.com/damiencaselli/rpi3-hotspot)
 
+https://forum-raspberrypi.de/attachment/16234-anleitung-hotspot-gateway-11-pdf/
+
+https://forum-raspberrypi.de/forum/thread/38378-anleitung-hotspot-einrichten-raspbian-stretch/?postID=325032#post325032
+
+
     cd /home/pi/
     git clone https://github.com/damiencaselli/rpi3-hotspot.git
 
 use templatefile to create configurationfile
 
-    sudo nano /home/rpi3-hotspot/boot/hotspot.txt.example
+    sudo nano /home/pi/rpi3-hotspot/boot/hotspot.txt.example
     
 set ssid and passphrase
 
@@ -44,7 +49,7 @@ copy file into boot-folder
 
 edit file interfaces
 
-    sudo nano /home/rpi3-hotspot/etc/network/interfaces
+    sudo nano /home/pi/rpi3-hotspot/etc/network/interfaces
     
 insert (like for eth0)
 
@@ -52,7 +57,7 @@ insert (like for eth0)
 
 edit file rpi-access-point
 
-    sudo nano /home/rpi3-hotspot/usr/bin/rpi-access-point
+    sudo nano /home/pi/rpi3-hotspot/usr/bin/rpi-access-point
 
 copy and reinsert line 72-82 (section IPTABLES) and set eth0 to wlan1
 
@@ -68,11 +73,11 @@ copy and reinsert line 72-82 (section IPTABLES) and set eth0 to wlan1
 
 edit IP-Adress
 
-    sudo nano /home/rpi3-hotspot/etc/dnsmasq.d/rpi-access-point.conf
+    sudo nano /home/pi/rpi3-hotspot/etc/dnsmasq.d/rpi-access-point.conf
 
 change every 10.99.99 to your IP-Choice
 
-    sudo nano /home/rpi3-hotspot/usr/bin/rpi-access-point
+    sudo nano /home/pi/rpi3-hotspot/usr/bin/rpi-access-point
 
 change 10.99.99 to your IP-Choice
 
