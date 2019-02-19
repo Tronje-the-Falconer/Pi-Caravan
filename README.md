@@ -3,13 +3,8 @@ Using Raspberry in Caravan
 
 To-Do's
 - DAB Radio
-- Temperatursenoren (1-Wire) (DS1820B)
-  - Außen
-  - Innen
-  - Kühlschrank
-  - Eisfach
-  - Kühlschrank abluft
 - Steuerung von Abluftlüfter
+- Schräglage Wohnwagen anhand Grafik
 - Wetteranzeige
 - GPS Ortung (SIM808 GPRS/GPSModul)
 - Füllstandsanzeige
@@ -17,7 +12,8 @@ To-Do's
   - Abwassser
   - WC
 - Batterieüberwachung
-- wasserwaage (MPU6050)
+- Windmesser
+    - gefühlte Temperatur
 - GSM 3G/LTE (SIM808 GPRS/GPSModul)
 - Display
 
@@ -29,6 +25,15 @@ Done's
   - Campingplatz WLAN
   
 - FM Radio (Si4703)
+
+- Temperatursenoren (1-Wire) (DS1820B)
+  - Außen
+  - Innen
+  - Kühlschrank
+  - Eisfach
+  - Kühlschrank abluft
+  
+- Wasserwaage (MPU6050)
 
 ---
 
