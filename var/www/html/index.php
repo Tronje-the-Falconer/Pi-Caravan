@@ -371,6 +371,88 @@
                 //console.log(data);
             }
         });
+        //Wetter Vorhersage API alle 3 Stunden (8 Pro Tag), 5 Tage
+        jQuery.ajax ({
+            url: apiUrl_weather_forecast,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                function timeConverter(UNIX_timestamp, Format){
+                    var a = new Date(UNIX_timestamp * 1000);
+                    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                    var year = a.getFullYear();
+                    var month = months[a.getMonth()];
+                    var date = a.getDate();
+                    var hour = a.getHours();
+                    var min = a.getMinutes();
+                    var sec = a.getSeconds();
+                    if ( Format == 'date'  ) {
+                        var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+                        return time;
+                    }else{
+                        var time = hour + ':' + min + ':' + sec ;
+                        return time;
+                    }
+                }
+                // DATA
+                var weather_forecast_data_objekt = data;
+
+                var weather_forecast_day_1_1 = weather_forecast_data_objekt.list[0];
+                var weather_forecast_day_1_2 = weather_forecast_data_objekt.list[1];
+                var weather_forecast_day_1_3 = weather_forecast_data_objekt.list[2];
+                var weather_forecast_day_1_4 = weather_forecast_data_objekt.list[3];
+                var weather_forecast_day_1_5 = weather_forecast_data_objekt.list[4];
+                var weather_forecast_day_1_6 = weather_forecast_data_objekt.list[5];
+                var weather_forecast_day_1_7 = weather_forecast_data_objekt.list[6];
+                var weather_forecast_day_1_8 = weather_forecast_data_objekt.list[7];
+                var weather_forecast_day_2_1 = weather_forecast_data_objekt.list[8];
+                var weather_forecast_day_2_2 = weather_forecast_data_objekt.list[9];
+                var weather_forecast_day_2_3 = weather_forecast_data_objekt.list[10];
+                var weather_forecast_day_2_4 = weather_forecast_data_objekt.list[11];
+                var weather_forecast_day_2_5 = weather_forecast_data_objekt.list[12];
+                var weather_forecast_day_2_6 = weather_forecast_data_objekt.list[13];
+                var weather_forecast_day_2_7 = weather_forecast_data_objekt.list[14];
+                var weather_forecast_day_2_8 = weather_forecast_data_objekt.list[15];
+                var weather_forecast_day_3_1 = weather_forecast_data_objekt.list[16];
+                var weather_forecast_day_3_2 = weather_forecast_data_objekt.list[17];
+                var weather_forecast_day_3_3 = weather_forecast_data_objekt.list[18];
+                var weather_forecast_day_3_4 = weather_forecast_data_objekt.list[19];
+                var weather_forecast_day_3_5 = weather_forecast_data_objekt.list[20];
+                var weather_forecast_day_3_6 = weather_forecast_data_objekt.list[21];
+                var weather_forecast_day_3_7 = weather_forecast_data_objekt.list[22];
+                var weather_forecast_day_3_8 = weather_forecast_data_objekt.list[23];
+                var weather_forecast_day_4_1 = weather_forecast_data_objekt.list[24];
+                var weather_forecast_day_4_2 = weather_forecast_data_objekt.list[25];
+                var weather_forecast_day_4_3 = weather_forecast_data_objekt.list[26];
+                var weather_forecast_day_4_4 = weather_forecast_data_objekt.list[27];
+                var weather_forecast_day_4_5 = weather_forecast_data_objekt.list[28];
+                var weather_forecast_day_4_6 = weather_forecast_data_objekt.list[29];
+                var weather_forecast_day_4_7 = weather_forecast_data_objekt.list[30];
+                var weather_forecast_day_4_8 = weather_forecast_data_objekt.list[32];
+                var weather_forecast_day_5_1 = weather_forecast_data_objekt.list[32];
+                var weather_forecast_day_5_2 = weather_forecast_data_objekt.list[33];
+                var weather_forecast_day_5_3 = weather_forecast_data_objekt.list[34];
+                var weather_forecast_day_5_4 = weather_forecast_data_objekt.list[35];
+                var weather_forecast_day_5_5 = weather_forecast_data_objekt.list[36];
+                var weather_forecast_day_5_6 = weather_forecast_data_objekt.list[37];
+                var weather_forecast_day_5_7 = weather_forecast_data_objekt.list[38];
+                var weather_forecast_day_5_8 = weather_forecast_data_objekt.list[39];
+                
+                
+                var weatherMain_day_1_1         =   weather_forecast_day_1_1.weather[0].main; // Group of weather parameters (Rain, Snow, Extreme etc.)
+                var weatherDescription_day_1_1  =   weather_forecast_day_1_1.weather[0].description; // Weather condition within the group
+                var weatherIcon_day_1_1         =   '<img src="https://openweathermap.org/img/w/' + weather_forecast_day_1_1.weather[0].icon + '.png">'; // Weather icon id
+                var weatherBg_day_1_1           =   weather_forecast_day_1_1.weather[0].icon; // Weather icon id
+                
+                
+                var weather             =   '<h4>Wetter</h4><ul><li><strong>Main:</strong> ' + weatherMain_day_1_1 + '</li><li><strong>Desc:</strong> ' + weatherDescription_day_1_1 + '</li><li><strong>icon:</strong> ' + weatherIcon_day_1_1 + '</li></ul>';
+                
+                // OUTPUT
+                jQuery('div#weather_forecast').html( weather );
+                console.log(weather_forecast_data_objekt.list[0]);
+                
+            }
+        });
         //UV Vorhersage API
         jQuery.ajax ({
             url: apiUrl_weather_uvi_forecast,
@@ -395,90 +477,90 @@
                     }
                 }
                 // DATA
-                var uv_forecast_data_objekt = data;
+                var uvi_forecast_data_objekt = data;
 
-                var data1 = uv_forecast_data_objekt[0];
-                var data2 = uv_forecast_data_objekt[1];
-                var data3 = uv_forecast_data_objekt[2];
-                var data4 = uv_forecast_data_objekt[3];
-                var data5 = uv_forecast_data_objekt[4];
-                var data6 = uv_forecast_data_objekt[5];
-                var data7 = uv_forecast_data_objekt[6];
-                var data8 = uv_forecast_data_objekt[7];
+                var uvi_forecast_data_1 = uvi_forecast_data_objekt[0];
+                var uvi_forecast_data_2 = uvi_forecast_data_objekt[1];
+                var uvi_forecast_data_3 = uvi_forecast_data_objekt[2];
+                var uvi_forecast_data_4 = uvi_forecast_data_objekt[3];
+                var uvi_forecast_data_5 = uvi_forecast_data_objekt[4];
+                var uvi_forecast_data_6 = uvi_forecast_data_objekt[5];
+                var uvi_forecast_data_7 = uvi_forecast_data_objekt[6];
+                var uvi_forecast_data_8 = uvi_forecast_data_objekt[7];
                 
                 
-                var date_iso_1            = data1.date_iso; //date and time corresponding to returned date 
-                var date_orig_1           = data1.date; // ISO 8601 timestamp
-                var date_1                = timeConverter(date_orig_1, 'date');
-                var value_1               = data1.value;
+                var uvi_forecast_date_iso_1            = uvi_forecast_data_1.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_1           = uvi_forecast_data_1.date; // ISO 8601 timestamp
+                var uvi_forecast_date_1                = timeConverter(uvi_forecast_date_orig_1, 'date');
+                var uvi_forecast_value_1               = uvi_forecast_data_1.value;
                 
-                var date_iso_2            = data2.date_iso; //date and time corresponding to returned date 
-                var date_orig_2           = data2.date; // ISO 8602 timestamp
-                var date_2                = timeConverter(date_orig_2, 'date');
-                var value_2               = data2.value;
+                var uvi_forecast_date_iso_2            = uvi_forecast_data_2.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_2           = uvi_forecast_data_2.date; // ISO 8602 timestamp
+                var uvi_forecast_date_2                = timeConverter(uvi_forecast_date_orig_2, 'date');
+                var uvi_forecast_value_2               = uvi_forecast_data_2.value;
                 
-                var date_iso_3            = data3.date_iso; //date and time corresponding to returned date 
-                var date_orig_3           = data3.date; // ISO 8603 timestamp
-                var date_3                = timeConverter(date_orig_3, 'date');
-                var value_3               = data3.value;
+                var uvi_forecast_date_iso_3            = uvi_forecast_data_3.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_3           = uvi_forecast_data_3.date; // ISO 8603 timestamp
+                var uvi_forecast_date_3                = timeConverter(uvi_forecast_date_orig_3, 'date');
+                var uvi_forecast_value_3               = uvi_forecast_data_3.value;
                 
-                var date_iso_4            = data4.date_iso; //date and time corresponding to returned date 
-                var date_orig_4           = data4.date; // ISO 8604 timestamp
-                var date_4                = timeConverter(date_orig_4, 'date');
-                var value_4               = data4.value;
+                var uvi_forecast_date_iso_4            = uvi_forecast_data_4.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_4           = uvi_forecast_data_4.date; // ISO 8604 timestamp
+                var uvi_forecast_date_4                = timeConverter(uvi_forecast_date_orig_4, 'date');
+                var uvi_forecast_value_4               = uvi_forecast_data_4.value;
                 
-                var date_iso_5            = data5.date_iso; //date and time corresponding to returned date 
-                var date_orig_5           = data5.date; // ISO 8605 timestamp
-                var date_5                = timeConverter(date_orig_5, 'date');
-                var value_5               = data5.value;
+                var uvi_forecast_date_iso_5            = uvi_forecast_data_5.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_5           = uvi_forecast_data_5.date; // ISO 8605 timestamp
+                var uvi_forecast_date_5                = timeConverter(uvi_forecast_date_orig_5, 'date');
+                var uvi_forecast_value_5               = uvi_forecast_data_5.value;
                 
-                var date_iso_6            = data6.date_iso; //date and time corresponding to returned date 
-                var date_orig_6           = data6.date; // ISO 8606 timestamp
-                var date_6                = timeConverter(date_orig_6, 'date');
-                var value_6               = data6.value;
+                var uvi_forecast_date_iso_6            = uvi_forecast_data_6.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_6           = uvi_forecast_data_6.date; // ISO 8606 timestamp
+                var uvi_forecast_date_6                = timeConverter(uvi_forecast_date_orig_6, 'date');
+                var uvi_forecast_value_6               = uvi_forecast_data_6.value;
                 
-                var date_iso_7            = data7.date_iso; //date and time corresponding to returned date 
-                var date_orig_7           = data7.date; // ISO 8607 timestamp
-                var date_7                = timeConverter(date_orig_7, 'date');
-                var value_7               = data7.value;
+                var uvi_forecast_date_iso_7            = uvi_forecast_data_7.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_7           = uvi_forecast_data_7.date; // ISO 8607 timestamp
+                var uvi_forecast_date_7                = timeConverter(uvi_forecast_date_orig_7, 'date');
+                var uvi_forecast_value_7               = uvi_forecast_data_7.value;
                 
-                var date_iso_8            = data8.date_iso; //date and time corresponding to returned date 
-                var date_orig_8           = data8.date; // ISO 8608 timestamp
-                var date_8                = timeConverter(date_orig_8, 'date');
-                var value_8               = data8.value;
+                var uvi_forecast_date_iso_8            = uvi_forecast_data_8.date_iso; //date and time corresponding to returned date 
+                var uvi_forecast_date_orig_8           = uvi_forecast_data_8.date; // ISO 8608 timestamp
+                var uvi_forecast_date_8                = timeConverter(uvi_forecast_date_orig_8, 'date');
+                var uvi_forecast_value_8               = uvi_forecast_data_8.value;
                 
-                var uv_forecast         =   '<div id="uvi_forecast_1" ><h4>' + date_1 + '</h4><ul><li><strong>value:</strong> ' + value_1 + '</li></ul></div><div id="uvi_forecast_2" ><h4>' + date_2 + '</h4><ul><li><strong>value:</strong> ' + value_2 + '</li></ul></div><div id="uvi_forecast_3" ><h4>' + date_3 + '</h4><ul><li><strong>value:</strong> ' + value_3 + '</li></ul></div><div id="uvi_forecast_4" ><h4>' + date_4 + '</h4><ul><li><strong>value:</strong> ' + value_4 + '</li></ul></div><div id="uvi_forecast_5" ><h4>' + date_5 + '</h4><ul><li><strong>value:</strong> ' + value_5 + '</li></ul></div><div id="uvi_forecast_6" ><h4>' + date_6 + '</h4><ul><li><strong>value:</strong> ' + value_6 + '</li></ul></div><div id="uvi_forecast_7" ><h4>' + date_7 + '</h4><ul><li><strong>value:</strong> ' + value_7 + '</li></ul></div><div id="uvi_forecast_8" ><h4>' + date_8 + '</h4><ul><li><strong>value:</strong> ' + value_8 + '</li></ul><h4></div>';
+                var uvi_forecast         =   '<div id="uvi_forecast_1" ><h4>' + uvi_forecast_date_1 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_1 + '</li></ul></div><div id="uvi_forecast_2" ><h4>' + uvi_forecast_date_2 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_2 + '</li></ul></div><div id="uvi_forecast_3" ><h4>' + uvi_forecast_date_3 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_3 + '</li></ul></div><div id="uvi_forecast_4" ><h4>' + uvi_forecast_date_4 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_4 + '</li></ul></div><div id="uvi_forecast_5" ><h4>' + uvi_forecast_date_5 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_5 + '</li></ul></div><div id="uvi_forecast_6" ><h4>' + uvi_forecast_date_6 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_6 + '</li></ul></div><div id="uvi_forecast_7" ><h4>' + uvi_forecast_date_7 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_7 + '</li></ul></div><div id="uvi_forecast_8" ><h4>' + uvi_forecast_date_8 + '</h4><ul><li><strong>value:</strong> ' + uvi_forecast_value_8 + '</li></ul><h4></div>';
 
                 
                 
                 // OUTPUT
-                jQuery('div#weather_uvi_forecast').html(uv_forecast);
+                jQuery('div#weather_uvi_forecast').html(uvi_forecast);
                 
                 
                 // colourise
-                var values = [value_1, value_2, value_3, value_4, value_5, value_6, value_7, value_8]
-                var count = 1
-                for (value of values){
-                    if ( value < 2.9  ) {  
+                var uvi_forecast_values = [uvi_forecast_value_1, uvi_forecast_value_2, uvi_forecast_value_3, uvi_forecast_value_4, uvi_forecast_value_5, uvi_forecast_value_6, uvi_forecast_value_7, uvi_forecast_value_8]
+                var uvi_forecast_count = 1
+                for (uvi_forecast_value of uvi_forecast_values){
+                    if ( uvi_forecast_value < 2.9  ) {  
                         // Risk of harm from unprotected sun exposure, for the average adult "Low"
-                        var bgcolor =  'green';  //A UV Index reading of 0 to 2 means low danger from the sun's UV rays for the average person. Wear sunglasses on bright days. If you burn easily, cover up and use broad spectrum SPF 30+ sunscreen. Bright surfaces, such as sand, water and snow, will increase UV exposure.
-                    } else if ( value >= 3.0 && value <= 5.9  ) {   
+                        var uvi_forecast_bgcolor =  'green';  //A UV Index reading of 0 to 2 means low danger from the sun's UV rays for the average person. Wear sunglasses on bright days. If you burn easily, cover up and use broad spectrum SPF 30+ sunscreen. Bright surfaces, such as sand, water and snow, will increase UV exposure.
+                    } else if ( uvi_forecast_value >= 3.0 && uvi_forecast_value <= 5.9  ) {   
                         // Risk of harm from unprotected sun exposure, for the average adult "Moderate"
-                        var bgcolor = 'yellow'; // A UV Index reading of 3 to 5 means moderate risk of harm from unprotected sun exposure. Stay in shade near midday when the sun is strongest. If outdoors, wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
-                    } else if ( value >= 6.0 && value <= 7.9  ) {   
+                        var uvi_forecast_bgcolor = 'yellow'; // A UV Index reading of 3 to 5 means moderate risk of harm from unprotected sun exposure. Stay in shade near midday when the sun is strongest. If outdoors, wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
+                    } else if ( uvi_forecast_value >= 6.0 && uvi_forecast_value <= 7.9  ) {   
                         // Risk of harm from unprotected sun exposure, for the average adult "High"
-                        var bgcolor = 'orange'; //A UV Index reading of 6 to 7 means high risk of harm from unprotected sun exposure. Protection against skin and eye damage is needed. Reduce time in the sun between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
-                    } else if ( value >= 8.0 && value <= 10.9  ) {   
+                        var uvi_forecast_bgcolor = 'orange'; //A UV Index reading of 6 to 7 means high risk of harm from unprotected sun exposure. Protection against skin and eye damage is needed. Reduce time in the sun between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
+                    } else if ( uvi_forecast_value >= 8.0 && uvi_forecast_value <= 10.9  ) {   
                         // Risk of harm from unprotected sun exposure, for the average adult "Very high"
-                        var bgcolor = 'red';// A UV Index reading of 8 to 10 means very high risk of harm from unprotected sun exposure. Take extra precautions because unprotected skin and eyes will be damaged and can burn quickly. Minimize sun exposure between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
-                    } else if ( value > 11.0  ) {   
+                        var uvi_forecast_bgcolor = 'red';// A UV Index reading of 8 to 10 means very high risk of harm from unprotected sun exposure. Take extra precautions because unprotected skin and eyes will be damaged and can burn quickly. Minimize sun exposure between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
+                    } else if ( uvi_forecast_value > 11.0  ) {   
                         // Risk of harm from unprotected sun exposure, for the average adult "Extreme"
-                        var bgcolor = 'violett'; // A UV Index reading of 11 or more means extreme risk of harm from unprotected sun exposure. Take all precautions because unprotected skin and eyes can burn in minutes. Try to avoid sun exposure between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
+                        var uvi_forecast_bgcolor = 'violett'; // A UV Index reading of 11 or more means extreme risk of harm from unprotected sun exposure. Take all precautions because unprotected skin and eyes can burn in minutes. Try to avoid sun exposure between 10 a.m. and 4 p.m. If outdoors, seek shade and wear sun protective clothing, a wide-brimmed hat, and UV-blocking sunglasses. Generously apply broad spectrum SPF 30+ sunscreen every 2 hours, even on cloudy days, and after swimming or sweating. Bright surfaces, such as sand, water and snow, will increase UV exposure.
                     }
                     
-                    var div_id = 'div#uvi_forecast_' + count.toString()
-                    jQuery(div_id).css('background-color', bgcolor);
-                    count = count + 1
+                    var weatherforecast_div_id = 'div#uvi_forecast_' + uvi_forecast_count.toString()
+                    jQuery(weatherforecast_div_id).css('background-color', uvi_forecast_bgcolor);
+                    uvi_forecast_count = uvi_forecast_count + 1
                     
                 }
             }
