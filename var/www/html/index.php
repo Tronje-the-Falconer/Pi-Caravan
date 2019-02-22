@@ -395,15 +395,16 @@
                     }
                 }
                 // DATA
-                var data_objekt = data;
-                var data1 = data_objekt[0];
-                var data2 = data_objekt[1];
-                var data3 = data_objekt[2];
-                var data4 = data_objekt[3];
-                var data5 = data_objekt[4];
-                var data6 = data_objekt[5];
-                var data7 = data_objekt[6];
-                var data8 = data_objekt[7];
+                var uv_forecast_data_objekt = data;
+
+                var data1 = uv_forecast_data_objekt[0];
+                var data2 = uv_forecast_data_objekt[1];
+                var data3 = uv_forecast_data_objekt[2];
+                var data4 = uv_forecast_data_objekt[3];
+                var data5 = uv_forecast_data_objekt[4];
+                var data6 = uv_forecast_data_objekt[5];
+                var data7 = uv_forecast_data_objekt[6];
+                var data8 = uv_forecast_data_objekt[7];
                 
                 
                 var date_iso_1            = data1.date_iso; //date and time corresponding to returned date 
