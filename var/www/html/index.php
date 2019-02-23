@@ -449,7 +449,7 @@
                 
                 // OUTPUT
                 jQuery('div#weather_forecast').html( weather );
-                console.log(weather_forecast_data_objekt.list[0]);
+                //console.log(weather_forecast_data_objekt.list[0]);
                 
             }
         });
@@ -477,16 +477,16 @@
                     }
                 }
                 // DATA
-                var uvi_forecast_data_objekt = data;
-
-                var uvi_forecast_data_1 = uvi_forecast_data_objekt[0];
-                var uvi_forecast_data_2 = uvi_forecast_data_objekt[1];
-                var uvi_forecast_data_3 = uvi_forecast_data_objekt[2];
-                var uvi_forecast_data_4 = uvi_forecast_data_objekt[3];
-                var uvi_forecast_data_5 = uvi_forecast_data_objekt[4];
-                var uvi_forecast_data_6 = uvi_forecast_data_objekt[5];
-                var uvi_forecast_data_7 = uvi_forecast_data_objekt[6];
-                var uvi_forecast_data_8 = uvi_forecast_data_objekt[7];
+                var uvi_forecast_data_objekts = data;
+                
+                var uvi_forecast_data_1 = uvi_forecast_data_objekts[0];
+                var uvi_forecast_data_2 = uvi_forecast_data_objekts[1];
+                var uvi_forecast_data_3 = uvi_forecast_data_objekts[2];
+                var uvi_forecast_data_4 = uvi_forecast_data_objekts[3];
+                var uvi_forecast_data_5 = uvi_forecast_data_objekts[4];
+                var uvi_forecast_data_6 = uvi_forecast_data_objekts[5];
+                var uvi_forecast_data_7 = uvi_forecast_data_objekts[6];
+                var uvi_forecast_data_8 = uvi_forecast_data_objekts[7];
                 
                 
                 var uvi_forecast_date_iso_1            = uvi_forecast_data_1.date_iso; //date and time corresponding to returned date 
