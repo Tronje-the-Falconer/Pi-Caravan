@@ -5,7 +5,6 @@ To-Do's
 - DAB Radio
 - Steuerung von Abluftlüfter
 - Schräglage Wohnwagen anhand Grafik
-- Wetteranzeige
 - GPS Ortung (SIM808 GPRS/GPSModul)
 - Füllstandsanzeige
   - Frischwasser
@@ -34,6 +33,7 @@ Done's
   - Kühlschrank abluft
   
 - Wasserwaage (MPU6050)
+- Wetteranzeige (openweathermap.org)
 
 ---
 

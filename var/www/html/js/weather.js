@@ -44,8 +44,8 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
         newPositionLon  =   '8.0';
         coords_source = 'fake';
     }
-    console.log(coords_source);
     
+    jQuery('div#coords').html( 'Koordinatenherkunft: ' + coords_source);
     var openweatherorgapi = gps_json.api;
     // API URL
     var apiUrl_weather               =   'https://api.openweathermap.org/data/2.5/weather?lat=' + newPositionLat + '&lon=' + newPositionLon + '&units=metric&lang=de&APPID=' + openweatherorgapi;
@@ -62,20 +62,15 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
         success: function(data) {
             function timeConverter(UNIX_timestamp, Format){
                 var a = new Date(UNIX_timestamp * 1000);
-                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var year = a.getFullYear();
-                var month = months[a.getMonth()];
-                var date = a.getDate();
-                var hour = a.getHours();
-                var min = a.getMinutes();
-                var sec = a.getSeconds();
                 if ( Format == 'date'  ) {
-                    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { weegday: 'long', year: 'numeric', day: '2-digit', month: '2-digit', hour: '2-digit',minute: '2-digit', weekday: 'long' };
+                }else if (Format == 'time'){
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }else{
-                    var time = hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }
+                var time = a.toLocaleDateString("de-DE", options);
+                return time;
             }
             // KOORDINATEN
             var coordLat            =   data.coord.lat;
@@ -143,20 +138,17 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
             
             // LAST UPDATE
             //var lastupdate          =   data.lastupdate.value; // Last time when data was updated
-             
-            var coor                =   '<h4>Koordinaten</h4><ul><li><strong>Lat:</strong> ' + coordLat + '</li><li><strong>Lon:</strong> ' + coordLon + '</li></ul>';
-            var weather             =   '<h4>Wetter</h4><ul><li><strong>Main:</strong> ' + weatherMain + '</li><li><strong>Beschreibung:</strong> ' + weatherDescription + '</li><li>' + weatherIcon + '</li></ul>';
-            var base                =   '<h4>Base</h4><ul><li><strong>Base:</strong> ' + baseData + '</li></ul>';
-            var temperatur          =   '<h4>Temperatur</h4><ul><li><strong>Temp:</strong> ' + mainTemp + ' &deg;C</li><li><strong>min. Temp.:</strong> ' + mainTempMin + ' &deg;C</li><li><strong>max. Temp.:</strong> ' + mainTempMax + ' &deg;C</li><li><strong>Druck:</strong> ' + mainPressure + ' hPa</li><li><strong>Feuchtigkeit:</strong> ' + mainHumidity + ' %</li></ul>';
-            var visibility          =   '<h4>Sichtweite</h4><ul><li><strong>Sichtweite:</strong> ' + visibility + ' Meter</li></ul>';
-            var wind                =   '<h4>Wind</h4><ul><li><strong>Wind Geschwindigkeit:</strong> ' + windSpeed + ' m/s</li><li><strong>Wind Richtung:</strong> ' + windDeg + ' &deg;</li></ul>';
-            var clouds              =   '<h4>Wolken</h4><ul><li><strong>Wolken:</strong> ' + clouds + ' %</li></ul>';
-            var dt                  =   '<h4>Daten von</h4><ul><li>' + dt + '</li></ul>';
-            var system              =   '<h4>Base</h4><ul><li><strong>Land:</strong> ' + sysCountry + '</li><li><strong>Sonnenaufgang:</strong> ' + sysSunrise + ' Uhr</li><li><strong>Sonnenuntergang:</strong> ' + sysSunset + ' Uhr</li></ul>';
-            var id                  =   '<h4>ID</h4><ul><li><strong>ID:</strong> ' + id + '</li></ul>';
-            var name                =   '<h4>Name</h4><ul><li><strong>Ort:</strong> ' + name + '</li></ul>';
-            var cod                 =   '<h4>Cod</h4><ul><li><strong>Cod:</strong> ' + cod + '</li></ul>';
             
+            var dt                  =   '<strong>Daten aus ' + name + ' vom ' + dt +'</strong><br>'; 
+            var coor                =   '<strong>Koordinaten </strong<strong>Lat: </strong> ' + coordLat + ' <strong>Lon: </strong> ' + coordLon + '<br>';
+            var weather             =   '<strong>Wetter</strong><br>  ' + weatherMain + '<br>  ' + weatherIcon + '<br>' + weatherDescription + '<br>'  ;
+            var temperatur          =   '<strong>Temperatur</strong><br><strong>  Temp:</strong> ' + mainTemp + ' &deg;C<br><strong>  min. Temp.:</strong> ' + mainTempMin + ' &deg;C<br><strong>  max. Temp.:</strong> ' + mainTempMax + ' &deg;C<br><br><strong>Druck:</strong> ' + mainPressure + ' hPa<br><strong>Feuchtigkeit:</strong> ' + mainHumidity + ' %<br>';
+            var visibility          =   '<strong>Sichtweite </strong>' + visibility + ' Meter<br>';
+            var wind                =   '<strong>Wind</strong><strong>Geschwindigkeit: </strong>' + windSpeed + ' m/s<br><strong>Richtung: </strong>' + windDeg + ' &deg;<br>';
+            var clouds              =   '<strong>Wolken: </strong>' + clouds + ' %<br>';
+            var system              =   '<strong>Sonnenaufgang:</strong> ' + sysSunrise + ' Uhr<br><strong>Sonnenuntergang:</strong> ' + sysSunset + ' Uhr<br>';
+            
+            var weatherdiv = dt + coor + weather + temperatur + visibility + wind + clouds + system ;
             
             // EXAKT
              
@@ -227,7 +219,7 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
             }
             
             // OUTPUT
-            jQuery('div#weather').html( name + coor + weather + temperatur + visibility + wind + clouds + dt + system );
+            jQuery('div#weather').html( weatherdiv);
             //console.log(data);
         }
     });
@@ -240,20 +232,15 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
         success: function(data) {
             function timeConverter(UNIX_timestamp, Format){
                 var a = new Date(UNIX_timestamp * 1000);
-                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var year = a.getFullYear();
-                var month = months[a.getMonth()];
-                var date = a.getDate();
-                var hour = a.getHours();
-                var min = a.getMinutes();
-                var sec = a.getSeconds();
                 if ( Format == 'date'  ) {
-                    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { weekday: 'short' };
+                }else if (Format == 'time'){
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }else{
-                    var time = hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }
+                var time = a.toLocaleDateString("de-DE", options);
+                return time;
             }
             // KOORDINATEN
             var coordLat            =   data.lat; // latitude for returned data
@@ -304,20 +291,15 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
         success: function(data) {
             function timeConverter(UNIX_timestamp, Format){
                 var a = new Date(UNIX_timestamp * 1000);
-                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var year = a.getFullYear();
-                var month = months[a.getMonth()];
-                var date = a.getDate();
-                var hour = a.getHours();
-                var min = a.getMinutes();
-                var sec = a.getSeconds();
                 if ( Format == 'date'  ) {
-                    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { hour: '2-digit',minute: '2-digit', weekday: 'short' };
+                }else if (Format == 'time'){
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }else{
-                    var time = hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }
+                var time = a.toLocaleDateString("de-DE", options);
+                return time;
             }
             // DATA
             var weather_forecast_data_objekts = data.list;
@@ -375,9 +357,9 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
                 var forecast_sysMessage          =   weather_forecast_data_objekt.sys.message; // Internal parameter
                 var forecast_sysCountry          =   weather_forecast_data_objekt.sys.country; // Country code (GB, JP etc.)
                 var forecast_sysSunrise_unix     =   weather_forecast_data_objekt.sys.sunrise; // Sunrise time, unix, UTC
-                var forecast_sysSunrise          =   timeConverter(forecast_sysSunrise_unix);
+                var forecast_sysSunrise          =   timeConverter(forecast_sysSunrise_unix, 'time');
                 var forecast_sysSunset_unix      =   weather_forecast_data_objekt.sys.sunset; // Sunset time, unix, UTC
-                var forecast_sysSunset           =   timeConverter(forecast_sysSunset_unix);
+                var forecast_sysSunset           =   timeConverter(forecast_sysSunset_unix, 'time');
                 
                 //weather_forcast_div = '<ul><li><strong>Day:</strong> ' + forecast_dt + '</li><li><strong>Main:</strong> ' + forecast_weatherMain + '</li><li><strong>Desc:</strong> ' + forecast_weatherDescription + '</li><li><strong>icon:</strong> ' + forecast_weatherIcon + '</li></ul>';
                 //weather_forecast = weather_forecast + weather_forcast_div;
@@ -469,23 +451,15 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
         success: function(data) {
             function timeConverter(UNIX_timestamp, Format){
                 var a = new Date(UNIX_timestamp * 1000);
-                var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-                var year = a.getFullYear();
-                var month = months[a.getMonth()];
-                var date = a.getDate();
-                var hour = a.getHours();
-                var min = a.getMinutes();
-                var sec = a.getSeconds();
                 if ( Format == 'date'  ) {
-                    var time = date + ' ' + month + ' ' + year;
-                    return time;
-                }else if ( Format == 'date_time'  ) {
-                    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { weekday: 'short', month: '2-digit', day: '2-digit'};
+                }else if (Format == 'time'){
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }else{
-                    var time = hour + ':' + min + ':' + sec ;
-                    return time;
+                    var options = { hour: '2-digit',minute: '2-digit' };
                 }
+                var time = a.toLocaleDateString("de-DE", options);
+                return time;
             }
             // DATA
             var uvi_forecast_data_objekts = data;

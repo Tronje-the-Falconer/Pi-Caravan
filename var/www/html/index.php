@@ -86,6 +86,7 @@
 <h2 class="art-postheader">Windmesser</h2>
 <hr>
 <h2 class="art-postheader">aktuelles Wetter</h2>
+<div id="coords"></div>
 <div id="weatherBg">
     <div id="weather"><p></p></div>
 </div>
