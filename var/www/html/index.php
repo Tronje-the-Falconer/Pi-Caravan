@@ -61,12 +61,12 @@
 <h2 class="art-postheader">Gyroskop</h2>
 <table>
     <tr>
-        <td>x: </td>
+        <td>x (left): </td>
         <td><div id="gyro_x"></div></td>
         <td> °</td>
     </tr>
     <tr>
-        <td>y: </td>
+        <td>y (top): </td>
         <td><div id="gyro_y"></div></td>
         <td> °</td>
     </tr>
@@ -75,9 +75,16 @@
         <td><div id="gyro_z"></div></td>
         <td> °</td>
     </tr>
+    
+    
 </table>
+<div style="position:relative;">
+        <div id="glas" style="align: middle; left:1px; top:1px; z-index:1; position:absolute;" ><img height="250" width="250" src="pictures/glas.gif"></div>
+        <div id="blase" style="align: middle; z-index:2; position:absolute;"><img height="50" width="50" src="pictures/blase.gif"></div>
+</div>
 <hr>
 <h2 class="art-postheader">Füllstände Wasser / Abwasser</h2>
+
 <hr>
 <h2 class="art-postheader">GPS</h2>
 <hr>
