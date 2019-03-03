@@ -79,8 +79,9 @@
     
 </table>
 <div style="position:relative;">
-        <div id="glas" style="align: middle; left:1px; top:1px; z-index:1; position:absolute;" ><img height="250" width="250" src="pictures/glas.gif"></div>
-        <div id="blase" style="align: middle; z-index:2; position:absolute;"><img height="50" width="50" src="pictures/blase.gif"></div>
+        <div id="libelle" style="align: middle; left:1px; top:1px; z-index:1; position:absolute;" ><img src="pictures/libelle.gif"></div>
+        <div id="blase" style="align: middle; z-index:2; position:absolute;"><img src="pictures/blase.gif"></div>
+        <div id="fadenkreuz" style="align: middle; left:1px; top:1px; z-index:3; position:absolute;" ><img src="pictures/fadenkreuz.gif"></div>
 </div>
 <hr>
 <h2 class="art-postheader">Füllstände Wasser / Abwasser</h2>
