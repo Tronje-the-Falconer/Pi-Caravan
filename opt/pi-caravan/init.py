@@ -14,6 +14,7 @@ import names
 import paths
 import class_temperature
 import class_gyro
+import class_sim808
 
 
 _logger = logging_.create_logger(__name__)
@@ -21,6 +22,7 @@ _logger.debug('logging initialised')
 
 dict_onewire_sensors = {}
 dict_gyro_sensors = {}
+dict_sim808_sensors = {}
 
 def get_onewire_sensor_instance(id_sensor):
     if id_sensor not in dict_onewire_sensors:
@@ -31,3 +33,8 @@ def get_gyro_sensor_instance(id_sensor):
     if id_sensor not in dict_gyro_sensors:
         dict_gyro_sensors[id_sensor] = class_gyro.Gyro()
     return dict_gyro_sensors[id_sensor]
+    
+def get_sim808_sensor_instance(id_sensor):
+    if id_sensor not in dict_sim808_sensors:
+        dict_sim808_sensors[id_sensor] = class_sim808.Sim808()
+    return dict_sim808_sensors[id_sensor]

@@ -35,16 +35,29 @@ def do_mainloop():
             gyro_xout = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x43)
             gyro_yout = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x45)
             gyro_zout = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x47)
+            gyro_temp_out = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x41)
             gyro_x = gyro_xout / 131
             gyro_y = gyro_yout / 131
             gyro_z = gyro_zout / 131
+            gyro_temp = (gyro_temp_out / 340.0) + 36.53
             print("gyroskop_xout: ", ("%5d" % gyro_xout), " skaliert: ", (gyro_x))
             print("gyroskop_yout: ", ("%5d" % gyro_yout), " skaliert: ", (gyro_y))
             print("gyroskop_zout: ", ("%5d" % gyro_zout), " skaliert: ", (gyro_z))
+            print("gyroskop_tout: " + str(gyro_temp))
             print ('gyro done')
+            print('Sim808')
+            init.get_sim808_sensor_instance(names.id_sim808_sensor).write_sim808('AT+CGNSINF'+ '\r\n')
+            gps_dict = init.get_sim808_sensor_instance(names.id_sim808_sensor).get_gps_dict()
+            print('Sim808_done')
+            
             print ('loop done')
             print ("\n")
-            json_values = json.dumps({"temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust, "gyroskop_x":gyro_x, "gyroskop_y":gyro_y, "gyroskop_z":gyro_z})
+            
+            json_values = json.dumps(gps_dict)
+            with open(paths.get_path_gps_json_file(), 'w') as file:
+                file.write(json_values)
+                
+            json_values = json.dumps({"temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust, "gyroskop_x":gyro_x, "gyroskop_y":gyro_y, "gyroskop_z":gyro_z,"gyroskop_temp":gyro_temp})
             with open(paths.get_path_web_json_file(), 'w') as file:
                 file.write(json_values)
     except KeyboardInterrupt:

@@ -13,7 +13,9 @@ id_temperature_sensor_inside='28-021313977aaa'
 id_temperature_sensor_fridge='28-00ff98430494'
 id_temperature_sensor_fridge_exhaust='28-000c98430a7b'
 
-id_gyro_sensor='knaus'
+id_gyro_sensor='MPU6050_knaus'
+
+id_sim808_sensor = 'sim808_knaus'
 
 
 # fields
