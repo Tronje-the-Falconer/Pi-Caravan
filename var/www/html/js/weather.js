@@ -20,13 +20,50 @@ navigator.geolocation.getCurrentPosition(position);
 // FUNCTION
 function weatherApi (newPositionLat = null , newPositionLon = null ) {
     var coords_source = 'geolocation';
+    var coords_date = new Date();
+    coords_date = coords_date.getDate()+ "." + (coords_date.getMonth()+ 1)+"." + coords_date.getFullYear()+" " +coords_date.getHours() +":" + coords_date.getMinutes();
     // AUSLESEN VON LAT UND lon
     var gps_json = (function() {
             var json = null;
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': "/gps_location.json",
+                'url': "/json/gps.json",
+                'dataType': "json",
+                'success': function (data) {
+                    json = data;
+                }
+            });
+            return json;
+        })();
+    
+    if ( gps_json != null ) {
+        newPositionLat = gps_json.lat;
+        newPositionLon = gps_json.lon;
+        coords_date = String(gps_json.datum);
+        var day = coords_date.substr(6, 2);
+        var month = coords_date.substr(4, 2);
+        var year = coords_date.substr(0, 4);
+        var hour = coords_date.substr(8, 2);
+        var minute = coords_date.substr(10, 2);
+        var second = coords_date.substr(12, 2);
+        coords_date = day + '.' + month + '.' + year + ' ' + hour +':' + minute + ':' + second;
+        coords_source = 'gps json';
+    }else if (newPositionLat == null && newPositionLon == null) {
+        newPositionLat  =   '52.0';
+        newPositionLon  =   '8.0';
+        coords_source = 'fake';
+        coords_date = 'none';
+    }
+    
+    jQuery('div#coords').html( 'Koordinatenherkunft: ' + coords_source + '<br> Last Update: ' + coords_date);
+    
+    var weatherapi_json = (function() {
+            var json = null;
+            $.ajax({
+                'async': false,
+                'global': false,
+                'url': "/json/weatherapi.json",
                 'dataType': "json",
                 'success': function (data) {
                     json = data;
@@ -35,18 +72,7 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
             return json;
         })();
         
-    if ( gps_json != null ) {
-        newPositionLat = gps_json.lat;
-        newPositionLon = gps_json.lon;
-        coords_source = 'gps json';
-    }else if (newPositionLat == null && newPositionLon == null) {
-        newPositionLat  =   '52.0';
-        newPositionLon  =   '8.0';
-        coords_source = 'fake';
-    }
-    
-    jQuery('div#coords').html( 'Koordinatenherkunft: ' + coords_source);
-    var openweatherorgapi = gps_json.api;
+    var openweatherorgapi = weatherapi_json.api;
     // API URL
     var apiUrl_weather               =   'https://api.openweathermap.org/data/2.5/weather?lat=' + newPositionLat + '&lon=' + newPositionLon + '&units=metric&lang=de&APPID=' + openweatherorgapi;
     var apiUrl_weather_forecast      =   'https://api.openweathermap.org/data/2.5/forecast?lat=' + newPositionLat + '&lon=' + newPositionLon + '&units=metric&lang=de&APPID=' + openweatherorgapi;
