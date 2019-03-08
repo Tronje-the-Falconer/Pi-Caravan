@@ -4,7 +4,6 @@ Using Raspberry in Caravan
 To-Do's
 - DAB Radio
 - Steuerung von Abluftlüfter
-- Schräglage Wohnwagen anhand Grafik
 - Füllstandsanzeige
   - Frischwasser
   - Abwassser
@@ -32,8 +31,10 @@ Done's
   - Kühlschrank abluft
   
 - Wasserwaage (MPU6050)
+    - Schräglage Wohnwagen anhand Grafik
 - Wetteranzeige (API openweathermap.org)
 - GPS Ortung (SIM808 GPRS/GPSModul)
+    -Kartenanzeige
 
 ---
 
