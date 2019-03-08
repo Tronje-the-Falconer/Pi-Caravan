@@ -69,29 +69,29 @@
     </table>
     <hr>
 </div>
-<div id="Gyroskop" style="position: relative;">
+<div id="Gyroskop" style="height:400px;"">
     <h2 class="art-postheader">Gyroskop</h2>
-    <table>
-        <tr>
-            <td>x (left, left_big): </td>
-            <td><div id="gyro_x"></div></td>
-            <td> °</td>
-        </tr>
-        <tr>
-            <td>y (top,top_big): </td>
-            <td><div id="gyro_y"></div></td>
-            <td> °</td>
-        </tr>
-        <tr>
-            <td>z: </td>
-            <td><div id="gyro_z"></div></td>
-            <td> °</td>
-        </tr>
-        
-        
-    </table>
+    <div>
+        <table>
+            <tr>
+                <td>x (left, left_big): </td>
+                <td><div id="gyro_x"></div></td>
+                <td> °</td>
+            </tr>
+            <tr>
+                <td>y (top,top_big): </td>
+                <td><div id="gyro_y"></div></td>
+                <td> °</td>
+            </tr>
+            <tr>
+                <td>z: </td>
+                <td><div id="gyro_z"></div></td>
+                <td> °</td>
+            </tr>
+        </table>
+    </div>
 
-    <div  id="Libellen" style="position: relative;">
+    <div id="Libellen" style="position: relative;">
         <div style="position: absolute;">
                 <div id="glas_green" style="align: middle; left:1px; top:1px; z-index:1; position:absolute;" ><img  height="250" width="250" src="pictures/glas_green.gif"></div>
                 <div id="blase_2" style="align: middle; z-index:2; position:absolute;"><img height="50" width="50" src="pictures/blase.gif"></div>
@@ -112,6 +112,16 @@
 </div>
 <div id="GPS" style="position: relative;">
     <h2 class="art-postheader">GPS</h2>
+    <div style="position: relative;">
+        <div id="header" style="position: absolute;">
+            <div id="osm"style="position: absolute;">© <a href="http://www.openstreetmap.org">OpenStreetMap</a>
+             und <a href="http://www.openstreetmap.org/copyright">Mitwirkende</a>,
+             <a href="http://creativecommons.org/licenses/by-sa/2.0/deed.de">CC-BY-SA</a>
+            </div>
+        </div>
+        <div id="map" style="width:600px; height:600px;">
+        </div>
+    </div>
     <hr>
 </div>
 <div id="Strom" style="position: relative;">
