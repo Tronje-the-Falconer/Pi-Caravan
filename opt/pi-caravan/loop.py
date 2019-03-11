@@ -31,20 +31,19 @@ def do_mainloop():
             # with open(paths.get_path_web_json_file(), 'w') as file:
                 # file.write(json_values)
             print ('temperature done')
+            
             print ('gyro')
-            gyro_xout = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x43)
-            gyro_yout = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x45)
-            gyro_zout = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x47)
-            gyro_temp_out = init.get_gyro_sensor_instance(names.id_gyro_sensor).read_word_2c(0x41)
-            gyro_x = gyro_xout / 131
-            gyro_y = gyro_yout / 131
-            gyro_z = gyro_zout / 131
-            gyro_temp = (gyro_temp_out / 340.0) + 36.53
-            print("gyroskop_xout: ", ("%5d" % gyro_xout), " skaliert: ", (gyro_x))
-            print("gyroskop_yout: ", ("%5d" % gyro_yout), " skaliert: ", (gyro_y))
-            print("gyroskop_zout: ", ("%5d" % gyro_zout), " skaliert: ", (gyro_z))
-            print("gyroskop_tout: " + str(gyro_temp))
+            gyro_dict = init.get_gyro_sensor_instance(names.id_gyro_sensor).get_mpu6050_dict()
+            gyro_x = gyro_dict.get('gyroskop_xout')
+            gyro_y = gyro_dict.get('gyroskop_yout')
+            gyro_z = gyro_dict.get('gyroskop_zout')
+            gyro_temp = gyro_dict.get('temperatur')
+            print(gyro_x)
+            print(gyro_y)
+            print(gyro_z)
+            print(gyro_temp)
             print ('gyro done')
+            
             print('Sim808')
             init.get_sim808_sensor_instance(names.id_sim808_sensor).write_sim808('AT+CGNSINF'+ '\r\n')
             gps_dict = init.get_sim808_sensor_instance(names.id_sim808_sensor).get_gps_dict()

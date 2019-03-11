@@ -13,7 +13,7 @@ import logging_
 import names
 import paths
 import class_temperature
-import class_gyro
+import class_mpu6050
 import class_sim808
 
 
@@ -31,7 +31,7 @@ def get_onewire_sensor_instance(id_sensor):
     
 def get_gyro_sensor_instance(id_sensor):
     if id_sensor not in dict_gyro_sensors:
-        dict_gyro_sensors[id_sensor] = class_gyro.Gyro()
+        dict_gyro_sensors[id_sensor] = class_mpu6050.MPU6050()
     return dict_gyro_sensors[id_sensor]
     
 def get_sim808_sensor_instance(id_sensor):

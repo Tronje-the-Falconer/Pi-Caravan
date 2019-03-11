@@ -22,6 +22,8 @@ class Sim808(threading.Thread):
         self.sim808.timeout = 1
         self.gps_dict = None
         
+        # ########   Reihenfolge prüfen!
+        
         try:
             self.sim808.open() # try to open port, if possible print message and proceed with 'while True:'
             #print ("sim808 port is opened!")
