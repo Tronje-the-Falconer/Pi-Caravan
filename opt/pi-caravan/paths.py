@@ -17,23 +17,22 @@ def set_paths():
     global pi_caravan_log_file
     global sqlite3_file
     global onewire_path
-    global web_json_file
-    global gps_json_file
+    global values_json_file
 
     logfile_txt_file = '/var/www/html/logs/logfile.txt'
     pi_caravan_log_file = '/var/www/html/logs/pi-caravan.log'
     sqlite3_file = '/var/www/html/database/pi-ager.sqlite3'
     onewire_path = '/sys/bus/w1/devices'
-    web_json_file = '/var/www/html/json/values.json'
-    gps_json_file = '/var/www/html/json/gps.json'
+    values_json_file = '/var/www/html/json/values.json'
 
-def get_path_gps_json_file():
+
+def get_path_values_json_file():
     """
     getting path for gps json
     """
-    global gps_json_file
+    global values_json_file
     set_paths()
-    return gps_json_file
+    return values_json_file
     
 def get_path_logfile_txt_file():
     """
@@ -66,11 +65,3 @@ def get_path_onewire():
     global onewire_path
     set_paths()
     return onewire_path
-    
-def get_path_web_json_file():
-    """
-    getting path for web_json_file
-    """
-    global web_json_file
-    set_paths()
-    return web_json_file

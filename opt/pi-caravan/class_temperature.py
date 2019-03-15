@@ -9,13 +9,14 @@ class TemperatureSensor(threading.Thread):
         threading.Thread.__init__(self)
         self.default = default #private
         self.sensorid = sensorid #private
-        self.sensortemperature = None
+        self.sensortemperature_dict = None
  
         try:
             self.sensor_path = glob.glob(base_path + self.sensorid)[0] + file_name
             self.temperaturesensor_startthread()
         except:
-            print("Bad sensor path")
+            print("Bad sensor path " + self.sensorid)
+            
     def temperaturesensor_startthread(self):
         self.thread_temperaturesensor = threading.Thread(target = self.handle_temperature_recieve)
         #thread2 = threading.Thread(target = user_input) #optional second thread
@@ -25,10 +26,17 @@ class TemperatureSensor(threading.Thread):
         
     def handle_temperature_recieve(self):
         while 1:
-            self.sensortemperature = self.read_temperature()
+            sensortemperature = self.read_temperature()
+            timestamp = time.time()
+            self.sensortemperature_dict = {"temperature":sensortemperature, "timestamp":timestamp,"sensor":self.sensorid}
     
     def get_temperature(self):
-        return self.sensortemperature
+        if self.sensortemperature_dict == None:
+            fake = {"temperature":99.9, "timestamp":0,"sensor":"None"}
+            return fake
+        else:
+            return self.sensortemperature_dict
+    
     def read_temperature(self):
         temperature = self.default
  

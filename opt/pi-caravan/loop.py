@@ -18,14 +18,28 @@ def do_mainloop():
     try:
         while True:
             print ('temperature')
-            temperature_outside = init.get_onewire_sensor_instance(names.id_temperature_sensor_outside).get_temperature()
-            temperature_inside = init.get_onewire_sensor_instance(names.id_temperature_sensor_inside).get_temperature()
-            temperature_fridge = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge).get_temperature()
-            temperature_fridge_exhaust = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature()
-            print ('Outside: ' + str(temperature_outside))
-            print ('Inside: ' + str(temperature_inside))
-            print ('Fridge: ' + str(temperature_fridge))
-            print ('Fridge Exhaust: ' + str(temperature_fridge_exhaust))
+            temperature_outside_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_outside).get_temperature()
+            temperature_inside_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_inside).get_temperature()
+            temperature_fridge_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge).get_temperature()
+            temperature_fridge_exhaust_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature()
+            
+            temperature_outside = temperature_outside_dict.get('temperature')
+            time_outside = temperature_outside_dict.get('timestamp')
+            id_outside = temperature_outside_dict.get('sensor')
+            temperature_inside = temperature_inside_dict.get('temperature')
+            time_inside = temperature_inside_dict.get('timestamp')
+            id_inside = temperature_inside_dict.get('sensor')
+            temperature_fridge = temperature_fridge_dict.get('temperature')
+            time_fridge = temperature_fridge_dict.get('timestamp')
+            id_fridge = temperature_fridge_dict.get('sensor')
+            temperature_fridge_exhaust = temperature_fridge_exhaust_dict.get('temperature')
+            time_fridge_exhaust = temperature_fridge_exhaust_dict.get('timestamp')
+            id_fridge_exhaust = temperature_fridge_exhaust_dict.get('sensor')
+            
+            print ('Outside: ' + str(temperature_outside) + ' time: ' + str(time_outside) + ' id: ' + str(id_outside))
+            print ('Inside: ' + str(temperature_inside)+ ' time: ' + str(time_inside) + ' id: ' + str(id_inside))
+            print ('Fridge: ' + str(temperature_fridge)+ ' time: ' + str(time_fridge) + ' id: ' + str(id_fridge))
+            print ('Fridge Exhaust: ' + str(temperature_fridge_exhaust)+ ' time: ' + str(time_fridge_exhaust) + ' id: ' + str(id_fridge_exhaust))
             
             # json_values = json.dumps({"temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust})
             # with open(paths.get_path_web_json_file(), 'w') as file:
@@ -38,27 +52,36 @@ def do_mainloop():
             gyro_y = gyro_dict.get('gyroskop_yout')
             gyro_z = gyro_dict.get('gyroskop_zout')
             gyro_temp = gyro_dict.get('temperatur')
-            print(gyro_x)
-            print(gyro_y)
-            print(gyro_z)
-            print(gyro_temp)
+            gyro_time = gyro_dict.get('time')
+            print('X: ' + str(gyro_x) + ' Y: ' + str(gyro_y) + ' Z: ' + str(gyro_z) + ' temp: ' + str(gyro_temp) + ' time: ' + str(gyro_time))
             print ('gyro done')
             
             print('Sim808')
             init.get_sim808_sensor_instance(names.id_sim808_sensor).write_sim808('AT+CGNSINF'+ '\r\n')
             gps_dict = init.get_sim808_sensor_instance(names.id_sim808_sensor).get_gps_dict()
+            lat = gps_dict.get('lat')
+            lon = gps_dict.get('lon')
+            date = gps_dict.get('date')
+            print('lat: ' + str(lat) + ' lon: ' + str(lon) + ' date: ' + str(date))
             print('Sim808_done')
             
+            print('Windmesser')
+            anemometer_windspeed = init.get_aneometer_sensor_instance(names.id_anemometer_sensor).get_windspeed()
+            anemometer_windaverage = init.get_aneometer_sensor_instance(names.id_anemometer_sensor).get_windaverage()
+            print('windspeed: ' + str(anemometer_windspeed))
+            print('windaverage: ' + str(anemometer_windaverage))
+            print('Windmesser done')
+            
             print ('loop done')
+            
             print ("\n")
             
-            json_values = json.dumps(gps_dict)
-            with open(paths.get_path_gps_json_file(), 'w') as file:
+                            
+            json_values = json.dumps({"windspeed":anemometer_windspeed, "windaverage":anemometer_windaverage, "gyroskop_x":gyro_x, "gyroskop_y":gyro_y, "gyroskop_z":gyro_z,"gyroskop_temp":gyro_temp, "lat":lat, "lon":lon, "date":date, "temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust})
+            with open(paths.get_path_values_json_file(), 'w') as file:
                 file.write(json_values)
                 
-            json_values = json.dumps({"temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust, "gyroskop_x":gyro_x, "gyroskop_y":gyro_y, "gyroskop_z":gyro_z,"gyroskop_temp":gyro_temp})
-            with open(paths.get_path_web_json_file(), 'w') as file:
-                file.write(json_values)
+            
     except KeyboardInterrupt:
         raise
     except Exception as e:

@@ -1,13 +1,13 @@
 #!/usr/bin/python
 import serial   
-import RPi.GPIO as GPIO
+import RPi.GPIO as gpio
 import os, time, sys
 import threading
 import re
 import json
 import paths
 
-GPIO.setmode(GPIO.BOARD)    
+gpio.setmode(gpio.BOARD)    
 
 class Sim808(threading.Thread):
     def __init__(self):
@@ -51,7 +51,7 @@ class Sim808(threading.Thread):
             try:
                 #if(line_str[2] == 'G'): # $GPGGA
                 if(line_str[2:8] == 'GNSINF'):
-                    # print('sim808  GPS Treffer: ' + line_str)
+                    #print('sim808:  GPS Treffer: ' + line_str)
                     gps_list = re.sub(r'.*:', '', line_str)
                     #gps_list = re.sub(r', \r\n', '', gps_list)
                     gps_list = gps_list.strip()
@@ -79,14 +79,15 @@ class Sim808(threading.Thread):
                     #gps_hpa = sim808_list[19]
                     #gps_vpa = sim808_list[20]
                     
-                    self.gps_dict = {"runs_status":gps_runs_status, "fix_status":gps_fix_status, "datum":gps_datum, "lat":gps_lat, "lon":gps_lon, "msl_altitude":gps_msl_altitude, "speed_over_ground":gps_speed_over_ground, "course_over_ground":gps_course_over_ground, "gps_satellites_in_view":gps_gps_satellites_in_view,"gnss_satellites_used":gps_gnss_satellites_used}
-                    #print('sim 808 dict_written')
+                    self.gps_dict = {"runs_status":gps_runs_status, "fix_status":gps_fix_status, "date":gps_datum, "lat":gps_lat, "lon":gps_lon, "msl_altitude":gps_msl_altitude, "speed_over_ground":gps_speed_over_ground, "course_over_ground":gps_course_over_ground, "gps_satellites_in_view":gps_gps_satellites_in_view,"gnss_satellites_used":gps_gnss_satellites_used}
+                    # print('sim808: dict_written')
+                    # print(self.gps_dict)
                     # return gps_return_list
                     
                 # if(line_str[0] == 'O'): 
                     # print('Treffer: ' + line_str)
-                else:
-                    self.stream_serial()
+                # else:
+                    # self.stream_serial()
             except Exception as e:
                 print(e)
     
@@ -98,7 +99,7 @@ class Sim808(threading.Thread):
     
     def get_gps_dict(self):
         if self.gps_dict == None:
-            fake_dict = {"lat":0, "lon":0, "date":190001010000.00}
+            fake_dict = {"lat":99, "lon":99, "date":999999999999.99}
             return fake_dict
         else:
             return self.gps_dict
@@ -110,11 +111,10 @@ class Sim808(threading.Thread):
         #print ('sim808_check')
         #print(at_command)
         if 'OK' in at_command.decode('utf8'):
-            print ('sim808 Module is on')
-            time.sleep(0.5)
+            print ('sim808: Module is on')
             return True
         else:
-            print('sim808 Module must be set on')
+            print('sim808: Module must be set on')
             ## es muss der Pin angesprochen werden der das Modul anschaltet
 
     def write_sim808(self, command):
@@ -122,7 +122,7 @@ class Sim808(threading.Thread):
         self.sim808.write(str.encode(command)) 
         # self.sim808.write(str.encode('AT'+'\r\n'))
         #reply = receiving()
-        #time.sleep(0.5)
+        time.sleep(0.5)
         #reply = self.sim808.read(self.sim808.inWaiting())
         #reply = self.sim808.read(20)
         #reply = self.sim808.readline()
@@ -145,7 +145,7 @@ def user_input():
         sim808.sim808.close()
         
 
-# sim808 = Sim808(paths.get_path_gps_json_file())
+# sim808 = Sim808()
 
 # while 1:
     # user_input() # the main program waits for user input the entire time

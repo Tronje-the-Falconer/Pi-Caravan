@@ -8,6 +8,7 @@
     
 """
 import logging_
+import RPi.GPIO as gpio
 
 global logger
 logger = logging_.create_logger(__name__)
@@ -19,5 +20,6 @@ def goodbye():
     last function for clean up system
     """
     global logger
+    gpio.cleanup()
     logstring = 'goodbye!'
     logger.info(logstring)

@@ -77,21 +77,23 @@ class MPU6050(threading.Thread):
             temperatur = self.read_word_2c(0x41)
             temperatur_skaliert = (temperatur / 340.0) + 36.53
             
-            self.mpu6050_raw_dict = {"gyroskop_xout":gyroskop_xout, "gyroskop_yout":gyroskop_yout, "gyroskop_zout":gyroskop_zout, "beschleunigung_xout":beschleunigung_xout, "beschleunigung_yout":beschleunigung_yout, "beschleunigung_zout":beschleunigung_zout, "temperatur":temperatur }
-            self.mpu6050_dict = {"gyroskop_xout":gyroskop_xout_skaliert, "gyroskop_yout":gyroskop_yout_skaliert, "gyroskop_zout":gyroskop_zout_skaliert, "beschleunigung_xout":beschleunigung_xout_skaliert, "beschleunigung_yout":beschleunigung_yout_skaliert, "beschleunigung_zout":beschleunigung_zout_skaliert, "temperatur":temperatur_skaliert }
-            print(self.mpu6050_dict)
+            timestamp = time.time()
+            
+            self.mpu6050_raw_dict = {"gyroskop_xout":gyroskop_xout, "gyroskop_yout":gyroskop_yout, "gyroskop_zout":gyroskop_zout, "beschleunigung_xout":beschleunigung_xout, "beschleunigung_yout":beschleunigung_yout, "beschleunigung_zout":beschleunigung_zout, "temperatur":temperatur, "time":timestamp }
+            self.mpu6050_dict = {"gyroskop_xout":gyroskop_xout_skaliert, "gyroskop_yout":gyroskop_yout_skaliert, "gyroskop_zout":gyroskop_zout_skaliert, "beschleunigung_xout":beschleunigung_xout_skaliert, "beschleunigung_yout":beschleunigung_yout_skaliert, "beschleunigung_zout":beschleunigung_zout_skaliert, "temperatur":temperatur_skaliert, "time":timestamp }
+            #print(self.mpu6050_dict)
             time.sleep(1)
     
     def get_mpu6050_raw_dict(self):
         if self.mpu6050_raw_dict == None:
-            fake_dict = {"gyroskop_xout":0, "gyroskop_yout":0, "gyroskop_zout":0, "beschleunigung_xout":0, "beschleunigung_yout":0, "beschleunigung_zout":0, "temperatur":0 }
+            fake_dict = {"gyroskop_xout":0, "gyroskop_yout":0, "gyroskop_zout":0, "beschleunigung_xout":0, "beschleunigung_yout":0, "beschleunigung_zout":0, "temperatur":0 , "time":0}
             return fake_dict
         else:
             return self.mpu6050_raw_dict
             
     def get_mpu6050_dict(self):
         if self.mpu6050_dict == None:
-            fake_dict = {"gyroskop_xout":0, "gyroskop_yout":0, "gyroskop_zout":0, "beschleunigung_xout":0, "beschleunigung_yout":0, "beschleunigung_zout":0, "temperatur":0 }
+            fake_dict = {"gyroskop_xout":0, "gyroskop_yout":0, "gyroskop_zout":0, "beschleunigung_xout":0, "beschleunigung_yout":0, "beschleunigung_zout":0, "temperatur":0, "time":0 }
             return fake_dict
         else:
             return self.mpu6050_dict
