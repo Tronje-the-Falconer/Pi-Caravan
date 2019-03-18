@@ -14,7 +14,7 @@ function drawmap() {
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': "/json/gps.json",
+                'url': "/json/values.json",
                 'dataType': "json",
                 'success': function (data) {
                     json = data;
@@ -22,10 +22,9 @@ function drawmap() {
             });
             return json;
         })();
-    
-    if ( gps_json != null ) {
-        newPositionLat = gps_json.lat;
-        newPositionLon = gps_json.lon;
+    newPositionLat = gps_json.lat;
+    newPositionLon = gps_json.lon;
+    if ( newPositionLat != 99 ) {
         coords_date = String(gps_json.datum);
         var day = coords_date.substr(6, 2);
         var month = coords_date.substr(4, 2);
@@ -35,7 +34,7 @@ function drawmap() {
         var second = coords_date.substr(12, 2);
         coords_date = day + '.' + month + '.' + year + ' ' + hour +':' + minute + ':' + second;
         coords_source = 'gps json';
-    }else if (newPositionLat == null && newPositionLon == null) {
+    }else {
         newPositionLat  =   '52.0';
         newPositionLon  =   '8.0';
         coords_source = 'fake';

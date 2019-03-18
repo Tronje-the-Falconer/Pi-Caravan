@@ -16,6 +16,7 @@ import class_temperature
 import class_mpu6050
 import class_sim808
 import class_anemometer
+import class_mcp3208
 
 
 _logger = logging_.create_logger(__name__)
@@ -25,6 +26,7 @@ dict_onewire_sensors = {}
 dict_gyro_sensors = {}
 dict_sim808_sensors = {}
 dict_aneometer_sensors = {}
+dict_mcp3208_ad = {}
 
 def get_onewire_sensor_instance(id_sensor):
     global dict_onewire_sensors
@@ -49,3 +51,9 @@ def get_aneometer_sensor_instance(id_sensor):
     if id_sensor not in dict_aneometer_sensors:
         dict_aneometer_sensors[id_sensor] = class_anemometer.AnemometerSensor(names.gpio_notinuse_17)
     return dict_aneometer_sensors[id_sensor]
+    
+def get_mcp3208_sensor_instance(id_ad):
+    global dict_mcp3208_ad
+    if id_ad not in dict_mcp3208_ad:
+        dict_mcp3208_ad[id_ad] = class_mcp3208.MCP3208()
+    return dict_mcp3208_ad[id_ad]

@@ -72,6 +72,53 @@ def do_mainloop():
             print('windaverage: ' + str(anemometer_windaverage))
             print('Windmesser done')
             
+            print('AD-Wandler')
+            raw_frischwasser = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_frischwasser)
+            raw_abwasser = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_abwasser)
+            raw_toilette = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_toilette)
+            raw_batteriespannung = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_batteriespannung)
+            raw_entnahmestrom = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_entnahmestrom)
+            raw_ladestrom = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_ladestrom)
+            raw_unused_1 = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_unused_1)
+            raw_unused_2 = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_unused_2)
+            
+            frischwasserstand = None
+            abwasserstand = None
+            toilettenstand = None
+            batteriespannung = None
+            entnahmestrom = None
+            ladestrom = None
+            undefined_1 = None
+            undefined_2 = None
+            
+            if raw_frischwasser >= 840:
+                frischwasserstand = '100%'
+            elif raw_frischwasser < 840 and raw_frischwasser >= 735:
+                frischwasserstand = '86%'
+            elif raw_frischwasser < 735 and raw_frischwasser >= 620:
+                frischwasserstand = '71%'
+            elif raw_frischwasser < 620 and raw_frischwasser >= 540:
+                frischwasserstand = '57%'
+            elif raw_frischwasser < 540 and raw_frischwasser >= 454:
+                frischwasserstand = '43%'
+            elif raw_frischwasser < 454 and raw_frischwasser >= 366:
+                frischwasserstand = '28%'
+            elif raw_frischwasser < 366 and raw_frischwasser >= 269:
+                frischwasserstand = '14%'
+            elif raw_frischwasser < 269:
+                frischwasserstand = '0%'
+            
+            print ('Kanal 1 Frischwasser: ' + str(raw_frischwasser) + ' ' + frischwasserstand)
+            print ('Kanal 2 Abwasser    : ' + str(raw_abwasser) + ' ' + abwasserstand)
+            print ('Kanal 3 Toilette    : ' + str(raw_toilette) + ' ' + toilettenstand)
+            print ('Kanal 4 Batterie    : ' + str(raw_batteriespannung) + ' ' + batteriespannung)
+            print ('Kanal 5 Entnahme    : ' + str(raw_entnahmestrom) + ' ' + entnahmestrom)
+            print ('Kanal 6 Ladung      : ' + str(raw_ladestrom) + ' ' + ladestrom)
+            print ('Kanal 7 Undefinded 1: ' + str(raw_unused_1) + ' ' + undefined_1)
+            print ('Kanal 8 Undefinded 2: ' + str(raw_unused_2) + ' ' + undefined_2)
+            
+            print('AD-Wandler done')
+            
             print ('loop done')
             
             print ("\n")

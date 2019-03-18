@@ -130,6 +130,21 @@
 </div>
 <div id="Windmesser" style="position: relative;">
     <h2 class="art-postheader">Windmesser</h2>
+    <table>
+        <tr>
+            <td>Windspeed: </td>
+            <td><div id="windspeed"></div></td>
+            <td>m/s</td>
+        </tr>
+        <tr>
+            <td>Windaverage: </td>
+            <td><div id="windaverage"></div></td>
+            <td>m/s</td>
+        </tr>
+        <tr>
+            <td><div id="windaverage_description"></div></td>
+        </tr>
+    </table>
     <hr>
 </div>
 <div id="Wetter" style="position: relative;">

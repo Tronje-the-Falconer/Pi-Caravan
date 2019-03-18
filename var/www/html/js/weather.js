@@ -28,7 +28,7 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
             $.ajax({
                 'async': false,
                 'global': false,
-                'url': "/json/gps.json",
+                'url': "/json/values.json",
                 'dataType': "json",
                 'success': function (data) {
                     json = data;
@@ -36,11 +36,11 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
             });
             return json;
         })();
+    jsonPositionLat = gps_json.lat;
+    jsonPositionLon = gps_json.lon;
     
-    if ( gps_json != null ) {
-        newPositionLat = gps_json.lat;
-        newPositionLon = gps_json.lon;
-        coords_date = String(gps_json.datum);
+    if (jsonPositionLat != 99){
+        coords_date = String(gps_json.date);
         var day = coords_date.substr(6, 2);
         var month = coords_date.substr(4, 2);
         var year = coords_date.substr(0, 4);
@@ -48,11 +48,18 @@ function weatherApi (newPositionLat = null , newPositionLon = null ) {
         var minute = coords_date.substr(10, 2);
         var second = coords_date.substr(12, 2);
         coords_date = day + '.' + month + '.' + year + ' ' + hour +':' + minute + ':' + second;
-        coords_source = 'gps json';
-    }else if (newPositionLat == null && newPositionLon == null) {
+        coords_source = 'GPS Sender (JSON)';
+        newPositionLat  =  jsonPositionLat;
+        newPositionLon  =   jsonPositionLon;
+    }
+    else if (newPositionLat == null) {
         newPositionLat  =   '52.0';
         newPositionLon  =   '8.0';
-        coords_source = 'fake';
+        coords_source = 'Fake! no Browser geolocation';
+        coords_date = 'none';
+    }
+    else{
+        coords_source = 'Browser Geolocation! json with fake coordinates recieved';
         coords_date = 'none';
     }
     

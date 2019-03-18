@@ -19,7 +19,20 @@ id_temperature_sensor_fridge_exhaust='28-000c98430a7b'
 id_gyro_sensor='MPU6050_knaus'
 id_sim808_sensor = 'sim808_knaus'
 id_anemometer_sensor = 'Froggit'
+id_mcp3208 = 'mcp3208'
 
+
+
+# MCP3208
+
+channel_frischwasser = 0
+channel_abwasser = 1
+channel_toilette = 2
+channel_batteriespannung = 3
+channel_entnahmestrom = 4
+channel_ladestrom = 5
+channel_unused_1 = 6
+channel_unused_2 = 7
 # GPIO
 # Pinbelegung
 # Pinleiste vertikal Pin 1 oben links pin 2 oben rechts
