@@ -13,6 +13,7 @@ class cl_1wire_temperature(threading.Thread):
         self.default = default #private
         self.sensorid = sensorid #private
         self.sensortemperature_dict = None
+        self.thread_status = True
  
         try:
             self.sensor_path = glob.glob(base_path + self.sensorid)[0] + file_name
@@ -23,12 +24,12 @@ class cl_1wire_temperature(threading.Thread):
     def temperaturesensor_startthread(self):
         self.thread_temperaturesensor = threading.Thread(target = self.handle_temperature_recieve)
         #thread2 = threading.Thread(target = user_input) #optional second thread
-        self.thread_temperaturesensor.setDaemon(False)
+        self.thread_temperaturesensor.setDaemon(True)
         self.thread_temperaturesensor.start()
         
         
     def handle_temperature_recieve(self):
-        while 1:
+        while self.thread_status:
             sensortemperature = self.read_temperature()
             timestamp = time.time()
             self.sensortemperature_dict = {"temperature":sensortemperature, "timestamp":timestamp,"sensor":self.sensorid}
@@ -71,6 +72,9 @@ class cl_1wire_temperature(threading.Thread):
         # load stored temperatures with
         # np.load('temperatures.npy')
 
+    def cleanup(self):
+        self.thread_status = False
+        
 class th_1wire_temperature(cl_1wire_temperature):   
 
     

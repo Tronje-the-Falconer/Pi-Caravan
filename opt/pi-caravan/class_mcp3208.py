@@ -17,6 +17,8 @@ class cl_mcp3208(threading.Thread):
         self.count = 0
         self.measurecount = 100
         
+        self.thread_status = True
+        
         self.channel_0 = None
         self.channel_1 = None
         self.channel_2 = None
@@ -35,12 +37,12 @@ class cl_mcp3208(threading.Thread):
     def mcp3208_startthread(self):
         self.thread_mcp3208 = threading.Thread(target = self.handle_mcp3208_recieve)
         #thread2 = threading.Thread(target = user_input) #optional second thread
-        self.thread_mcp3208.setDaemon(False)
+        self.thread_mcp3208.setDaemon(True)
         self.thread_mcp3208.start()
     
     def handle_mcp3208_recieve(self):
         timestamp = time.time()
-        while 1:
+        while self.thread_status:
                 
             for i in range(8):
                 self.value[i] += self.read(i) # werte werden 100 mal gelesen und aufaddiert
@@ -155,6 +157,9 @@ class cl_mcp3208(threading.Thread):
         else:
             pass
 
+    def cleanup(self):
+        self.thread_status = False
+            
 class th_mcp3208(cl_mcp3208):   
 
     

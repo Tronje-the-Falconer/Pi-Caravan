@@ -14,6 +14,7 @@ class cl_mpu6050(threading.Thread):
         
         self.mpu6050_dict = None
         self.mpu6050_raw_dict = None
+        self.thread_status = True
 
         # Aktivieren, um das Modul ansprechen zu koennen
         self.bus.write_byte_data(self.address, self.power_mgmt_1, 0)
@@ -30,11 +31,11 @@ class cl_mpu6050(threading.Thread):
     def mpu6050_startthread(self):
         self.thread_mpu6050 = threading.Thread(target = self.handle_mpu6050_recieve)
         #thread2 = threading.Thread(target = user_input) #optional second thread
-        self.thread_mpu6050.setDaemon(False)
+        self.thread_mpu6050.setDaemon(True)
         self.thread_mpu6050.start()
         
     def handle_mpu6050_recieve(self):
-        while 1:
+        while self.thread_status:
             bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
             address = 0x68       # via i2cdetect
             power_mgmt_1 = 0x6b
@@ -120,6 +121,9 @@ class cl_mpu6050(threading.Thread):
     def get_x_rotation(self,x,y,z):
         radians = math.atan2(y, self.dist(x,z))
         return math.degrees(radians)
+        
+    def cleanup(self):
+        self.thread_status = False
 
         
 class th_mpu6050(cl_mpu6050):   

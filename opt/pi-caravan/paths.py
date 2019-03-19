@@ -26,42 +26,23 @@ def set_paths():
     values_json_file = '/var/www/html/json/values.json'
 
 
-def get_path_values_json_file():
+def get_path(filename):
     """
-    getting path for gps json
-    """
-    global values_json_file
-    set_paths()
-    return values_json_file
-    
-def get_path_logfile_txt_file():
-    """
-    getting path for website logfile
+    getting path for files
     """
     global logfile_txt_file
-    set_paths()
-    return logfile_txt_file
-    
-def get_pi_caravan_log_file_path():
-    """
-    getting path for logfile
-    """
     global pi_caravan_log_file
-    set_paths()
-    return pi_caravan_log_file
-
-def get_path_sqlite3_file():
-    """
-    getting path for sqlite file
-    """
     global sqlite3_file
-    set_paths()
-    return sqlite3_file
-
-def get_path_onewire():
-    """
-    getting path for onewiresensors 
-    """
     global onewire_path
+    global values_json_file
     set_paths()
-    return onewire_path
+    if filename == 'values_json_file':
+        return values_json_file
+    elif filename == 'logfile_txt_file':
+        return logfile_txt_file
+    elif filename == 'pi_caravan_log_file':
+        return pi_caravan_log_file
+    elif filename == 'sqlite3_file':
+        return sqlite3_file
+    elif filename == 'onewire_path':
+        return onewire_path

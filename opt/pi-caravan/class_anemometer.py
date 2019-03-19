@@ -27,6 +27,7 @@ class cl_anemometer:
         self.count = 0
         self.starttime = time.time()
         self.averagestarttime = time.time()
+        self.thread_status = True
         
         
         #gpio.setmode(gpio.BCM)
@@ -54,11 +55,11 @@ class cl_anemometer:
     def anemometer_startthread(self):
         self.thread_anemometer = threading.Thread(target = self.handle_anemometer_recieve)
         ##thread2 = threading.Thread(target = user_input) #optional second thread
-        self.thread_anemometer.setDaemon(False)
+        self.thread_anemometer.setDaemon(True)
         self.thread_anemometer.start()
         
     def handle_anemometer_recieve(self):
-        while 1:
+        while self.thread_status:
             currenttime = time.time()
             #print(currenttime)
             measuretime = currenttime - self.starttime
@@ -149,6 +150,9 @@ class cl_anemometer:
             return fake
         else:
             return self.anemometer_dict
+            
+    def cleanup(self):
+        self.thread_status = False
 
 class th_anemometer(cl_anemometer):   
 

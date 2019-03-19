@@ -48,7 +48,7 @@ def do_mainloop():
             print ('Fridge Exhaust: ' + str(temperature_fridge_exhaust)+ ' time: ' + str(time_fridge_exhaust) + ' id: ' + str(id_fridge_exhaust))
             
             # json_values = json.dumps({"temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust})
-            # with open(paths.get_path_web_json_file(), 'w') as file:
+            # with open(paths.get_path('web_json_file'), 'w') as file:
                 # file.write(json_values)
             print ('temperature done')
             
@@ -178,7 +178,7 @@ def do_mainloop():
             
                             
             json_values = json.dumps({"windspeed":anemometer_windspeed, "windaverage":anemometer_windaverage, "gyroskop_x":gyro_x, "gyroskop_y":gyro_y, "gyroskop_z":gyro_z,"gyroskop_temp":gyro_temp, "lat":lat, "lon":lon, "date":date, "temperature_outside":temperature_outside, "temperature_inside":temperature_inside, "temperature_fridge":temperature_fridge, "temperature_fridge_exhaust":temperature_fridge_exhaust})
-            with open(paths.get_path_values_json_file(), 'w') as file:
+            with open(paths.get_path('values_json_file'), 'w') as file:
                 file.write(json_values)
                 
             

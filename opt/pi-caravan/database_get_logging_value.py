@@ -16,7 +16,7 @@ def get_logging_value(destination):
     get loglevel
     """
     rows = None
-    connection = sqlite3.connect(paths.sqlite3_file)
+    connection = sqlite3.connect(paths.get_path('sqlite3_file'))
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
     

@@ -24,6 +24,7 @@ class cl_sim808(threading.Thread):
         self.sim808.baudrate = 9600
         self.sim808.timeout = 1
         self.gps_dict = None
+        self.thread_status = True
         
         # ########   Reihenfolge prüfen!
         
@@ -43,12 +44,12 @@ class cl_sim808(threading.Thread):
     def sim808_startthread(self):
         self.thread_sim808 = threading.Thread(target = self.handle_sim808_recieve) #saves the raw GPS data over serial while the main program runs
         #thread2 = threading.Thread(target = user_input) #optional second thread
-        self.thread_sim808.setDaemon(False)
+        self.thread_sim808.setDaemon(True)
         self.thread_sim808.start()
         
     def handle_sim808_recieve(self):
         #this fxn creates a txt file and saves only GPGGA sentences
-        while 1:
+        while self.thread_status:
             line = self.sim808.readline()
             line_str = str(line.decode('utf8'))
             try:
@@ -132,6 +133,8 @@ class cl_sim808(threading.Thread):
         #time.sleep(1.0)
         #print (reply)
         #return reply
+    def cleanup(self):
+        self.thread_status = False
 
 def user_input():
     global sim808
