@@ -1,9 +1,12 @@
+from abc import ABC
+import inspect
+
 import glob, os, sys, time
 import threading
 
 import numpy as np
  
-class TemperatureSensor(threading.Thread):
+class cl_1wire_temperature(threading.Thread):
     def __init__(self, base_path= '/sys/bus/w1/devices/', 
                      file_name='/w1_slave', sensorid='28*', default=99.9):
         threading.Thread.__init__(self)
@@ -67,4 +70,27 @@ class TemperatureSensor(threading.Thread):
             
         # load stored temperatures with
         # np.load('temperatures.npy')
- 
+
+class th_1wire_temperature(cl_1wire_temperature):   
+
+    
+    def __init__(self):
+        pass
+
+
+class cl_fact_1wire_temperature(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_1wire_temperature.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self, id):
+        if cl_fact_1wire_temperature.__o_instance is not None:
+            return(cl_fact_1wire_temperature.__o_instance)
+        cl_fact_1wire_temperature.__o_instance = cl_1wire_temperature(sensorid=id)
+        return(cl_fact_1wire_temperature.__o_instance)
+
+    def __init__(self):
+        pass 

@@ -1,10 +1,12 @@
-#from spidev import SpiDev
+from abc import ABC
+import inspect
+
 import spidev
 import time
 import threading
  
-class MCP3208(threading.Thread):
-    def __init__(self, spi_channel=0):
+class cl_mcp3208(threading.Thread):
+    def __init__(self, spi_channel):
         threading.Thread.__init__(self)
         self.spi_channel = spi_channel
         self.conn = spidev.SpiDev(0, spi_channel)
@@ -152,31 +154,27 @@ class MCP3208(threading.Thread):
                 return 9999
         else:
             pass
+
+class th_mcp3208(cl_mcp3208):   
+
+    
+    def __init__(self):
+        pass
+
+
+class cl_fact_mcp3208(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_mcp3208.__o_instance = i_instance
         
-test = MCP3208()
-#print(test.get_value())
+    @classmethod        
+    def get_instance(self, spi_channel=0):
+        if cl_fact_mcp3208.__o_instance is not None:
+            return(cl_fact_mcp3208.__o_instance)
+        cl_fact_mcp3208.__o_instance = cl_mcp3208(spi_channel)
+        return(cl_fact_mcp3208.__o_instance)
 
-
-##### Füllstandssensoren digits bei 750 ohm
-### 10cm
-# 847   100%
-# 451   66%
-# 269   33%
-# 1     0%
-
-### 15 cmd
-# 845   100%
-# 612   75%    
-# 448   50%
-# 268   25%
-# 1     0%
-
-### 20cm
-# 845   100%
-# 735   86%
-# 620   71%
-# 540   57%
-# 454   43%
-# 366   28%
-# 269   14%
-# 1     0%
+    def __init__(self):
+        pass  

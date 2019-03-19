@@ -1,4 +1,7 @@
-#!/usr/bin/python
+from abc import ABC
+import inspect
+
+
 import serial   
 import RPi.GPIO as gpio
 import os, time, sys
@@ -9,7 +12,7 @@ import paths
 
 gpio.setmode(gpio.BOARD)    
 
-class Sim808(threading.Thread):
+class cl_sim808(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         
@@ -145,6 +148,30 @@ def user_input():
         sim808.sim808.close()
         
 
+        
+class th_sim808(cl_sim808):   
+
+    
+    def __init__(self):
+        pass
+
+
+class cl_fact_sim808(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_sim808.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        if cl_fact_sim808.__o_instance is not None:
+            return(cl_fact_sim808.__o_instance)
+        cl_fact_sim808.__o_instance = cl_sim808()
+        return(cl_fact_sim808.__o_instance)
+
+    def __init__(self):
+        pass 
 # sim808 = Sim808()
 
 # while 1:

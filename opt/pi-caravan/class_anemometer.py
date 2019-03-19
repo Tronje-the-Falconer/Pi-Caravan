@@ -1,12 +1,22 @@
-#!/usr/bin/python
+from abc import ABC
+import inspect
 
 import smbus, time, sys
 import math
 import threading
 import RPi.GPIO as gpio
 
-class AnemometerSensor(threading.Thread):
-    def __init__(self, gpio_pin):
+#from cx_exception import *
+
+        
+class cl_anemometer:
+    def __init__(self, gpio_pin = 11):
+   
+        if "get_instance" not in inspect.stack()[1][3]:
+            print('use factoryclass')
+            raise
+            #raise cx_direct_call("Please use factory class")
+      
         threading.Thread.__init__(self)
         self.sensor_pin = gpio_pin
         self.anemometer_dict = None
@@ -50,6 +60,7 @@ class AnemometerSensor(threading.Thread):
     def handle_anemometer_recieve(self):
         while 1:
             currenttime = time.time()
+            #print(currenttime)
             measuretime = currenttime - self.starttime
             if measuretime >= 10:
                 self.windspeed = ((self.count / 2) * (2 * 7 * math.pi) / measuretime) * 2.5
@@ -138,13 +149,27 @@ class AnemometerSensor(threading.Thread):
             return fake
         else:
             return self.anemometer_dict
+
+class th_anemometer(cl_anemometer):   
+
+    
+    def __init__(self):
+        pass
+
+
+class cl_fact_anemometer(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_anemometer.__o_instance = i_instance
         
-# if __name__ == "__main__":
-    # anemometer = AnemometerSensor(17)
-    # time.sleep(605)
-    # sys.exit(0) # no data - no wind - return 0
-    
-    
-    
-    
-    
+    @classmethod        
+    def get_instance(self, gpio_pin):
+        if cl_fact_anemometer.__o_instance is not None:
+            return(cl_fact_anemometer.__o_instance)
+        cl_fact_anemometer.__o_instance = cl_anemometer(gpio_pin)
+        return(cl_fact_anemometer.__o_instance)
+
+    def __init__(self):
+        pass  

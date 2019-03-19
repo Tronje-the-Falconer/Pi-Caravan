@@ -8,6 +8,12 @@ import logging_
 import init
 import names
 import paths
+from class_anemometer import cl_fact_anemometer
+from class_mcp3208 import cl_fact_mcp3208
+from class_sim808 import cl_fact_sim808
+from class_mpu6050 import cl_fact_mpu6050
+from class_temperature import cl_fact_1wire_temperature
+
 
 _logger = logging_.create_logger(__name__)
 _logger.debug('logging initialised')
@@ -18,10 +24,10 @@ def do_mainloop():
     try:
         while True:
             print ('temperature')
-            temperature_outside_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_outside).get_temperature()
-            temperature_inside_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_inside).get_temperature()
-            temperature_fridge_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge).get_temperature()
-            temperature_fridge_exhaust_dict = init.get_onewire_sensor_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature()
+            temperature_outside_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_outside).get_temperature()
+            temperature_inside_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_inside).get_temperature()
+            temperature_fridge_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge).get_temperature()
+            temperature_fridge_exhaust_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature()
             
             temperature_outside = temperature_outside_dict.get('temperature')
             time_outside = temperature_outside_dict.get('timestamp')
@@ -47,7 +53,7 @@ def do_mainloop():
             print ('temperature done')
             
             print ('gyro')
-            gyro_dict = init.get_gyro_sensor_instance(names.id_gyro_sensor).get_mpu6050_dict()
+            gyro_dict = cl_fact_mpu6050().get_instance().get_mpu6050_dict()
             gyro_x = gyro_dict.get('gyroskop_xout')
             gyro_y = gyro_dict.get('gyroskop_yout')
             gyro_z = gyro_dict.get('gyroskop_zout')
@@ -57,8 +63,8 @@ def do_mainloop():
             print ('gyro done')
             
             print('Sim808')
-            init.get_sim808_sensor_instance(names.id_sim808_sensor).write_sim808('AT+CGNSINF'+ '\r\n')
-            gps_dict = init.get_sim808_sensor_instance(names.id_sim808_sensor).get_gps_dict()
+            cl_fact_sim808().get_instance().write_sim808('AT+CGNSINF'+ '\r\n')
+            gps_dict = cl_fact_sim808().get_instance().get_gps_dict()
             lat = gps_dict.get('lat')
             lon = gps_dict.get('lon')
             date = gps_dict.get('date')
@@ -66,21 +72,47 @@ def do_mainloop():
             print('Sim808_done')
             
             print('Windmesser')
-            anemometer_windspeed = init.get_aneometer_sensor_instance(names.id_anemometer_sensor).get_windspeed()
-            anemometer_windaverage = init.get_aneometer_sensor_instance(names.id_anemometer_sensor).get_windaverage()
+            anemometer_windspeed = cl_fact_anemometer().get_instance(names.gpio_anemometer).get_windspeed()
+            anemometer_windaverage = cl_fact_anemometer().get_instance(names.gpio_anemometer).get_windaverage()
             print('windspeed: ' + str(anemometer_windspeed))
             print('windaverage: ' + str(anemometer_windaverage))
             print('Windmesser done')
             
             print('AD-Wandler')
-            raw_frischwasser = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_frischwasser)
-            raw_abwasser = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_abwasser)
-            raw_toilette = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_toilette)
-            raw_batteriespannung = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_batteriespannung)
-            raw_entnahmestrom = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_entnahmestrom)
-            raw_ladestrom = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_ladestrom)
-            raw_unused_1 = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_unused_1)
-            raw_unused_2 = init.get_mcp3208_sensor_instance(names.id_mcp3208).get_value(names.channel_unused_2)
+            raw_frischwasser = cl_fact_mcp3208().get_instance().get_value(names.channel_frischwasser)
+            raw_abwasser = cl_fact_mcp3208().get_instance().get_value(names.channel_abwasser)
+            raw_toilette = cl_fact_mcp3208().get_instance().get_value(names.channel_toilette)
+            raw_batteriespannung = cl_fact_mcp3208().get_instance().get_value(names.channel_batteriespannung)
+            raw_entnahmestrom = cl_fact_mcp3208().get_instance().get_value(names.channel_entnahmestrom)
+            raw_ladestrom = cl_fact_mcp3208().get_instance().get_value(names.channel_ladestrom)
+            raw_unused_1 = cl_fact_mcp3208().get_instance().get_value(names.channel_unused_1)
+            raw_unused_2 = cl_fact_mcp3208().get_instance().get_value(names.channel_unused_2)
+            
+            
+            ##### Füllstandssensoren digits bei 750 ohm
+            ### 10cm
+            # 847   100%
+            # 451   66%
+            # 269   33%
+            # 1     0%
+
+            ### 15 cmd
+            # 845   100%
+            # 612   75%    
+            # 448   50%
+            # 268   25%
+            # 1     0%
+
+            ### 20cm
+            # 845   100%
+            # 735   86%
+            # 620   71%
+            # 540   57%
+            # 454   43%
+            # 366   28%
+            # 269   14%
+            # 1     0%
+            
             
             frischwasserstand = None
             abwasserstand = None
@@ -107,15 +139,36 @@ def do_mainloop():
                 frischwasserstand = '14%'
             elif raw_frischwasser < 269:
                 frischwasserstand = '0%'
+                
+            if raw_abwasser >= 840:
+                abwasserstand = '100%'
+            elif raw_abwasser < 840 and raw_abwasser >= 451:
+                abwasserstand = '66%'
+            elif raw_abwasser < 451 and raw_abwasser >= 269:
+                abwasserstand = '33%'
+            elif raw_abwasser < 269:
+                abwasserstand = '0%'
+                
+            if raw_toilette >= 840:
+                toilettenstand = '100%'
+            elif raw_toilette < 840 and raw_toilette >= 612:
+                toilettenstand = '75%'
+            elif raw_toilette < 612 and raw_toilette >= 448:
+                toilettenstand = '50%'
+            elif raw_toilette < 448 and raw_toilette >= 268:
+                toilettenstand = '25%'
+            elif raw_toilette < 268:
+                toilettenstand = '0%'
+            
             
             print ('Kanal 1 Frischwasser: ' + str(raw_frischwasser) + ' ' + frischwasserstand)
             print ('Kanal 2 Abwasser    : ' + str(raw_abwasser) + ' ' + abwasserstand)
             print ('Kanal 3 Toilette    : ' + str(raw_toilette) + ' ' + toilettenstand)
-            print ('Kanal 4 Batterie    : ' + str(raw_batteriespannung) + ' ' + batteriespannung)
-            print ('Kanal 5 Entnahme    : ' + str(raw_entnahmestrom) + ' ' + entnahmestrom)
-            print ('Kanal 6 Ladung      : ' + str(raw_ladestrom) + ' ' + ladestrom)
-            print ('Kanal 7 Undefinded 1: ' + str(raw_unused_1) + ' ' + undefined_1)
-            print ('Kanal 8 Undefinded 2: ' + str(raw_unused_2) + ' ' + undefined_2)
+            print ('Kanal 4 Batterie    : ' + str(raw_batteriespannung) + ' ' )#+ batteriespannung)
+            print ('Kanal 5 Entnahme    : ' + str(raw_entnahmestrom) + ' ' )#+ entnahmestrom)
+            print ('Kanal 6 Ladung      : ' + str(raw_ladestrom) + ' ' )#+ ladestrom)
+            print ('Kanal 7 Undefinded 1: ' + str(raw_unused_1) + ' ' )#+ undefined_1)
+            print ('Kanal 8 Undefinded 2: ' + str(raw_unused_2) + ' ' )#+ undefined_2)
             
             print('AD-Wandler done')
             

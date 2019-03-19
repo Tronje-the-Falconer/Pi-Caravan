@@ -1,10 +1,11 @@
-#!/usr/bin/python
+from abc import ABC
+import inspect
 
 import smbus, time
 import math
 import threading
 
-class MPU6050(threading.Thread):
+class cl_mpu6050(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         self.bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
@@ -119,7 +120,31 @@ class MPU6050(threading.Thread):
     def get_x_rotation(self,x,y,z):
         radians = math.atan2(y, self.dist(x,z))
         return math.degrees(radians)
+
+        
+class th_mpu6050(cl_mpu6050):   
+
+    def __init__(self):
+        pass
+
+
+class cl_fact_mpu6050(ABC):
+    __o_instance = None
     
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_mpu6050.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        if cl_fact_mpu6050.__o_instance is not None:
+            return(cl_fact_mpu6050.__o_instance)
+        cl_fact_mpu6050.__o_instance = cl_mpu6050()
+        return(cl_fact_mpu6050.__o_instance)
+
+    def __init__(self):
+        pass 
+        
 # def read_mpu6050():
     # global bus, address
     # bus = smbus.SMBus(1) # bus = smbus.SMBus(0) fuer Revision 1
