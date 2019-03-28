@@ -10,7 +10,8 @@ import RPi.GPIO as gpio
 
         
 class cl_anemometer:
-    def __init__(self, gpio_pin = 11):
+    #---------------------------------------------------------
+    def __init__(self, gpio_pin = 33, boardmode = 'BOARD'):
    
         if "get_instance" not in inspect.stack()[1][3]:
             print('use factoryclass')
@@ -18,6 +19,7 @@ class cl_anemometer:
             #raise cx_direct_call("Please use factory class")
       
         threading.Thread.__init__(self)
+        self.boardmode = boardmode
         self.sensor_pin = gpio_pin
         self.anemometer_dict = None
         self.windspeed = None
@@ -29,11 +31,23 @@ class cl_anemometer:
         self.averagestarttime = time.time()
         self.thread_status = True
         
-        
-        #gpio.setmode(gpio.BCM)
-        gpio.setmode(gpio.BOARD)
-        
-        gpio.setup(self.sensor_pin, gpio.IN)
+        if (gpio.getmode() == 11 or gpio.getmode() == -1) and self.boardmode == 'BOARD': # 11=BCM 10=Board -1=unset
+            try:
+                gpio.cleanup()
+            except:
+                pass
+            print('changing Boardmode to BOARD')
+            gpio.setmode(gpio.BOARD)
+        elif self.boardmode == 'BCM' and (gpio.getmode() == 10 or gpio.getmode() == -1) :
+            try:
+                gpio.cleanup()
+            except:
+                pass
+            print('changing Boardmode to BCM')
+            gpio.setmode(gpio.BCM)
+        else:
+            print('Boardmode not changed')
+            pass
         
         # setup pin as an input
         gpio.setup(self.sensor_pin, gpio.IN)
@@ -51,20 +65,22 @@ class cl_anemometer:
             self.anemometer_startthread()
         except:
             print("Bad sensor path")
-             
+    
+    #---------------------------------------------------------
     def anemometer_startthread(self):
         self.thread_anemometer = threading.Thread(target = self.handle_anemometer_recieve)
         ##thread2 = threading.Thread(target = user_input) #optional second thread
         self.thread_anemometer.setDaemon(True)
         self.thread_anemometer.start()
-        
+    
+    #---------------------------------------------------------
     def handle_anemometer_recieve(self):
         while self.thread_status:
             currenttime = time.time()
             #print(currenttime)
             measuretime = currenttime - self.starttime
             if measuretime >= 10:
-                self.windspeed = ((self.count / 2) * (2 * 7 * math.pi) / measuretime) * 2.5
+                self.windspeed = ((self.count / 2) * (2 * 7.5 * math.pi) / measuretime) * 2.5
                 self.windspeed = self.windspeed / 100
                 self.anemometer_dict = {"windspeed":self.windspeed, "starttime":self.starttime, "stoptime":currenttime, "measuretime":measuretime, "triggercount":self.count}
                 # print('windspeed')
@@ -104,7 +120,8 @@ class cl_anemometer:
         
         # self.loopcounter = self.loopcounter + 1
         # time.sleep(1)
-     
+    
+    #---------------------------------------------------------
     def inputEventHandler(self, pin):
         ''' count the edges and calculate windspeed...
             with "triggerflanke" you decide how much falling edges to count
@@ -115,7 +132,7 @@ class cl_anemometer:
             espacially at low wind speeds
         '''
         self.count += 1
-        print(self.count)
+        #print(self.count)
         # triggerflanke = 10
         # if self.count == triggerflanke:
             ##the sensor ticks twice per rotation (2 falling edges)
@@ -127,36 +144,31 @@ class cl_anemometer:
             # self.count = 0
             # self.anemometer_dict = {"windspeed":self.windspeed, "starttime":self.starttime, "stoptime":stoptime, "triggerflanke":triggerflanke}
             # self.starttime = time.time()
-            # print(self.anemometer_dict)
-
+            ##print(self.anemometer_dict)
+    
+    #---------------------------------------------------------
     def cleanup(self):
         GPIO.cleanup() # don't leave a mess
-        
-    def get_windspeed(self):
-        if self.windspeed == None:
-            return 999
-        else:
-            return self.windspeed
     
+    #---------------------------------------------------------
+    def get_windspeed(self):
+        return self.windspeed
+    
+    #---------------------------------------------------------
     def get_windaverage(self):
-        if self.windaverage == None:
-            return 999
-        else:
-            return self.windaverage
-        
+        return self.windaverage
+    
+    #---------------------------------------------------------
     def get_anemometer_dict(self):
-        if self.anemometer_dict == None:
-            fake = {"windspeed":999, "starttime":0, "stoptime":0, "triggerflanke":0}
-            return fake
-        else:
-            return self.anemometer_dict
-            
+        return self.anemometer_dict
+    
+    #---------------------------------------------------------
     def cleanup(self):
         self.thread_status = False
 
 class th_anemometer(cl_anemometer):   
-
     
+    #---------------------------------------------------------
     def __init__(self):
         pass
 
@@ -164,16 +176,23 @@ class th_anemometer(cl_anemometer):
 class cl_fact_anemometer(ABC):
     __o_instance = None
     
+    #---------------------------------------------------------
     @classmethod
     def set_instance(self, i_instance):
         cl_fact_anemometer.__o_instance = i_instance
-        
+    
+    #---------------------------------------------------------
     @classmethod        
     def get_instance(self, gpio_pin):
         if cl_fact_anemometer.__o_instance is not None:
             return(cl_fact_anemometer.__o_instance)
         cl_fact_anemometer.__o_instance = cl_anemometer(gpio_pin)
         return(cl_fact_anemometer.__o_instance)
-
+    
+    #---------------------------------------------------------
     def __init__(self):
-        pass  
+        pass
+        
+# test= cl_fact_anemometer().get_instance(33)
+# while 1:
+    # a=1

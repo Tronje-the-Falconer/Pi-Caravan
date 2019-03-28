@@ -63,8 +63,13 @@
             <td> °C</td>
         </tr>
         <tr>
+            <td>Windchill: </td>
+            <td><div id="windchill"></div></td>
+            <td> °C  <div id="windchill_txt"></div></td>
+        </tr>
+        <tr>
             <td>Kühlschrank Abluft Lüfter </td>
-            <td>AN/AUS</td>
+            <td><div id="fan"></div></td>
         </tr>
     </table>
     <hr>
@@ -107,7 +112,25 @@
 </div>
 <div id="Füllstände" style="position: relative; margin-top: 255px;">
     <h2 class="art-postheader">Füllstände Wasser / Abwasser</h2>
-
+    <div>
+        <table>
+            <tr>
+                <td>Frischwasser: </td>
+                <td><div id="frischwasser"></div></td>
+                <td> %</td>
+            </tr>
+            <tr>
+                <td>Abwasser: </td>
+                <td><div id="abwasser"></div></td>
+                <td> %</td>
+            </tr>
+            <tr>
+                <td>Toilette: </td>
+                <td><div id="toilette"></div></td>
+                <td> %</td>
+            </tr>
+        </table>
+    </div>
     <hr>
 </div>
 <div id="GPS" style="position: relative;">
@@ -126,6 +149,33 @@
 </div>
 <div id="Strom" style="position: relative;">
     <h2 class="art-postheader">Batterieüberwachung</h2>
+    <table>
+        <tr>
+            <td>Batteriespannung: </td>
+            <td><div id="batteriespannung"></div></td>
+            <td>Volt</td>
+        </tr>
+        <tr>
+            <td>Batteriefüllstand: </td>
+            <td><div id="batteriefuellstand"></div></td>
+            <td>%</td>
+        </tr>
+        <tr>
+            <td>Solarerzeugung: </td>
+            <td><div id="solarerzeugung"></div></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>aktueller Verbrauch: </td>
+            <td><div id="systemverbrauch"></div></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>Landstrom: </td>
+            <td><div id="netzbezug"></div></td>
+            <td></td>
+        </tr>
+    </table>
     <hr>
 </div>
 <div id="Windmesser" style="position: relative;">

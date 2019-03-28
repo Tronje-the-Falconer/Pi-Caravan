@@ -8,14 +8,15 @@
     
 """
 import logging_
-import RPi.GPIO as gpio
+
 
 import names
 from class_anemometer import cl_fact_anemometer
 from class_mcp3208 import cl_fact_mcp3208
 from class_sim808 import cl_fact_sim808
 from class_mpu6050 import cl_fact_mpu6050
-from class_temperature import cl_fact_1wire_temperature
+from class_onewire import cl_fact_1wire_temperature
+from class_gpio_handling import gpio_handling
 
 global logger
 logger = logging_.create_logger(__name__)
@@ -27,8 +28,8 @@ def goodbye():
     last function for clean up system
     """
     global logger
-    gpio.cleanup()
     cleanup_threads()
+    gpio_handling.gpio_cleanup()
     logstring = 'goodbye!'
     logger.info(logstring)
     

@@ -20,6 +20,7 @@ import os
 import organization
 import logging_
 import loop
+from class_gpio_handling import gpio_handling
 
 class Loopcounter():
     def __init__(self):
@@ -40,6 +41,9 @@ logger.debug('logging initialised')
 # initialise system
 
 try:
+    gpio_handling.setGPIO_boardmode()
+    gpio_handling.setupGPIO()
+    gpio_handling.defaultGPIO()
     loop.do_mainloop()
     
 except KeyboardInterrupt:

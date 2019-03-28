@@ -4,12 +4,7 @@ Using Raspberry in Caravan
 To-Do's
 - DAB Radio
 - Steuerung von Kühlschrank-Abluftlüfter
-- Füllstandsanzeige
-  - Frischwasser
-  - Abwassser
-  - WC
 - Batterieüberwachung
-    - Spannung
     - Stromverbrauch
     - Stromerzeugung
 - Windmesser
@@ -18,7 +13,9 @@ To-Do's
 - Display
 - SMS/Benachrichtgung bei Positionswechsel
     - Alarm on /off
-
+- Wasserwage Feinjustierung
+- Temperatur und Feuchte über sht31-Sensoren innen und außen)
+- schönes Frontend (Website)
 
 Done's
 
@@ -37,10 +34,22 @@ Done's
   
 - Wasserwaage (MPU6050)
     - Schräglage Wohnwagen anhand Grafik (Dosenlibelle fein/grob)
+    
 - Wetteranzeige (API openweathermap.org)
-- GPS Ortung (SIM808 GPRS/GPSModul)
-    -Kartenanzeige
 
+- GPS Ortung (SIM808 GPRS/GPSModul)
+    - Kartenanzeige
+    
+- Windmesser
+  -
+  
+- Füllstandsanzeige
+  - Frischwasser
+  - Abwassser
+  - WC
+  
+- Batterieüberwachung
+    - Spannung
 ---
 
 

@@ -24,7 +24,7 @@ function drawmap() {
         })();
     newPositionLat = gps_json.lat;
     newPositionLon = gps_json.lon;
-    if ( newPositionLat != 99 ) {
+    if ( newPositionLat != null ) {
         coords_date = String(gps_json.datum);
         var day = coords_date.substr(6, 2);
         var month = coords_date.substr(4, 2);

@@ -13,6 +13,8 @@ import paths
 gpio.setmode(gpio.BOARD)    
 
 class cl_sim808(threading.Thread):
+    
+    #---------------------------------------------------------
     def __init__(self):
         threading.Thread.__init__(self)
         
@@ -26,7 +28,7 @@ class cl_sim808(threading.Thread):
         self.gps_dict = None
         self.thread_status = True
         
-        # ########   Reihenfolge prüfen!
+####################   Reihenfolge prüfen!
         
         try:
             self.sim808.open() # try to open port, if possible print message and proceed with 'while True:'
@@ -40,13 +42,15 @@ class cl_sim808(threading.Thread):
         sim808_is_on = self.check_sim808()
         if sim808_is_on:
             self.sim808_startthread()
-
+    
+    #---------------------------------------------------------
     def sim808_startthread(self):
         self.thread_sim808 = threading.Thread(target = self.handle_sim808_recieve) #saves the raw GPS data over serial while the main program runs
         #thread2 = threading.Thread(target = user_input) #optional second thread
         self.thread_sim808.setDaemon(True)
         self.thread_sim808.start()
-        
+    
+    #---------------------------------------------------------
     def handle_sim808_recieve(self):
         #this fxn creates a txt file and saves only GPGGA sentences
         while self.thread_status:
@@ -95,19 +99,18 @@ class cl_sim808(threading.Thread):
             except Exception as e:
                 print(e)
     
+    #---------------------------------------------------------
     def stream_serial(self):
         #stream data directly from the serial port
         line = self.sim808.readline()
         line_str = 'sim808: ' + str(line)    
         #print (line_str)
     
+    #---------------------------------------------------------
     def get_gps_dict(self):
-        if self.gps_dict == None:
-            fake_dict = {"lat":99, "lon":99, "date":999999999999.99}
-            return fake_dict
-        else:
-            return self.gps_dict
-
+        return self.gps_dict
+    
+    #---------------------------------------------------------
     def check_sim808(self):
         self.sim808.write(str.encode('AT'+'\r\n')) # check module
         time.sleep(0.5)
@@ -120,7 +123,8 @@ class cl_sim808(threading.Thread):
         else:
             print('sim808: Module must be set on')
             ## es muss der Pin angesprochen werden der das Modul anschaltet
-
+    
+    #---------------------------------------------------------
     def write_sim808(self, command):
         # print('sim808 command ' + command)
         self.sim808.write(str.encode(command)) 
@@ -133,9 +137,37 @@ class cl_sim808(threading.Thread):
         #time.sleep(1.0)
         #print (reply)
         #return reply
+            
+    #---------------------------------------------------------
     def cleanup(self):
         self.thread_status = False
+        
+class th_sim808(cl_sim808):   
+    
+    #---------------------------------------------------------
+    def __init__(self):
+        pass
 
+class cl_fact_sim808(ABC):
+    __o_instance = None
+    
+    #---------------------------------------------------------
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_sim808.__o_instance = i_instance
+    
+    #---------------------------------------------------------
+    @classmethod        
+    def get_instance(self):
+        if cl_fact_sim808.__o_instance is not None:
+            return(cl_fact_sim808.__o_instance)
+        cl_fact_sim808.__o_instance = cl_sim808()
+        return(cl_fact_sim808.__o_instance)
+    
+    #---------------------------------------------------------
+    def __init__(self):
+        pass
+        
 def user_input():
     global sim808
     global thread_sim808
@@ -150,32 +182,6 @@ def user_input():
     if tester == 'e':
         sim808.sim808.close()
         
-
-        
-class th_sim808(cl_sim808):   
-
-    
-    def __init__(self):
-        pass
-
-
-class cl_fact_sim808(ABC):
-    __o_instance = None
-    
-    @classmethod
-    def set_instance(self, i_instance):
-        cl_fact_sim808.__o_instance = i_instance
-        
-    @classmethod        
-    def get_instance(self):
-        if cl_fact_sim808.__o_instance is not None:
-            return(cl_fact_sim808.__o_instance)
-        cl_fact_sim808.__o_instance = cl_sim808()
-        return(cl_fact_sim808.__o_instance)
-
-    def __init__(self):
-        pass 
 # sim808 = Sim808()
-
 # while 1:
     # user_input() # the main program waits for user input the entire time
