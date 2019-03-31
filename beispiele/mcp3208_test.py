@@ -111,6 +111,10 @@ class cl_mcp3208(threading.Thread):
                     
                     if i == kanalnummer:
                         print('Kanal ' + str(i) + ' Mittelwert: ' + str(self.value[i]) + ' Digits\t\t\t' + str(y) + ' ' + einheit +  '\t\tVolt an A/D: ' + str(self.value[i]*3.3/4095.0)) # 4081.88
+                        linestring = time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime()) + '\tMittelwert: ' + str(self.value[i]) + ' Digits\t\t\t' + str(y) + ' ' + einheit +  '\t\tVolt an A/D: ' + str(self.value[i]*3.3/4095.0) + '\n'
+                        #print(linestring)
+                        with open(dateipfad, 'a') as file:
+                            file.write(linestring)
                         #self.volt[i] = self.value[i]*3.3/4095.0 # berechnung der anliegenden Spannung
                         #print(str(i) + '___' + str(self.volt[i]))
                 self.count = 0
