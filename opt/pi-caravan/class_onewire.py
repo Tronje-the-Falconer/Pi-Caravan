@@ -4,8 +4,7 @@ import inspect
 import glob, os, sys, time
 import threading
 
-import numpy as np
- 
+###########----------------------------------------###########
 class cl_1wire_temperature(threading.Thread):
     
     #---------------------------------------------------------
@@ -60,31 +59,17 @@ class cl_1wire_temperature(threading.Thread):
         return float(temperature) 
     
     #---------------------------------------------------------
-    def log_temperature(self, interval=5.0):
-        temperatures = []
-        temperatures.append(self.get_temperature())
-        print(self.sensorid, 'Temperature: ' + str(temperatures[-1]))
-
-        # while True:
-            # time.sleep(interval)
-            # temperatures.append(self.get_temperature())
-            # print(self.sensorid, 'Temperature: ' + str(temperatures[-1]))
-            #np.save('temperatures', np.array(temperatures))
-            
-        # load stored temperatures with
-        # np.load('temperatures.npy')
-    
-    #---------------------------------------------------------
     def cleanup(self):
         self.thread_status = False
         
+###########----------------------------------------###########
 class th_1wire_temperature(cl_1wire_temperature):   
     
     #---------------------------------------------------------
     def __init__(self):
         pass
 
-
+###########----------------------------------------###########
 class cl_fact_1wire_temperature(ABC):
     __o_instance = None
         

@@ -13,6 +13,7 @@ from class_mcp3208 import cl_fact_mcp3208
 from class_sim808 import cl_fact_sim808
 from class_mpu6050 import cl_fact_mpu6050
 from class_onewire import cl_fact_1wire_temperature
+from class_sht31 import cl_fact_sht31
 from class_gpio_handling import gpio_handling
 
 
@@ -27,28 +28,28 @@ def do_mainloop():
             
             json_dict = {}
             
-            print ('temperature')
-            temperature_outside_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_outside).get_temperature()
-            temperature_inside_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_inside).get_temperature()
+            print ('temperature onewire')
+            temperature_truma_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_truma).get_temperature()
+            temperature_trumavent_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_trumavent).get_temperature()
             temperature_fridge_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge).get_temperature()
             temperature_fridge_exhaust_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature()
             
-            if temperature_outside_dict is not None:
-                temperature_outside = temperature_outside_dict.get('temperature')
-                time_outside = temperature_outside_dict.get('timestamp')
-                id_outside = temperature_outside_dict.get('sensor')
+            if temperature_truma_dict is not None:
+                temperature_truma = temperature_truma_dict.get('temperature')
+                time_truma = temperature_truma_dict.get('timestamp')
+                id_truma = temperature_truma_dict.get('sensor')
             else:
-                temperature_outside = None
-                time_outside = None
-                id_outside = None
-            if temperature_inside_dict is not None:
-                temperature_inside = temperature_inside_dict.get('temperature')
-                time_inside = temperature_inside_dict.get('timestamp')
-                id_inside = temperature_inside_dict.get('sensor')
+                temperature_truma = None
+                time_truma = None
+                id_truma = None
+            if temperature_trumavent_dict is not None:
+                temperature_trumavent = temperature_trumavent_dict.get('temperature')
+                time_trumavent = temperature_trumavent_dict.get('timestamp')
+                id_trumavent = temperature_trumavent_dict.get('sensor')
             else:
-                temperature_inside = None
-                time_inside = None
-                id_inside = None
+                temperature_trumavent = None
+                time_trumavent = None
+                id_trumavent = None
             if temperature_fridge_dict is not None:
                 temperature_fridge = temperature_fridge_dict.get('temperature')
                 time_fridge = temperature_fridge_dict.get('timestamp')
@@ -66,29 +67,44 @@ def do_mainloop():
                 time_fridge_exhaust = None
                 id_fridge_exhaust = None
                 
-            if temperature_fridge_exhaust is not None and temperature_outside is not None and names.fridge_fan_mode == 'automatic':
-                if temperature_fridge_exhaust >= names.fridge_exhaust_on and fridge_exhaust_fan is not True:
-                    gpio_handling.setGPIO(pi_ager_names.gpio_fridge_exhaust_fan, pi_ager_names.relay_on)
-                    fridge_exhaust_fan = True
-                elif temperature_fridge_exhaust < names.fridge_exhaust_off and fridge_exhaust_fan is not False:
-                    gpio_handling.setGPIO(pi_ager_names.gpio_fridge_exhaust_fan, pi_ager_names.relay_off)
-                    fridge_exhaust_fan = False
-            elif names.fridge_fan_mode == 'on':
-                fridge_exhaust_fan = True
-            else:
-                fridge_exhaust_fan = False
             
             #print ('Outside: ' + str(temperature_outside) + ' time: ' + str(time_outside) + ' id: ' + str(id_outside))
             #print ('Inside: ' + str(temperature_inside)+ ' time: ' + str(time_inside) + ' id: ' + str(id_inside))
             #print ('Fridge: ' + str(temperature_fridge)+ ' time: ' + str(time_fridge) + ' id: ' + str(id_fridge))
             #print ('Fridge Exhaust: ' + str(temperature_fridge_exhaust)+ ' time: ' + str(time_fridge_exhaust) + ' id: ' + str(id_fridge_exhaust))
             
-            json_dict['temperature_outside'] = temperature_outside
-            json_dict['temperature_inside'] = temperature_inside
+            json_dict['temperature_truma'] = temperature_truma
+            json_dict['temperature_trumavent'] = temperature_trumavent
             json_dict['temperature_fridge'] = temperature_fridge
             json_dict['temperature_fridge_exhaust'] = temperature_fridge_exhaust
-            json_dict['fridge_exhaust_fan'] = fridge_exhaust_fan
-            print ('temperature done')
+            print ('temperature onewire done')
+            
+            print('sht31')
+            sht31_indoor_dict = cl_fact_sht31().get_instance(names.id_sht31_indoor).get_sht31_dict()
+            sht31_outdoor_dict = cl_fact_sht31().get_instance(names.id_sht31_outdoor).get_sht31_dict()
+            
+            #print(sht31_indoor_dict)
+            #print(sht31_outdoor_dict)
+            if sht31_indoor_dict is not None:
+                temperature_inside = sht31_indoor_dict.get('temperature_c')
+                humidity_inside = sht31_indoor_dict.get('humidity')
+            else:
+                temperature_inside = None
+                humidity_inside = None
+            
+            if sht31_outdoor_dict is not None:
+                temperature_outside = sht31_outdoor_dict.get('temperature_c')
+                humidity_outside = sht31_outdoor_dict.get('humidity')
+            else:
+                temperature_outside = None
+                humidity_outside = None
+            
+            json_dict['temperature_outside'] = temperature_outside
+            json_dict['temperature_inside'] = temperature_inside
+            json_dict['humidity_outside'] = humidity_outside
+            json_dict['humidity_inside'] = humidity_inside
+            
+            print('sht31 done')
             
             print ('gyro')
             gyro_dict = cl_fact_mpu6050().get_instance().get_mpu6050_dict()
@@ -213,21 +229,33 @@ def do_mainloop():
                 
             #Batterie
             if raw_batteriespannung is not None: # 12v 2870 8v 1800 1,2v 270
-                if (digits1-digits2) != 0:
-                        batteriespannung = names.battery_volt/names.battery_digits * raw_batteriespannung + names.battery_offset
-                    else:
-                        batteriespannung = 0
+                if (names.battery_digits2-names.battery_digits1) != 0:
+                    batteriespannung = (names.battery_volt2-names.battery_volt1)/(names.battery_digits2-names.battery_digits1) * raw_batteriespannung + names.battery_offset
+                else:
+                    batteriespannung = 0
                         
                 batteriefuellstand = batteriespannung / (names.battery_maxvolt/100)
             else:
                 batteriespannung = None
                 batteriefuellstand = None
+            
+            #Systemverbrauch
+            if raw_systemverbrauch is not None:
+                systemverbrauch = raw_systemverbrauch
+            else:
+                systemverbrauch = None
                 
-            
-            
-            systemverbrauch = None
-            solarerzeugung = None
-            netzbezug = None
+            #solarerzeugung
+            if raw_solarerzeugung is not None:
+                solarerzeugung = raw_solarerzeugung
+            else:
+                solarerzeugung = None
+                
+            #Netzbezug
+            if raw_netzbezug is not None:
+                netzbezug = raw_netzbezug
+            else:
+                netzbezug = None
                 
             #print ('Kanal 1 Frischwasser    : ' + str(raw_frischwasser) + ' ' + str(frischwasserstand))
             #print ('Kanal 2 Abwasser        : ' + str(raw_abwasser) + ' ' + str(abwasserstand))
@@ -250,13 +278,31 @@ def do_mainloop():
             json_dict['toilettenstand'] = toilettenstand
             print('AD-Wandler done')
             
-            print ('loop done')
             
-            print ("\n")
+            print('relais')
+            if temperature_fridge_exhaust is not None and temperature_outside is not None and names.fridge_fan_mode == 'automatic':
+                if temperature_fridge_exhaust >= names.fridge_exhaust_on and fridge_exhaust_fan is not True:
+                    gpio_handling.setGPIO(pi_ager_names.gpio_fridge_exhaust_fan, pi_ager_names.relay_on)
+                    fridge_exhaust_fan = True
+                elif temperature_fridge_exhaust < names.fridge_exhaust_off and fridge_exhaust_fan is not False:
+                    gpio_handling.setGPIO(pi_ager_names.gpio_fridge_exhaust_fan, pi_ager_names.relay_off)
+                    fridge_exhaust_fan = False
+            elif names.fridge_fan_mode == 'on':
+                fridge_exhaust_fan = True
+            else:
+                fridge_exhaust_fan = False
+            json_dict['fridge_exhaust_fan'] = fridge_exhaust_fan
+            print('relais done')
 
             json_values = json.dumps(json_dict)
             with open(paths.get_path('values_json_file'), 'w') as file:
                 file.write(json_values)
+
+            
+            print ('loop done')
+            
+            print ("\n")
+
                 
             
     except KeyboardInterrupt:

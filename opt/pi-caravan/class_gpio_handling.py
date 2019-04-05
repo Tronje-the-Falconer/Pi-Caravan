@@ -12,6 +12,7 @@ global logger
 logger = logging_.create_logger(__name__)
 logger.debug('logging initialised')
 
+###########----------------------------------------###########
 class gpio_handling():
     
     #---------------------------------------------------------

@@ -1,14 +1,7 @@
 sudo pip3 install pyserial
 
 
-
-
-
-
-
-
-
-
+##########################################
 
 import urllib
 try:
@@ -22,19 +15,20 @@ if status == "Connected":
     # do stuff...
 will check for internet connection.
 
+##########################################
 
+http://wohnwagen-forum.de/index.php?thread/64365-raspberry-pi-als-controlpanel-mit-steuerungsm%C3%B6glichkeiten/&postID=1268012#post1268012
 
+Da ich nicht viel in den Kästen liegen habe, hab ich kurzerhand jeweils 2 12V- Lüfter angebracht, 
+die die Luft aus dem Fußraum in die Kästen bewegen. Die Lüfter werden vormittags und nachmittags 2h automatisch geschalten. 
+Als ich das soweit fertig hatte - im Januar mit Heizbetrieb, schließlich will ich ja nicht frieren beim basteln 
+- war diese zusätzliche Umluft gar nicht so unangehm. Zufälliger Weise sauge ich die kalte Luft in den toten Ecken an und 
+puste die in die durch die "richtige" Umluft aufgewärmten Staukästen. Mit dieser Erkenntnis, habe ich die Steuerung der kleinen Umluft 
+an den Betrieb der großen Umluft angepasst. Misst mein Raspi also im Heizungsrohr eine Temperatur von über 33°, sind draussen weniger 
+als 18° und ist Spannung über 13V (also wird die Batterie geladen=Landstrom da), pusten die Ventis gemütlich Luft in die Kästen. 
+Es sind insgesamt 6 Ventis mit gemütlichen 2000 Umdrehungen/Min. Man hört sie kaum. Trumavent ist lauter.
 
-
-
-
-
-
-
-
-
-
-
+##########################################
 Kühlschranklüfter
 50°
 
@@ -51,7 +45,7 @@ https://www.t3-infos.de/t3-infos_f.html#kuehlschr
 
 
 
-
+##########################################
 
 Batterie
 
@@ -67,7 +61,7 @@ Ladezustand 	Nass-Batterie	Gel-Batterie	AGM-Batterie
 
 
 
-
+##########################################
 Windchill
 windchill = 13.12 + 0.6215 x temperature + (0.3965 x temperature – 11.37) x (windspeed)**0.16
 

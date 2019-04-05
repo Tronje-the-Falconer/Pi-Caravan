@@ -16,19 +16,23 @@ fridge_exhaust_off = 35 # Ausschalten des Lüfters
 fridge_fan_mode = 'automatic' # 'auto' oder 'on' or 'off'
 
 battery_maxvolt = 12.85
-battery_volt = 12.4
-battery_digits = 2870
+battery_volt1 = 0
+battery_digits1 = 0
+battery_volt2 = 12.4
+battery_digits2 = 2870
 battery_offset = 0
 
 
 # 1wire sensorids
-id_temperature_sensor_outside='28-0213139dc0aa'
-id_temperature_sensor_inside='28-021313977aaa'
+id_temperature_sensor_truma='28-0213139dc0aa'
+id_temperature_sensor_trumavent='28-021313977aaa'
 id_temperature_sensor_fridge='28-00ff98430494'
 id_temperature_sensor_fridge_exhaust='28-000c98430a7b'
 
 #########################################
-
+# SHT31
+id_sht31_outdoor = 1 #
+id_sht31_indoor = 2 # bridge vcc -> AD
 # MCP3208
 
 channel_frischwasser = 0

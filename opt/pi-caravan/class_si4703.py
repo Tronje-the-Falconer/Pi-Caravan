@@ -1,10 +1,12 @@
 import threading
 
+###########----------------------------------------###########
 class si4703(threading.Thread):
    
     import smbus
     i2c = smbus.SMBus(1)
-    
+
+    #---------------------------------------------------------
     def __init__(self, pin_rst= 40, pin_sda=3, i2c_adress=0x10, boardmode='BOARD'):
         print " "
         print "[__init__] Initializing si4703 class"
@@ -21,6 +23,7 @@ class si4703(threading.Thread):
         # command then only need 11 bytes to write
         self.writereg   = [0] * 11
         
+    #---------------------------------------------------------
     def init(self):
         print "[init] Initializing si4703 radio module"
         
@@ -94,6 +97,7 @@ class si4703(threading.Thread):
         
         print "[init] si4703 module initialization complete!"
         
+    #---------------------------------------------------------
     def readRegisters(self):
         print "[readRegisters] Reading registers"
        
@@ -117,6 +121,7 @@ class si4703(threading.Thread):
         self.registers[8]  = self.readreg[28] * 256 + self.readreg[29]
         self.registers[9]  = self.readreg[30] * 256 + self.readreg[31]
         
+    #---------------------------------------------------------
     def writeRegisters(self):
         print "[readRegisters] Writting registers"
         
@@ -137,11 +142,12 @@ class si4703(threading.Thread):
     #####################################################################################
     ##    FUNCTIONALITIES
     #####################################################################################
+    #---------------------------------------------------------
     def getVolume(self):
         self.readRegisters()
         volume = self.registers[addresses.SYSCONFIG2]
         return volume
-    
+    #---------------------------------------------------------
     def setVolume(self, volume):
         print "[setVolume] Set volume = ", volume
         if volume > 15:
@@ -153,6 +159,7 @@ class si4703(threading.Thread):
         self.registers[addresses.SYSCONFIG2] = volume   # Set volume
         self.writeRegisters()
         
+    #---------------------------------------------------------
     def getChannel(self):
         self.readRegisters()
         channel = self.registers[addresses.READCHAN] & 0x03FF
@@ -160,6 +167,7 @@ class si4703(threading.Thread):
         channel += 875
         return channel
         
+    #---------------------------------------------------------
     def setChannel(self, channel):
         print "[changeChannel] Changing channel to ", channel
         if channel < 878 or channel > 1080:
@@ -180,6 +188,7 @@ class si4703(threading.Thread):
         self.registers[addresses.CHANNEL] &= ~(1<<15)
         self.writeRegisters()
         
+    #---------------------------------------------------------
     def seek(direction):
         self.readRegisters()
         self.registers[addresses.POWERCFG] |= (1<<10 )
@@ -198,7 +207,8 @@ class si4703(threading.Thread):
         valuesfbl = self.registers[addresses.STATUSRSSI] & (1<<13)
         self.registers[addresses.POWERCFG] &= ~(1<<8)
         self.writeRegisters()
-        
+    
+###########----------------------------------------###########
 class addresses:
     # Register addresses
     DEVICEID = 0x00
