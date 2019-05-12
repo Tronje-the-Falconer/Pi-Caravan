@@ -34,10 +34,10 @@ def goodbye():
     logger.info(logstring)
     
 def cleanup_threads():
-    cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_outside).cleanup()
-    cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_inside).cleanup()
-    cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge).cleanup()
-    cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge_exhaust).cleanup()
+    cl_fact_1wire_temperature().get_instance(names.get_sensorid('temperature_sensor_outside')).cleanup()
+    cl_fact_1wire_temperature().get_instance(names.get_sensorid('names.temperature_sensor_inside')).cleanup()
+    cl_fact_1wire_temperature().get_instance(names.get_sensorid('names.temperature_sensor_fridge')).cleanup()
+    cl_fact_1wire_temperature().get_instance(names.get_sensorid('names.temperature_sensor_fridge_exhaust')).cleanup()
     cl_fact_mpu6050().get_instance().cleanup()
     cl_fact_sim808().get_instance().cleanup()
     cl_fact_anemometer().get_instance(names.gpio_anemometer).cleanup()

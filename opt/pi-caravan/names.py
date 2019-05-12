@@ -10,7 +10,9 @@
 import RPi.GPIO as gpio
 
 #########################################
-#########CONFIG##########################
+######### CONFIG BEGIN ##################
+#########################################
+
 fridge_exhaust_on = 40 # Einschalten des Lüfters
 fridge_exhaust_off = 35 # Ausschalten des Lüfters
 fridge_fan_mode = 'automatic' # 'auto' oder 'on' or 'off'
@@ -24,12 +26,21 @@ battery_offset = 0
 
 
 # 1wire sensorids
-id_temperature_sensor_truma='28-0213139dc0aa'
-id_temperature_sensor_trumavent='28-021313977aaa'
-id_temperature_sensor_fridge='28-00ff98430494'
-id_temperature_sensor_fridge_exhaust='28-000c98430a7b'
+id_temperature_sensor_truma = '28-02131dc6e4aa'
+id_temperature_sensor_fridge = '28-0213139dc0aa'
+id_temperature_sensor_freezer = '28-021313977aaa'
+id_temperature_sensor_trumavent = '28-00ff98430494'
+id_temperature_sensor_fridge_exhaust = '28-000c98430a7b'
+
+testsensor = '28-01143291af56'
+test = False
 
 #########################################
+######### CONFIG ENDE ###################
+#########################################
+
+
+
 # SHT31
 id_sht31_outdoor = 1 #
 id_sht31_indoor = 2 # bridge vcc -> AD
@@ -101,10 +112,44 @@ relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1
 # fields
 key_field = 'key'
 value_field = 'value'
-loglevel_file_field='loglevel_file'
-loglevel_console_field='loglevel_console'
+loglevel_file_field = 'loglevel_file'
+loglevel_console_field = 'loglevel_console'
 
 
 # tables
 debug_table = 'debug'
 
+def get_sensorid(sensor):
+    # reset sensors for testcase
+    global testsensor,  id_temperature_sensor_truma, id_temperature_sensor_trumavent, id_temperature_sensor_fridge, id_temperature_sensor_freezer, id_temperature_sensor_fridge_exhaust, id_sht31_outdoor, id_sht31_indoor
+    if test:
+        
+        if sensor == 'sensor_truma':
+            return testsensor
+        if sensor == 'sensor_trumavent':
+            return testsensor
+        if sensor == 'sensor_fridge':
+            return testsensor
+        if sensor == 'sensor_freezer':
+            return testsensor
+        if sensor == 'sensor_fridge_exhaust':
+            return testsensor
+        if sensor == 'sht31_outdoor':
+            return 1
+        if sensor == 'sht31_indoor':
+            return 1
+    else:
+        if sensor == 'sensor_truma':
+            return id_temperature_sensor_truma
+        if sensor == 'sensor_trumavent':
+            return id_temperature_sensor_trumavent
+        if sensor == 'sensor_fridge':
+            return id_temperature_sensor_fridge
+        if sensor == 'sensor_freezer':
+            return id_temperature_sensor_freezer
+        if sensor == 'sensor_fridge_exhaust':
+            return id_temperature_sensor_fridge_exhaust
+        if sensor == 'sht31_outdoor':
+            return id_sht31_outdoor
+        if sensor == 'sht31_indoor':
+            return id_sht31_indoor

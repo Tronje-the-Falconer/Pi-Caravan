@@ -29,8 +29,14 @@ function handleContent() {
         var temp_outside = myObj.temperature_outside;
         var temp_inside = myObj.temperature_inside;
         var fridge = myObj.temperature_fridge;
+        var freezer = myObj.temperature_freezer;
         var fridge_exhaust = myObj.temperature_fridge_exhaust;
         var exhaust_fan = myObj.fridge_exhaust_fan;
+        var temp_truma = myObj.temperature_truma;
+        var temp_trumavent = myObj.temperature_trumavent;
+        
+        var humidity_outside = myObj.humidity_outside;
+        var humidity_inside = myObj.humidity_inside;
         
         var windspeed = myObj.windspeed;
         var windaverage = myObj.windaverage;
@@ -158,12 +164,48 @@ function handleContent() {
         else{
             str_fridge = fridge.toFixed(1);
         }
+        var str_freezer = '-';
+        if (freezer === null){
+            str_freezer = '-';
+        }
+        else{
+            str_freezer = freezer.toFixed(1);
+        }
         var str_fridge_exhaust = '-';
         if (fridge_exhaust === null){
             str_fridge_exhaust = '-';
         }
         else{
             str_fridge_exhaust = fridge_exhaust.toFixed(1);
+        }
+        
+        var str_temp_truma = '-';
+        if (temp_truma === null){
+            str_temp_truma = '-';
+        }
+        else{
+            str_temp_truma = temp_truma.toFixed(1);
+        }
+        var str_temp_truma_vent = '-';
+        if (temp_trumavent === null){
+            str_temp_truma_vent = '-';
+        }
+        else{
+            str_temp_truma_vent = temp_trumavent.toFixed(1);
+        }
+        var str_humidity_inside = '-';
+        if (humidity_inside === null){
+            str_humidity_inside = '-';
+        }
+        else{
+            str_humidity_inside = humidity_inside.toFixed(1);
+        }
+        var str_humidity_outside = '-';
+        if (humidity_outside === null){
+            str_humidity_outside = '-';
+        }
+        else{
+            str_humidity_outside = humidity_outside.toFixed(1);
         }
         
         
@@ -281,8 +323,14 @@ function handleContent() {
         document.getElementById('temp_outside').innerHTML = str_temp_outside;
         document.getElementById('temp_inside').innerHTML = str_temp_inside;
         document.getElementById('fridge').innerHTML = str_fridge;
+        document.getElementById('freezer').innerHTML = str_freezer;
         document.getElementById('fridge_exhaust').innerHTML = str_fridge_exhaust;
         document.getElementById('fan').innerHTML = str_exhaust_fan;
+        document.getElementById('truma').innerHTML = str_temp_truma;
+        document.getElementById('trumavent').innerHTML = str_temp_truma_vent;
+        
+        document.getElementById('humidity_inside').innerHTML = str_humidity_inside;
+        document.getElementById('humidity_outside').innerHTML = str_humidity_outside;
         
         document.getElementById('windspeed').innerHTML = str_windspeed;
         document.getElementById('windaverage').innerHTML = str_windaverage;

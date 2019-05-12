@@ -53,8 +53,23 @@
             <td> °C</td>
         </tr>
         <tr>
+            <td>Kühlschrank Gefrierfach: </td>
+            <td><div id="freezer"></div></td>
+            <td> °C</td>
+        </tr>
+        <tr>
             <td>Kühlschrank Abluft: </td>
             <td><div id="fridge_exhaust"></div></td>
+            <td> °C</td>
+        </tr>
+        <tr>
+            <td>Trumaheizung: </td>
+            <td><div id="truma"></div></td>
+            <td> °C</td>
+        </tr>
+        <tr>
+            <td>Trumavent - Rohr: </td>
+            <td><div id="trumavent"></div></td>
             <td> °C</td>
         </tr>
         <tr>
@@ -74,6 +89,23 @@
     </table>
     <hr>
 </div>
+<div id="Luftfeuchte" style="position: relative;">
+    <h2 class="art-postheader">Luftfeuchte</h2>
+    <table style="width: 20%;">
+        <tr>
+            <td>Feuchtigkeit Außen: </td>
+            <td><div id="humidity_outside"></div></td>
+            <td> φ</td>
+        </tr>
+        <tr>
+            <td>Feuchtigkeit Innen: </td>
+            <td><div id="humidity_inside"></div></td>
+            <td> φ</td>
+        </tr>
+    </table>
+    <hr>
+</div>
+    
 <div id="Gyroskop" style="height:400px;"">
     <h2 class="art-postheader">Gyroskop</h2>
     <div>

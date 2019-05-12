@@ -29,10 +29,18 @@ def do_mainloop():
             json_dict = {}
             
             print ('temperature onewire')
-            temperature_truma_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_truma).get_temperature()
-            temperature_trumavent_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_trumavent).get_temperature()
-            temperature_fridge_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge).get_temperature()
-            temperature_fridge_exhaust_dict = cl_fact_1wire_temperature().get_instance(names.id_temperature_sensor_fridge_exhaust).get_temperature()
+            print(names.get_sensorid('sensor_truma'))
+            print(names.get_sensorid('sensor_trumavent'))
+            print(names.get_sensorid('sensor_freezer'))
+            print(names.get_sensorid('sensor_fridge'))
+            print(names.get_sensorid('sensor_fridge_exhaust'))
+            
+            
+            temperature_truma_dict = cl_fact_1wire_temperature().get_instance(names.get_sensorid('sensor_truma')).get_temperature()
+            temperature_trumavent_dict = cl_fact_1wire_temperature().get_instance(names.get_sensorid('sensor_trumavent')).get_temperature()
+            temperature_fridge_dict = cl_fact_1wire_temperature().get_instance(names.get_sensorid('sensor_fridge')).get_temperature()
+            temperature_freezer_dict = cl_fact_1wire_temperature().get_instance(names.get_sensorid('sensor_freezer')).get_temperature()
+            temperature_fridge_exhaust_dict = cl_fact_1wire_temperature().get_instance(names.get_sensorid('sensor_fridge_exhaust')).get_temperature()
             
             if temperature_truma_dict is not None:
                 temperature_truma = temperature_truma_dict.get('temperature')
@@ -58,6 +66,14 @@ def do_mainloop():
                 temperature_fridge = None
                 time_fridge = None
                 id_fridge = None
+            if temperature_freezer_dict is not None:
+                temperature_freezer = temperature_freezer_dict.get('temperature')
+                time_freezer = temperature_freezer_dict.get('timestamp')
+                id_freezer = temperature_freezer_dict.get('sensor')
+            else:
+                temperature_freezer = None
+                time_freezer = None
+                id_freezer = None
             if temperature_fridge_exhaust_dict is not None:
                 temperature_fridge_exhaust = temperature_fridge_exhaust_dict.get('temperature')
                 time_fridge_exhaust = temperature_fridge_exhaust_dict.get('timestamp')
@@ -70,18 +86,19 @@ def do_mainloop():
             
             #print ('Outside: ' + str(temperature_outside) + ' time: ' + str(time_outside) + ' id: ' + str(id_outside))
             #print ('Inside: ' + str(temperature_inside)+ ' time: ' + str(time_inside) + ' id: ' + str(id_inside))
-            #print ('Fridge: ' + str(temperature_fridge)+ ' time: ' + str(time_fridge) + ' id: ' + str(id_fridge))
+            print ('Fridge: ' + str(temperature_fridge)+ ' time: ' + str(time_fridge) + ' id: ' + str(id_fridge))
             #print ('Fridge Exhaust: ' + str(temperature_fridge_exhaust)+ ' time: ' + str(time_fridge_exhaust) + ' id: ' + str(id_fridge_exhaust))
             
             json_dict['temperature_truma'] = temperature_truma
             json_dict['temperature_trumavent'] = temperature_trumavent
             json_dict['temperature_fridge'] = temperature_fridge
+            json_dict['temperature_freezer'] = temperature_freezer
             json_dict['temperature_fridge_exhaust'] = temperature_fridge_exhaust
             print ('temperature onewire done')
             
             print('sht31')
-            sht31_indoor_dict = cl_fact_sht31().get_instance(names.id_sht31_indoor).get_sht31_dict()
-            sht31_outdoor_dict = cl_fact_sht31().get_instance(names.id_sht31_outdoor).get_sht31_dict()
+            sht31_indoor_dict = cl_fact_sht31().get_instance(names.get_sensorid('sht31_indoor')).get_sht31_dict()
+            sht31_outdoor_dict = cl_fact_sht31().get_instance(names.get_sensorid('sht31_outdoor')).get_sht31_dict()
             
             #print(sht31_indoor_dict)
             #print(sht31_outdoor_dict)
