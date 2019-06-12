@@ -12,7 +12,6 @@ global logger
 logger = logging_.create_logger(__name__)
 logger.debug('logging initialised')
 
-###########----------------------------------------###########
 class gpio_handling():
     
     #---------------------------------------------------------
@@ -114,11 +113,11 @@ class gpio_handling():
         gpio.setmode(names.board_mode)
     
     #---------------------------------------------------------
-    def setGPIO(gpio, state):
+    def setGPIO(gpio_pin, state):
         """
         change gpio setting on/off
         """
-        gpio.output(gpio, state)
+        gpio.output(gpio_pin, state)
     
     #---------------------------------------------------------
     def gpios_are_in_use(self):

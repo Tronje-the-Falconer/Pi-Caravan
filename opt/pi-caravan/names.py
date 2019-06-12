@@ -32,8 +32,8 @@ id_temperature_sensor_freezer = '28-021313977aaa'
 id_temperature_sensor_trumavent = '28-00ff98430494'
 id_temperature_sensor_fridge_exhaust = '28-000c98430a7b'
 
-testsensor = '28-01143291af56'
-test = False
+testsensor = '28-02131dc6e4aa'
+test = True
 
 #########################################
 ######### CONFIG ENDE ###################
@@ -123,7 +123,6 @@ def get_sensorid(sensor):
     # reset sensors for testcase
     global testsensor,  id_temperature_sensor_truma, id_temperature_sensor_trumavent, id_temperature_sensor_fridge, id_temperature_sensor_freezer, id_temperature_sensor_fridge_exhaust, id_sht31_outdoor, id_sht31_indoor
     if test:
-        
         if sensor == 'sensor_truma':
             return testsensor
         if sensor == 'sensor_trumavent':

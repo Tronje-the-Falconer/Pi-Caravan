@@ -5,7 +5,6 @@ import smbus, time
 import math
 import threading
 
-###########----------------------------------------###########
 class cl_mpu6050(threading.Thread):
     
     #---------------------------------------------------------
@@ -129,14 +128,14 @@ class cl_mpu6050(threading.Thread):
     def cleanup(self):
         self.thread_status = False
 
-###########----------------------------------------###########
+        
 class th_mpu6050(cl_mpu6050):   
     
     #---------------------------------------------------------
     def __init__(self):
         pass
 
-###########----------------------------------------###########
+
 class cl_fact_mpu6050(ABC):
     __o_instance = None
     

@@ -4,8 +4,7 @@ import inspect
 import spidev
 import time
 import threading
-
-###########----------------------------------------###########
+ 
 class cl_mcp3208(threading.Thread):
     
     #---------------------------------------------------------
@@ -53,6 +52,8 @@ class cl_mcp3208(threading.Thread):
                 #print('Raw' +str(i) + ' ' + str(self.value[i])) # 4008188
                 # if i == 6:
                     # print (str(i) + '   :' + str(self.read(i)))
+
+
 
                 if i == 6:
                     currenttime = time.time()
@@ -144,15 +145,14 @@ class cl_mcp3208(threading.Thread):
     #---------------------------------------------------------
     def cleanup(self):
         self.thread_status = False
-    
-###########----------------------------------------###########
+            
 class th_mcp3208(cl_mcp3208):   
     
     #---------------------------------------------------------
     def __init__(self):
         pass
 
-###########----------------------------------------###########
+
 class cl_fact_mcp3208(ABC):
     __o_instance = None
     

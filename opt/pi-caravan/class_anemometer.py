@@ -8,9 +8,8 @@ import RPi.GPIO as gpio
 
 #from cx_exception import *
 
-###########----------------------------------------###########
+        
 class cl_anemometer:
-
     #---------------------------------------------------------
     def __init__(self, gpio_pin = 33, boardmode = 'BOARD'):
    
@@ -173,7 +172,7 @@ class th_anemometer(cl_anemometer):
     def __init__(self):
         pass
 
-###########----------------------------------------###########
+
 class cl_fact_anemometer(ABC):
     __o_instance = None
     
@@ -193,8 +192,7 @@ class cl_fact_anemometer(ABC):
     #---------------------------------------------------------
     def __init__(self):
         pass
-
-##############################################################
+        
 # test= cl_fact_anemometer().get_instance(33)
 # while 1:
     # a=1
