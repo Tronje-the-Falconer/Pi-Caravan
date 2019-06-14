@@ -347,7 +347,10 @@ def do_mainloop():
             print('relais done')
             
 #-------------------------
-            
+            if names.test:
+                json_dict['testmodus'] = True
+            else:
+                json_dict['testmodus'] = False
             
             json_values = json.dumps(json_dict)
             with open(paths.get_path('values_json_file'), 'w') as file:

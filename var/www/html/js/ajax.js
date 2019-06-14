@@ -26,6 +26,8 @@ function handleContent() {
     if (xmlHttpObject.readyState == 4 && xmlHttpObject.status == 200) {
         myObj = JSON.parse(xmlHttpObject.responseText);
         
+        var testmodus = myObj.testmodus;
+        
         var temp_outside = myObj.temperature_outside;
         var temp_inside = myObj.temperature_inside;
         var fridge = myObj.temperature_fridge;
@@ -317,9 +319,17 @@ function handleContent() {
              str_exhaust_fan = '-';
         }
         
+        if (testmodus == true){
+            jQuery('div#testmodus').css('background-color', '#FF0000');
+            str_testmodus = '!!!Testmode!!!';
+        }
+        else{
+            str_testmodus = '';
+        }
        
         //------------------------Setzen der Werte auf der Webseite
         
+        document.getElementById('testmodus').innerHTML = str_testmodus;
         document.getElementById('temp_outside').innerHTML = str_temp_outside;
         document.getElementById('temp_inside').innerHTML = str_temp_inside;
         document.getElementById('fridge').innerHTML = str_fridge;
