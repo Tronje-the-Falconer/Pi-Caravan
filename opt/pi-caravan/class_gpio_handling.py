@@ -95,6 +95,7 @@ class gpio_handling():
         gpio.output(names.gpio_relais4, names.relay_off)                        # Relais standardmaessig aus
         gpio.output(names.gpio_relais5, names.relay_off)                        # Relais standardmaessig aus
         gpio.output(names.gpio_relais6, names.relay_off)                        # Relais standardmaessig aus
+        gpio.output(names.gpio_relais7, names.relay_off)                        # Relais standardmaessig aus
         gpio.output(names.gpio_relais8, names.relay_off)                        # Relais standardmaessig aus
         # gpio.output(names.gpio_notinuse_27, names.pin_without_voltage)
         # gpio.output(names.gpio_notinuse_22, names.pin_without_voltage)

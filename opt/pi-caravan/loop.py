@@ -153,16 +153,27 @@ def do_mainloop():
 #-------------------------
             
             #print('Sim808')
+            #GPS
             cl_fact_sim808().get_instance().write_sim808('AT+CGNSINF'+ '\r\n')
             gps_dict = cl_fact_sim808().get_instance().get_gps_dict()
-            lat = gps_dict.get('lat')
-            lon = gps_dict.get('lon')
-            date = gps_dict.get('date')
-            #print('lat: ' + str(lat) + ' lon: ' + str(lon) + ' date: ' + str(date))
+            fix = gps_dict.get('fix_status')
+            if fix == 1:
+                lat = gps_dict.get('lat')
+                lon = gps_dict.get('lon')
+                date = gps_dict.get('date')
+                #print('lat: ' + str(lat) + ' lon: ' + str(lon) + ' date: ' + str(date))
+            else:
+                lat = 0
+                lon = 0
+                date = '01.01.1111'
             
+            print(lat)
+            print(lon)
+            print(date)
             json_dict['lat'] = lat
             json_dict['lon'] = lon
             json_dict['date'] = date
+            json_dict['fix_status'] = fix
             print('Sim808_done')
             
 #-------------------------
