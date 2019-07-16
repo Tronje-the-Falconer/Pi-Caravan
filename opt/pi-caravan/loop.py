@@ -161,11 +161,13 @@ def do_mainloop():
                 lat = gps_dict.get('lat')
                 lon = gps_dict.get('lon')
                 date = gps_dict.get('date')
+                fix_status = True
                 #print('lat: ' + str(lat) + ' lon: ' + str(lon) + ' date: ' + str(date))
             else:
                 lat = 0
                 lon = 0
                 date = '01.01.1111'
+                fix_status = False
             
             print(lat)
             print(lon)
@@ -173,7 +175,7 @@ def do_mainloop():
             json_dict['lat'] = lat
             json_dict['lon'] = lon
             json_dict['date'] = date
-            json_dict['fix_status'] = fix
+            json_dict['fix_status'] = fix_status
             print('Sim808_done')
             
 #-------------------------

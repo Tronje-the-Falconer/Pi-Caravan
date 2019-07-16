@@ -15,9 +15,10 @@ gpio.setmode(gpio.BOARD)
 class cl_sim808(threading.Thread):
     
     #---------------------------------------------------------
-    def __init__(self):
+    def __init__(self, pin=11):
         threading.Thread.__init__(self)
         
+        self.pin = pin
         self.sim808 = 0
         self.thread_sim808 = 0
         
@@ -39,8 +40,8 @@ class cl_sim808(threading.Thread):
             self.sim808.open()
             #print ("sim808 port was already open, was closed and opened again!")
         
-        sim808_is_on = self.check_sim808()
-        if sim808_is_on:
+        sim808_is_ok = self.check_sim808()
+        if sim808_is_ok:
             self.sim808_startthread()
     
     #---------------------------------------------------------
@@ -112,18 +113,48 @@ class cl_sim808(threading.Thread):
     
     #---------------------------------------------------------
     def check_sim808(self):
+        if self.check_module_is_on():
+            #if self.check_GNSS_power_supply():
+            return True
+    
+    #---------------------------------------------------------
+    def check_module_is_on(self):
         self.sim808.write(str.encode('AT'+'\r\n')) # check module
         time.sleep(0.5)
         at_command = self.sim808.read(self.sim808.inWaiting())
         #print ('sim808_check')
-        #print(at_command)
+        print(at_command)
         if 'OK' in at_command.decode('utf8'):
-            print ('sim808: Module is on')
+            print('sim808: Module is on')
             return True
         else:
-            print('sim808: Module must be set on')
-            ## es muss der Pin angesprochen werden der das Modul anschaltet
-    
+            print('sim808: Module must be set on, power with pin')
+            self.power_on_off_module()
+            self.check_module_is_on()
+    #---------------------------------------------------------
+    def check_GNSS_power_supply(self):
+        self.sim808.write(str.encode('AT+CGNSPWR?'+'\r\n'))
+        time.sleep(0.5)
+        at_command = self.sim808.read(self.sim808.inWaiting())
+        #print ('sim808_check')
+        print(at_command)
+        if '+CGNSPWR: 1' in at_command.decode('utf8'):
+            print('sim808: GNSSpowersuply is on')
+            return True
+        else:
+            print('sim808: GNSSpowersuply is 0, setting it on')
+            self.sim808.write(str.encode('AT+CGNSPWR=1'+'\r\n'))
+            time.sleep(0.5)
+    #---------------------------------------------------------
+    # def check_GPS_status(self):
+        # self.sim808.write(str.encode('AT+CGNSPWR?'+'\r\n'))
+        # time.sleep(0.5)
+        # at_command = self.sim808.read(self.sim808.inWaiting())
+        # if '1' in at_command.decode('utf8'):
+            # print ('sim808: has GNSS_power_supply')
+            # if  
+            # return True
+        
     #---------------------------------------------------------
     def write_sim808(self, command):
         # print('sim808 command ' + command)
@@ -138,6 +169,13 @@ class cl_sim808(threading.Thread):
         #print (reply)
         #return reply
             
+    #---------------------------------------------------------
+    def power_on_off_module(self):
+        gpio.output(self.pin, gpio.HIGH)
+        time.sleep(2)               # wait for 1 second
+        gpio.output(self.pin, gpio.LOW)
+        time.sleep(2)
+       
     #---------------------------------------------------------
     def cleanup(self):
         self.thread_status = False
@@ -158,10 +196,10 @@ class cl_fact_sim808(ABC):
     
     #---------------------------------------------------------
     @classmethod        
-    def get_instance(self):
+    def get_instance(self, pin=11):
         if cl_fact_sim808.__o_instance is not None:
             return(cl_fact_sim808.__o_instance)
-        cl_fact_sim808.__o_instance = cl_sim808()
+        cl_fact_sim808.__o_instance = cl_sim808(pin)
         return(cl_fact_sim808.__o_instance)
     
     #---------------------------------------------------------
