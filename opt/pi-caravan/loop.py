@@ -134,19 +134,16 @@ def do_mainloop():
             if gyro_dict is not None:
                 gyro_x = gyro_dict.get('gyroskop_xout')
                 gyro_y = gyro_dict.get('gyroskop_yout')
-                gyro_z = gyro_dict.get('gyroskop_zout')
-                gyro_temp = gyro_dict.get('temperatur')
+                gyro_temp = gyro_dict.get('temperature')
                 gyro_time = gyro_dict.get('time')
             else:
                 gyro_x = None
                 gyro_y = None
-                gyro_z = None
                 gyro_temp = None
                 gyro_time = None
-            #print('X: ' + str(gyro_x) + ' Y: ' + str(gyro_y) + ' Z: ' + str(gyro_z) + ' temp: ' + str(gyro_temp) + ' time: ' + str(gyro_time))
+            #print('X: ' + str(gyro_x) + ' Y: ' + str(gyro_y) + ' temp: ' + str(gyro_temp) + ' time: ' + str(gyro_time))
             json_dict['gyroskop_x'] = gyro_x
             json_dict['gyroskop_y'] = gyro_y
-            json_dict['gyroskop_z'] = gyro_z
             json_dict['gyroskop_temp'] = gyro_temp
             print ('gyro done')
             
@@ -154,29 +151,32 @@ def do_mainloop():
             
             #print('Sim808')
             #GPS
-            cl_fact_sim808().get_instance().write_sim808('AT+CGNSINF'+ '\r\n')
-            gps_dict = cl_fact_sim808().get_instance().get_gps_dict()
-            fix = gps_dict.get('fix_status')
-            if fix == 1:
-                lat = gps_dict.get('lat')
-                lon = gps_dict.get('lon')
-                date = gps_dict.get('date')
-                fix_status = True
-                #print('lat: ' + str(lat) + ' lon: ' + str(lon) + ' date: ' + str(date))
-            else:
-                lat = 0
-                lon = 0
-                date = '01.01.1111'
-                fix_status = False
-            
-            print(lat)
-            print(lon)
-            print(date)
-            json_dict['lat'] = lat
-            json_dict['lon'] = lon
-            json_dict['date'] = date
-            json_dict['fix_status'] = fix_status
-            print('Sim808_done')
+            test = cl_fact_sim808().get_instance().get_sim808_ready()
+            print('Simstatus: ' + str(test))
+            if cl_fact_sim808().get_instance().get_sim808_ready():
+                cl_fact_sim808().get_instance().write_sim808('AT+CGNSINF'+ '\r\n')
+                gps_dict = cl_fact_sim808().get_instance().get_gps_dict()
+                fix = gps_dict.get('fix_status')
+                if fix == 1:
+                    lat = gps_dict.get('lat')
+                    lon = gps_dict.get('lon')
+                    date = gps_dict.get('date')
+                    fix_status = True
+                    #print('lat: ' + str(lat) + ' lon: ' + str(lon) + ' date: ' + str(date))
+                else:
+                    lat = 0
+                    lon = 0
+                    date = '01.01.1111'
+                    fix_status = False
+                
+                # print(lat)
+                # print(lon)
+                # print(date)
+                json_dict['lat'] = lat
+                json_dict['lon'] = lon
+                json_dict['date'] = date
+                json_dict['fix_status'] = fix_status
+                print('Sim808_done')
             
 #-------------------------
             
@@ -356,7 +356,7 @@ def do_mainloop():
                     pass
                 
             json_dict['fridge_exhaust_fan'] = fridge_exhaust_fan
-            print (fridge_exhaust_fan)
+            print ('Fanstatus: ' + str(fridge_exhaust_fan))
             print('relais done')
             
 #-------------------------

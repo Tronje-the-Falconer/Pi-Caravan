@@ -28,6 +28,7 @@ class cl_sim808(threading.Thread):
         self.sim808.timeout = 1
         self.gps_dict = None
         self.thread_status = True
+        self.sim808_is_ready = False
         
 ####################   Reihenfolge prüfen!
         
@@ -40,8 +41,8 @@ class cl_sim808(threading.Thread):
             self.sim808.open()
             #print ("sim808 port was already open, was closed and opened again!")
         
-        sim808_is_ok = self.check_sim808()
-        if sim808_is_ok:
+        self.sim808_is_ready = self.check_sim808()
+        if self.sim808_is_ready:
             self.sim808_startthread()
     
     #---------------------------------------------------------
@@ -112,10 +113,15 @@ class cl_sim808(threading.Thread):
         return self.gps_dict
     
     #---------------------------------------------------------
+    def get_sim808_ready(self):
+        return self.sim808_is_ready
+    #---------------------------------------------------------
     def check_sim808(self):
         if self.check_module_is_on():
             #if self.check_GNSS_power_supply():
-            return True
+            if self.check_GPS_status():
+                if self.check_GPS_fix():
+                    return True
     
     #---------------------------------------------------------
     def check_module_is_on(self):
@@ -123,12 +129,13 @@ class cl_sim808(threading.Thread):
         time.sleep(0.5)
         at_command = self.sim808.read(self.sim808.inWaiting())
         #print ('sim808_check')
-        print(at_command)
+        #print(at_command)
         if 'OK' in at_command.decode('utf8'):
-            print('sim808: Module is on')
+            #print('sim808: Module is on')
             return True
         else:
-            print('sim808: Module must be set on, power with pin')
+            self.sim808_is_ready = False
+            #print('sim808: Module must be set on, power with pin')
             self.power_on_off_module()
             self.check_module_is_on()
     #---------------------------------------------------------
@@ -137,24 +144,46 @@ class cl_sim808(threading.Thread):
         time.sleep(0.5)
         at_command = self.sim808.read(self.sim808.inWaiting())
         #print ('sim808_check')
-        print(at_command)
+        #print(at_command)
         if '+CGNSPWR: 1' in at_command.decode('utf8'):
-            print('sim808: GNSSpowersuply is on')
+            #print('sim808: GNSSpowersuply is on')
             return True
         else:
-            print('sim808: GNSSpowersuply is 0, setting it on')
+            self.sim808_is_ready = False
+            #print('sim808: GNSSpowersuply is 0, setting it on')
             self.sim808.write(str.encode('AT+CGNSPWR=1'+'\r\n'))
             time.sleep(0.5)
     #---------------------------------------------------------
-    # def check_GPS_status(self):
-        # self.sim808.write(str.encode('AT+CGNSPWR?'+'\r\n'))
-        # time.sleep(0.5)
-        # at_command = self.sim808.read(self.sim808.inWaiting())
-        # if '1' in at_command.decode('utf8'):
-            # print ('sim808: has GNSS_power_supply')
-            # if  
-            # return True
-        
+    def check_GPS_status(self):
+        self.sim808.write(str.encode('AT+CGPSPWR?'+'\r\n'))
+        time.sleep(0.5)
+        at_command = self.sim808.read(self.sim808.inWaiting())
+        at_command = at_command.decode('utf8')
+        #print(at_command)
+        if 'CGPSPWR: 1' in at_command:            
+            print('sim808: GPS runs')
+            return True
+        else:
+            self.sim808_is_ready = False
+            #print('sim808: GPS is not running, turning on')
+            self.sim808.write(str.encode('AT+CGPSPWR=1'+'\r\n'))
+            time.sleep(1)
+            self.check_GPS_status()
+                
+    #---------------------------------------------------------
+    def check_GPS_fix(self):
+        self.sim808.write(str.encode('AT+CGPSSTATUS?'+'\r\n'))
+        time.sleep(0.5)
+        at_command = self.sim808.read(self.sim808.inWaiting())
+        at_command = at_command.decode('utf8')
+        if 'D Fix' in at_command:
+            #print('sim808: GPS has fix')
+            return True
+        else:
+            self.sim808_is_ready = False
+            #print('sim808: GPS has no fix, trying again')
+            time.sleep(1)
+            self.check_GPS_fix()
     #---------------------------------------------------------
     def write_sim808(self, command):
         # print('sim808 command ' + command)
