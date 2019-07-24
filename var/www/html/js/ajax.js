@@ -57,7 +57,6 @@ function handleContent() {
        
         var gyro_x = myObj.gyroskop_x;
         var gyro_y = myObj.gyroskop_y;
-        var gyro_z = myObj.gyroskop_z;
         var gyro_temp = myObj.gyroskop_temp;
         
         var str_windchill_txt = null;
@@ -211,16 +210,20 @@ function handleContent() {
         }
         
         
-        if (gyro_x !== null && gyro_y !== null && gyro_z !== null && gyro_temp !== null){
+        if (gyro_x !== null && gyro_y !== null && gyro_temp !== null){
             var str_gyro_x = gyro_x.toFixed(1);
             var str_gyro_y = gyro_y.toFixed(1);
-            var str_gyro_z = gyro_z.toFixed(1);
             var str_gyro_temp = gyro_temp.toFixed(1);
             var rotate_x ='rotate('+ str_gyro_x +'deg)';
             var rotate_y ='rotate('+ str_gyro_y +'deg)';
             // fuer 3grad Libelle
-            var top_math = 100 + (gyro_y*-25);
-            var left_math = 100 + (gyro_x*25);
+            //var top_math = 100 + (gyro_y*-25);
+            //var left_math = 100 + (gyro_x*25);
+            var top_math =  175+(1+Math.cos(Math.atan2(gyro_x,gyro_y)));
+            var left_math = 175+(1+Math.sin(Math.atan2(gyro_x,gyro_y)));
+            //var top_math = 175*Math.cos(Math.atan2(gyro_y/gyro_x));
+            //var left_math = 175*Math.sin(Math.atan2(gyro_y/gyro_x));
+            
             var top_str = top_math.toString() + "px";
             var left_str = left_math.toString() + "px";
             //fuer allgemeine Libelle
@@ -248,7 +251,6 @@ function handleContent() {
         else{
             str_gyro_x = '-';
             str_gyro_y = '-';
-            str_gyro_z = '-';
             str_gyro_temp = '-';
         }
         
@@ -309,10 +311,10 @@ function handleContent() {
             str_windaverage_description = "Noch keine 10 min für Durchschnittsgeschwindigkeit gemessen";
         }
         var str_exhaust_fan = '-';
-        if (exhaust_fan === true){
+        if (exhaust_fan == true){
              str_exhaust_fan = 'An';
         }
-        else if (exhaust_fan === false){
+        else if (exhaust_fan == false){
              str_exhaust_fan = 'Aus';
         }
         else{
@@ -323,10 +325,14 @@ function handleContent() {
             jQuery('div#testmodus').css('background-color', '#FF0000');
             str_testmodus = '!!!Testmode!!!';
         }
-        else{
-            str_testmodus = '';
+        else if (testmodus == false){
+            str_testmodus = ''; 
         }
-       
+        else{
+            jQuery('div#testmodus').css('background-color', '#FFFFFF');
+            str_testmodus = 'undefined';
+        }
+        
         //------------------------Setzen der Werte auf der Webseite
         
         document.getElementById('testmodus').innerHTML = str_testmodus;
@@ -355,7 +361,6 @@ function handleContent() {
         
         document.getElementById('gyro_x').innerHTML = str_gyro_x;
         document.getElementById('gyro_y').innerHTML = str_gyro_y;
-        document.getElementById('gyro_z').innerHTML = str_gyro_z;
         document.getElementById('gyro_temp').innerHTML = str_gyro_temp;
         
         

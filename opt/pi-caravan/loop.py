@@ -324,7 +324,7 @@ def do_mainloop():
             
             #print('relais')
             if names.fridge_fan_mode == 'automatic': # automatic
-                if temperature_fridge_exhaust is not None:
+                if temperature_fridge_exhaust is not None and isinstance(temperature_fridge_exhaust, float) :
                     if temperature_fridge_exhaust >= names.fridge_exhaust_on:
                         if fridge_exhaust_fan is not True:
                             gpio_handling.setGPIO(names.gpio_fridge_exhaust_fan, names.relay_on)
@@ -340,6 +340,7 @@ def do_mainloop():
                     else:
                         pass
                 else:
+                    print('Bad Sensor for fridge exhaust')
                     fridge_exhaust_fan = False
                     gpio_handling.setGPIO(names.gpio_fridge_exhaust_fan, names.relay_off)
             elif names.fridge_fan_mode == 'on': # always on

@@ -1,3 +1,27 @@
+Programm
+
+GPS
+    # AT abfragen
+    # wenn OK dann weiter, sonst pin 9 ansprechen um es anzuschalten
+    # AT+CGNSPWR? -> 1 weiter 0 -> AT+CGNSPWR=1 -> OK
+    # GPSStatus abfragen wenn ein dann weiter, sonst GPSan senden
+    # GPS abrufen, wenn kein FIx dann überspringen sonst weiter.
+    # AT+CGNSINF (2ter parameter ist fix 0 -> Kein Fix 1-> Fix
+    # AT+CGPSSTATUS "Location Unknown", "Location Not Fix", "Location 2D Fix", Location 3D Fix"
+    # LAT lon abrufen
+
+Abfangen:
+    # no FIX  
+    # Bad Sensorpath -> 1wire
+    sht31 nicht angesteckt write_block
+
+https://learn.adafruit.com/fona-tethering-to-raspberry-pi-or-beaglebone-black?view=all
+GSM
+
+
+
+##########################################
+
 sudo pip3 install pyserial
 
 
@@ -58,7 +82,18 @@ Ladezustand 	Nass-Batterie	Gel-Batterie	AGM-Batterie
 20%	            12,00V	        12,10V	        12,00V          gelb
 0%	            < 11.90V	    < 12.00V	    < 12,00V        rot
 
+#########################################
 
+Sicherungskasten
+2E FI1
+2E FI2
+2E 10A
+2E 10A
+2E 13A
+2E 13A
+1E Eltako
+
+13E
 
 
 ##########################################

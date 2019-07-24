@@ -53,7 +53,6 @@ class cl_sht31(threading.Thread):
             self.write_block()
             data = self.read_block()
             
-            # Convert the data
             temp = data[0] * 256 + data[1]
             self.cTemp = -45 + (175 * temp / 65535.0)
             self.fTemp = -49 + (315 * temp / 65535.0)
@@ -66,6 +65,9 @@ class cl_sht31(threading.Thread):
             # print("Temperature in Celsius is : %.2f C" %self.cTemp)
             # print("Temperature in Fahrenheit is : %.2f F" %self.fTemp)
             # print("Relative Humidity is : %.2f %%RH" %self.humidity)
+
+            # Convert the data
+            
     
     #---------------------------------------------------------
     def get_sht31_dict(self):

@@ -19,8 +19,11 @@ class cl_1wire_temperature(threading.Thread):
  
         try:
             self.sensor_path = glob.glob(base_path + self.sensorid)[0] + file_name
+            self.bad_sensor = False
             self.temperaturesensor_startthread()
         except:
+            self.bad_sensor = True
+            self.errorreturn = 'bad sensor'
             print("Bad sensor path " + self.sensorid)
     
     #---------------------------------------------------------
@@ -39,7 +42,11 @@ class cl_1wire_temperature(threading.Thread):
     
     #---------------------------------------------------------
     def get_temperature(self):
-        return self.sensortemperature_dict
+        if self.bad_sensor:
+            errordict = {"temperature":self.errorreturn, "timestamp":0,"sensor":self.sensorid}
+            return errordict
+        else:
+            return self.sensortemperature_dict
     
     #---------------------------------------------------------
     def read_temperature(self):

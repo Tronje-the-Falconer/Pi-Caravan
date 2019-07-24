@@ -123,6 +123,7 @@ def get_sensorid(sensor):
     # reset sensors for testcase
     global testsensor,  id_temperature_sensor_truma, id_temperature_sensor_trumavent, id_temperature_sensor_fridge, id_temperature_sensor_freezer, id_temperature_sensor_fridge_exhaust, id_sht31_outdoor, id_sht31_indoor
     if test:
+        
         if sensor == 'sensor_truma':
             return testsensor
         if sensor == 'sensor_trumavent':
